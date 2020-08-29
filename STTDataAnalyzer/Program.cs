@@ -21,25 +21,44 @@ namespace STTDataAnalyzer
 			SttUser.CrewSlot[] voyageCrewSlots = voyageInfo[0].CrewSlots.ToArray();
 
 			int crewCount = crew.Count();
-			int[,] crewScores = new int[crewCount,12];
+			CrewMember[] crewScores = new CrewMember[crewCount];
 
 			for (int i = 0; i < crew.Count(); i++) {
 				SttUser.Crew crewMember = crew[i];
+				crewScores[i] = new CrewMember(crewMember);
 				for (int j = 0; j < voyageCrewSlots.Count(); j++)
 				{
 					SttUser.CrewSlot voyageCrewSlot = voyageCrewSlots[j];
 
 					int totalScore = 0;
-					if (crewMember.BaseSkills.CommandSkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "CommandSkill", voyageCrewSlot.Trait);
-					if (crewMember.BaseSkills.DiplomacySkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "DiplomacySkill", voyageCrewSlot.Trait);
-					if (crewMember.BaseSkills.EngineeringSkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "EngineerSkill", voyageCrewSlot.Trait);
-					if (crewMember.BaseSkills.MedicineSkill.Core > 0) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "MedicineSkill", voyageCrewSlot.Trait);
-					if (crewMember.BaseSkills.ScienceSkill.Core > 0) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "ScienceSkill", voyageCrewSlot.Trait);
-					if (crewMember.BaseSkills.SecuritySkill.Core > 0) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "SecuritySkill", voyageCrewSlot.Trait);
+					if (crewMember.HasSkillForVoyageSlot(voyageCrewSlot)) {
+						if (crewMember.BaseSkills.CommandSkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "CommandSkill", voyageCrewSlot.Trait);
+						if (crewMember.BaseSkills.DiplomacySkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "DiplomacySkill", voyageCrewSlot.Trait);
+						if (crewMember.BaseSkills.EngineeringSkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "EngineerSkill", voyageCrewSlot.Trait);
+						if (crewMember.BaseSkills.MedicineSkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "MedicineSkill", voyageCrewSlot.Trait);
+						if (crewMember.BaseSkills.ScienceSkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "ScienceSkill", voyageCrewSlot.Trait);
+						if (crewMember.BaseSkills.SecuritySkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "SecuritySkill", voyageCrewSlot.Trait);
+					}
 
-					crewScores[i, j] = totalScore;
+					crewScores[i].VoyageScores[j] = totalScore;
 				}
 			}
+
+			var slots1 = crewScores.OrderByDescending(x => x.VoyageScores[0]);
+			var slot1 = crewScores.OrderByDescending(x => x.VoyageScores[0]).Select(x => new { x.Crew, Score = x.VoyageScores[0] }).First();
+			var slot2 = crewScores.OrderByDescending(x => x.VoyageScores[1]).Select(x => new { x.Crew, Score = x.VoyageScores[1] }).First();
+			var slot3 = crewScores.OrderByDescending(x => x.VoyageScores[2]).Select(x => new { x.Crew, Score = x.VoyageScores[2] }).First();
+			var slot4 = crewScores.OrderByDescending(x => x.VoyageScores[3]).Select(x => new { x.Crew, Score = x.VoyageScores[3] }).First();
+			var slot5 = crewScores.OrderByDescending(x => x.VoyageScores[4]).Select(x => new { x.Crew, Score = x.VoyageScores[4] }).First();
+			var slot6 = crewScores.OrderByDescending(x => x.VoyageScores[5]).Select(x => new { x.Crew, Score = x.VoyageScores[5] }).First();
+
+			Console.WriteLine("slot1 = " + slot1.Crew.Name);
+			Console.WriteLine("slot2 = " + slot2.Crew.Name);
+			Console.WriteLine("slot3 = " + slot3.Crew.Name);
+			Console.WriteLine("slot4 = " + slot4.Crew.Name);
+			Console.WriteLine("slot5 = " + slot5.Crew.Name);
+			Console.WriteLine("slot6 = " + slot6.Crew.Name);
+
 			//var items = sttUser.ItemArchetypeCache.Archetypes;
 			//foreach (var iitem in items)
 			//{
@@ -92,6 +111,7 @@ namespace STTDataAnalyzer
 			//var item1 = welcome.ItemArchetypeCache.Archetypes.Find(a => a.Name == "Authorization Code");
 			//Console.WriteLine(item1.Id);
 
+			Console.WriteLine("Done");
 			Console.ReadLine();
 		}
 
@@ -102,7 +122,7 @@ namespace STTDataAnalyzer
 			else if (secondarySkill == currentSkill) skillScore *= 0.358;
 			else skillScore *= 0.100;
 
-			if (crewMember.Traits.Contains(trait)) skillScore += 200;
+			if (crewMember.Traits.Contains(trait)) skillScore += 25;
 
 			return (int)skillScore;
 		}
@@ -155,6 +175,30 @@ namespace STTDataAnalyzer
 					//Console.WriteLine("Name = " + item0.Recipe.Demands[i].Count + " - " + item00.Name);
 				}
 			}
+		}
+	}
+
+	public class CrewMember : IComparable {
+		public SttUser.Crew Crew;
+		public int[] VoyageScores;
+
+		public CrewMember(SttUser.Crew c) {
+			this.Crew = c;
+			this.VoyageScores = new int[12];
+		}
+
+		public int CompareTo(object obj)
+		{
+			if (obj == null) return 1;
+
+			CrewMember cm = obj as CrewMember;
+			if(cm != null) {
+				if (this.VoyageScores[0] < cm.VoyageScores[0]) return -1;
+				if (this.VoyageScores[0] > cm.VoyageScores[0]) return 1;
+				return 0;
+			}
+
+			return 0;
 		}
 	}
 }
