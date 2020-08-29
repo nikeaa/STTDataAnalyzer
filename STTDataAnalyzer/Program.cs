@@ -10,12 +10,36 @@ namespace STTDataAnalyzer
 
 		private static void Main(string[] args)
 		{
+			string primarySkill = "SecuritySkill";
+			string secondarySkill = "MedicineSkill";
+
 			string data = System.IO.File.ReadAllText(@"C:\Users\nikea\Desktop\Crew.json");
 			sttUser = SttUser.Welcome.FromJson(data);
 
-			List<SttUser.Crew> crew = sttUser.Player.Character.Crew;
+			SttUser.Crew[] crew = sttUser.Player.Character.Crew.ToArray();
 			List<SttUser.VoyageDescription> voyageInfo = sttUser.Player.Character.VoyageDescriptions;
-			List<SttUser.CrewSlot> voyageCrewSlots = voyageInfo[0].CrewSlots;
+			SttUser.CrewSlot[] voyageCrewSlots = voyageInfo[0].CrewSlots.ToArray();
+
+			int crewCount = crew.Count();
+			int[,] crewScores = new int[crewCount,12];
+
+			for (int i = 0; i < crew.Count(); i++) {
+				SttUser.Crew crewMember = crew[i];
+				for (int j = 0; j < voyageCrewSlots.Count(); j++)
+				{
+					SttUser.CrewSlot voyageCrewSlot = voyageCrewSlots[j];
+
+					int totalScore = 0;
+					if (crewMember.BaseSkills.CommandSkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "CommandSkill", voyageCrewSlot.Trait);
+					if (crewMember.BaseSkills.DiplomacySkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "DiplomacySkill", voyageCrewSlot.Trait);
+					if (crewMember.BaseSkills.EngineeringSkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "EngineerSkill", voyageCrewSlot.Trait);
+					if (crewMember.BaseSkills.MedicineSkill.Core > 0) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "MedicineSkill", voyageCrewSlot.Trait);
+					if (crewMember.BaseSkills.ScienceSkill.Core > 0) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "ScienceSkill", voyageCrewSlot.Trait);
+					if (crewMember.BaseSkills.SecuritySkill.Core > 0) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "SecuritySkill", voyageCrewSlot.Trait);
+
+					crewScores[i, j] = totalScore;
+				}
+			}
 			//var items = sttUser.ItemArchetypeCache.Archetypes;
 			//foreach (var iitem in items)
 			//{
@@ -69,6 +93,46 @@ namespace STTDataAnalyzer
 			//Console.WriteLine(item1.Id);
 
 			Console.ReadLine();
+		}
+
+		private static int GetSkillVoyageScore(SttUser.Crew crewMember, string primarySkill, string secondarySkill, string currentSkill, string trait)
+		{
+			double skillScore = GetSkillVoyageValue(crewMember, currentSkill);
+			if (primarySkill == currentSkill) skillScore *= 0.500;
+			else if (secondarySkill == currentSkill) skillScore *= 0.358;
+			else skillScore *= 0.100;
+
+			if (crewMember.Traits.Contains(trait)) skillScore += 200;
+
+			return (int)skillScore;
+		}
+
+		private static double GetSkillVoyageValue(SttUser.Crew crewMember, string primarySkill)
+		{
+			double skillValue = 0;
+
+			switch(primarySkill) {
+				case "CommandSkill":
+					skillValue = crewMember.BaseSkills.CommandSkill.Core + ((crewMember.BaseSkills.CommandSkill.RangeMin + crewMember.BaseSkills.CommandSkill.RangeMax) / 2);
+					break;
+				case "DiplomacySkill":
+					skillValue = crewMember.BaseSkills.DiplomacySkill.Core + ((crewMember.BaseSkills.DiplomacySkill.RangeMin + crewMember.BaseSkills.DiplomacySkill.RangeMax) / 2);
+					break;
+				case "EngineeringSkill":
+					skillValue = crewMember.BaseSkills.EngineeringSkill.Core + ((crewMember.BaseSkills.EngineeringSkill.RangeMin + crewMember.BaseSkills.EngineeringSkill.RangeMax) / 2);
+					break;
+				case "MedicineSkill":
+					skillValue = crewMember.BaseSkills.MedicineSkill.Core + ((crewMember.BaseSkills.MedicineSkill.RangeMin + crewMember.BaseSkills.MedicineSkill.RangeMax) / 2);
+					break;
+				case "ScienceSkill":
+					skillValue = crewMember.BaseSkills.ScienceSkill.Core + ((crewMember.BaseSkills.ScienceSkill.RangeMin + crewMember.BaseSkills.ScienceSkill.RangeMax) / 2);
+					break;
+				case "SecuritySkill":
+					skillValue = crewMember.BaseSkills.SecuritySkill.Core + ((crewMember.BaseSkills.SecuritySkill.RangeMin + crewMember.BaseSkills.SecuritySkill.RangeMax) / 2);
+					break;
+			}
+
+			return skillValue;
 		}
 
 		private static void DisplayRecipe(SttUser.Archetype item, int level, int quantity)
