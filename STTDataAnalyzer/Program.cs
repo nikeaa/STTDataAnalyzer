@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using STTDataAnalyzer.SttUser;
 
 namespace STTDataAnalyzer
 {
@@ -44,33 +45,32 @@ namespace STTDataAnalyzer
 				}
 			}
 
-			
-			var slots1 = crewScores.OrderByDescending(x => x.VoyageScores[0]);
-			var slot1 = crewScores.OrderByDescending(x => x.VoyageScores[0]).Select(x => new { x.Crew, Score = x.VoyageScores[0] }).First();
-			var slot2 = crewScores.OrderByDescending(x => x.VoyageScores[1]).Select(x => new { x.Crew, Score = x.VoyageScores[1] }).First();
-			var slot3 = crewScores.OrderByDescending(x => x.VoyageScores[2]).Select(x => new { x.Crew, Score = x.VoyageScores[2] }).First();
-			var slot4 = crewScores.OrderByDescending(x => x.VoyageScores[3]).Select(x => new { x.Crew, Score = x.VoyageScores[3] }).First();
-			var slot5 = crewScores.OrderByDescending(x => x.VoyageScores[4]).Select(x => new { x.Crew, Score = x.VoyageScores[4] }).First();
-			var slot6 = crewScores.OrderByDescending(x => x.VoyageScores[5]).Select(x => new { x.Crew, Score = x.VoyageScores[5] }).First();
-			var slot7 = crewScores.OrderByDescending(x => x.VoyageScores[6]).Select(x => new { x.Crew, Score = x.VoyageScores[6] }).First();
-			var slot8 = crewScores.OrderByDescending(x => x.VoyageScores[7]).Select(x => new { x.Crew, Score = x.VoyageScores[7] }).First();
-			var slot9 = crewScores.OrderByDescending(x => x.VoyageScores[8]).Select(x => new { x.Crew, Score = x.VoyageScores[8] }).First();
-			var slot10 = crewScores.OrderByDescending(x => x.VoyageScores[9]).Select(x => new { x.Crew, Score = x.VoyageScores[9] }).First();
-			var slot11 = crewScores.OrderByDescending(x => x.VoyageScores[10]).Select(x => new { x.Crew, Score = x.VoyageScores[10] }).First();
-			var slot12 = crewScores.OrderByDescending(x => x.VoyageScores[11]).Select(x => new { x.Crew, Score = x.VoyageScores[11] }).First();
 
-			Console.WriteLine("slot1 = " + slot1.Crew.Name);
-			Console.WriteLine("slot2 = " + slot2.Crew.Name);
-			Console.WriteLine("slot3 = " + slot3.Crew.Name);
-			Console.WriteLine("slot4 = " + slot4.Crew.Name);
-			Console.WriteLine("slot5 = " + slot5.Crew.Name);
-			Console.WriteLine("slot6 = " + slot6.Crew.Name);
-			Console.WriteLine("slot7 = " + slot7.Crew.Name);
-			Console.WriteLine("slot8 = " + slot8.Crew.Name);
-			Console.WriteLine("slot9 = " + slot9.Crew.Name);
-			Console.WriteLine("slot10 = " + slot10.Crew.Name);
-			Console.WriteLine("slot11 = " + slot11.Crew.Name);
-			Console.WriteLine("slot12 = " + slot12.Crew.Name);
+			int commandTotal = 0;
+			int diplomacyTotal = 0;
+			int engineeringTotal = 0;
+			int medicineTotal = 0;
+			int scienceTotal = 0;
+			int securityTotal = 0;
+
+			string[] populatedSlotNames = new string[12];
+			SttUser.Crew[] populatedSlotCrews = new SttUser.Crew[12];
+
+			for (int i = 0; i < 12; i++)
+			{
+				GetUnusedCrew(crewScores, populatedSlotNames, populatedSlotCrews, i);
+				Console.WriteLine(populatedSlotNames[i]);
+
+				commandTotal += (int)(populatedSlotCrews[i].BaseSkills.CommandSkill.Core + ((populatedSlotCrews[i].BaseSkills.CommandSkill.RangeMin + populatedSlotCrews[i].BaseSkills.CommandSkill.RangeMax) / 2));
+				diplomacyTotal += (int)(populatedSlotCrews[i].BaseSkills.DiplomacySkill.Core + ((populatedSlotCrews[i].BaseSkills.DiplomacySkill.RangeMin + populatedSlotCrews[i].BaseSkills.DiplomacySkill.RangeMax) / 2));
+				engineeringTotal += (int)(populatedSlotCrews[i].BaseSkills.EngineeringSkill.Core + ((populatedSlotCrews[i].BaseSkills.EngineeringSkill.RangeMin + populatedSlotCrews[i].BaseSkills.EngineeringSkill.RangeMax) / 2));
+				medicineTotal += (int)(populatedSlotCrews[i].BaseSkills.MedicineSkill.Core + ((populatedSlotCrews[i].BaseSkills.MedicineSkill.RangeMin + populatedSlotCrews[i].BaseSkills.MedicineSkill.RangeMax) / 2));
+				scienceTotal += (int)(populatedSlotCrews[i].BaseSkills.ScienceSkill.Core + ((populatedSlotCrews[i].BaseSkills.ScienceSkill.RangeMin + populatedSlotCrews[i].BaseSkills.ScienceSkill.RangeMax) / 2));
+				securityTotal += (int)(populatedSlotCrews[i].BaseSkills.SecuritySkill.Core + ((populatedSlotCrews[i].BaseSkills.SecuritySkill.RangeMin + populatedSlotCrews[i].BaseSkills.SecuritySkill.RangeMax) / 2));
+			}
+
+			Console.WriteLine();
+			Console.WriteLine("command = " + commandTotal);
 
 			//var items = sttUser.ItemArchetypeCache.Archetypes;
 			//foreach (var iitem in items)
@@ -106,8 +106,8 @@ namespace STTDataAnalyzer
 			//var item1 = welcome.ItemArchetypeCache.Archetypes.Find(a => a.Id == 6360);
 			//for (int i = 0; i < item1.Recipe.Demands.Count; i++)
 			//{
-			//	Console.WriteLine("Id = " + item1.Recipe.Demands[i].ArchetypeId);
-			//	var item11 = welcome.ItemArchetypeCache.Archetypes.Find(a => a.Id == item1.Recipe.Demands[i].ArchetypeId);
+			//	Console.WriteLine("Id = " + i
+			//etypeCache.Archetypes.Find(a => a.Id == item1.Recipe.Demands[i].ArchetypeId);
 			//	Console.WriteLine("Name = " + item1.Recipe.Demands[i].Count + " - " + item11.Name);
 			//}
 
@@ -126,6 +126,19 @@ namespace STTDataAnalyzer
 
 			Console.WriteLine("Done");
 			Console.ReadLine();
+		}
+
+		private static void GetUnusedCrew(CrewMember[] crewScores, string[] populatedSlotNames, Crew[] populatedSlotCrews, int v)
+		{
+			var sortedSlots = crewScores.OrderByDescending(x => x.VoyageScores[v]).Select(x => new { x.Crew, Score = x.VoyageScores[v] }).Take(50);
+
+			foreach(var crewMember in sortedSlots) {
+				if (!populatedSlotNames.Contains(crewMember.Crew.Name)){
+					populatedSlotNames[v] = crewMember.Crew.Name;
+					populatedSlotCrews[v] = crewMember.Crew;
+					break;
+				}
+			}
 		}
 
 		private static int GetSkillVoyageScore(SttUser.Crew crewMember, string primarySkill, string secondarySkill, string currentSkill, string trait)
