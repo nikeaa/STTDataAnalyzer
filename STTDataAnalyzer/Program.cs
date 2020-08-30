@@ -44,6 +44,7 @@ namespace STTDataAnalyzer
 				}
 			}
 
+			
 			var slots1 = crewScores.OrderByDescending(x => x.VoyageScores[0]);
 			var slot1 = crewScores.OrderByDescending(x => x.VoyageScores[0]).Select(x => new { x.Crew, Score = x.VoyageScores[0] }).First();
 			var slot2 = crewScores.OrderByDescending(x => x.VoyageScores[1]).Select(x => new { x.Crew, Score = x.VoyageScores[1] }).First();
@@ -51,6 +52,12 @@ namespace STTDataAnalyzer
 			var slot4 = crewScores.OrderByDescending(x => x.VoyageScores[3]).Select(x => new { x.Crew, Score = x.VoyageScores[3] }).First();
 			var slot5 = crewScores.OrderByDescending(x => x.VoyageScores[4]).Select(x => new { x.Crew, Score = x.VoyageScores[4] }).First();
 			var slot6 = crewScores.OrderByDescending(x => x.VoyageScores[5]).Select(x => new { x.Crew, Score = x.VoyageScores[5] }).First();
+			var slot7 = crewScores.OrderByDescending(x => x.VoyageScores[6]).Select(x => new { x.Crew, Score = x.VoyageScores[6] }).First();
+			var slot8 = crewScores.OrderByDescending(x => x.VoyageScores[7]).Select(x => new { x.Crew, Score = x.VoyageScores[7] }).First();
+			var slot9 = crewScores.OrderByDescending(x => x.VoyageScores[8]).Select(x => new { x.Crew, Score = x.VoyageScores[8] }).First();
+			var slot10 = crewScores.OrderByDescending(x => x.VoyageScores[9]).Select(x => new { x.Crew, Score = x.VoyageScores[9] }).First();
+			var slot11 = crewScores.OrderByDescending(x => x.VoyageScores[10]).Select(x => new { x.Crew, Score = x.VoyageScores[10] }).First();
+			var slot12 = crewScores.OrderByDescending(x => x.VoyageScores[11]).Select(x => new { x.Crew, Score = x.VoyageScores[11] }).First();
 
 			Console.WriteLine("slot1 = " + slot1.Crew.Name);
 			Console.WriteLine("slot2 = " + slot2.Crew.Name);
@@ -58,6 +65,12 @@ namespace STTDataAnalyzer
 			Console.WriteLine("slot4 = " + slot4.Crew.Name);
 			Console.WriteLine("slot5 = " + slot5.Crew.Name);
 			Console.WriteLine("slot6 = " + slot6.Crew.Name);
+			Console.WriteLine("slot7 = " + slot7.Crew.Name);
+			Console.WriteLine("slot8 = " + slot8.Crew.Name);
+			Console.WriteLine("slot9 = " + slot9.Crew.Name);
+			Console.WriteLine("slot10 = " + slot10.Crew.Name);
+			Console.WriteLine("slot11 = " + slot11.Crew.Name);
+			Console.WriteLine("slot12 = " + slot12.Crew.Name);
 
 			//var items = sttUser.ItemArchetypeCache.Archetypes;
 			//foreach (var iitem in items)
