@@ -5,7 +5,7 @@ namespace STTDataAnalyzer
 
 	namespace SttUser
 	{
-		public class Welcome
+		public partial class Welcome
 		{
 			public static Welcome FromJson(string json)
 			{

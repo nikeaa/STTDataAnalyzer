@@ -49,6 +49,8 @@
 						return VideoAdChronitonBoostRewardSymbol.ReplicatorFuelLegendary;
 					case "premium_10x_bundle":
 						return VideoAdChronitonBoostRewardSymbol.Premium10XBundle;
+					case "niners_avatar":
+						return VideoAdChronitonBoostRewardSymbol.NinersAvatar;
 				}
 				throw new Exception("Cannot unmarshal type VideoAdChronitonBoostRewardSymbol");
 			}
@@ -83,6 +85,9 @@
 						return;
 					case VideoAdChronitonBoostRewardSymbol.ReplicatorFuelSuperrare:
 						serializer.Serialize(writer, "replicator_fuel_superrare");
+						return;
+					case VideoAdChronitonBoostRewardSymbol.NinersAvatar:
+						serializer.Serialize(writer, "niners_avatar");
 						return;
 				}
 				throw new Exception("Cannot marshal type VideoAdChronitonBoostRewardSymbol");

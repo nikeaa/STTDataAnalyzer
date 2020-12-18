@@ -1,77 +1,150 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using STTDataAnalyzer.ExtensionMethods;
+using STTDataAnalyzer.Models;
 using STTDataAnalyzer.SttUser;
 
 namespace STTDataAnalyzer
 {
 	public class Program
 	{
-		private static SttUser.Welcome sttUser;
+		//private static SttUser.Welcome sttUser;
 
 		private static void Main(string[] args)
 		{
-			string primarySkill = "SecuritySkill";
-			string secondarySkill = "MedicineSkill";
+			string data = File.ReadAllText(@"C:\Users\nikea\Desktop\STT\Crew.json");
+			Welcome sttUser = Welcome.FromJson(data);
+			List<DataCoreCrew> dataCoreCrew = readDataCoreCrew(@"C:\Users\nikea\Desktop\STT\STT - Crew.tsv");
+			List<DataCoreItem> dataCoreItems = readDataCoreItems(@"C:\Users\nikea\Desktop\STT\STT - Items.tsv");
+			List<DataCoreShip> dataCoreShips = readDataCoreShips(@"C:\Users\nikea\Desktop\STT\STT - Ships.tsv");
+			List<DataCoreEquipment> dataCoreEquipment = readDataCoreEquipment(@"C:\Users\nikea\Desktop\STT\STT - Equipment.tsv");
 
-			string data = System.IO.File.ReadAllText(@"C:\Users\nikea\Desktop\Crew.json");
-			sttUser = SttUser.Welcome.FromJson(data);
-
-			SttUser.Crew[] crew = sttUser.Player.Character.Crew.ToArray();
-			List<SttUser.VoyageDescription> voyageInfo = sttUser.Player.Character.VoyageDescriptions;
-			SttUser.CrewSlot[] voyageCrewSlots = voyageInfo[0].CrewSlots.ToArray();
-
-			int crewCount = crew.Count();
-			CrewMember[] crewScores = new CrewMember[crewCount];
-
-			for (int i = 0; i < crew.Count(); i++) {
-				SttUser.Crew crewMember = crew[i];
-				crewScores[i] = new CrewMember(crewMember);
-				for (int j = 0; j < voyageCrewSlots.Count(); j++)
-				{
-					SttUser.CrewSlot voyageCrewSlot = voyageCrewSlots[j];
-
-					int totalScore = 0;
-					if (crewMember.HasSkillForVoyageSlot(voyageCrewSlot)) {
-						if (crewMember.BaseSkills.CommandSkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "CommandSkill", voyageCrewSlot.Trait);
-						if (crewMember.BaseSkills.DiplomacySkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "DiplomacySkill", voyageCrewSlot.Trait);
-						if (crewMember.BaseSkills.EngineeringSkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "EngineerSkill", voyageCrewSlot.Trait);
-						if (crewMember.BaseSkills.MedicineSkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "MedicineSkill", voyageCrewSlot.Trait);
-						if (crewMember.BaseSkills.ScienceSkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "ScienceSkill", voyageCrewSlot.Trait);
-						if (crewMember.BaseSkills.SecuritySkill != null) totalScore += GetSkillVoyageScore(crewMember, primarySkill, secondarySkill, "SecuritySkill", voyageCrewSlot.Trait);
-					}
-
-					crewScores[i].VoyageScores[j] = totalScore;
-				}
-			}
+			var x = dataCoreCrew.Where(dcc => dcc.Name == "Age of Sail Data");
 
 
-			int commandTotal = 0;
-			int diplomacyTotal = 0;
-			int engineeringTotal = 0;
-			int medicineTotal = 0;
-			int scienceTotal = 0;
-			int securityTotal = 0;
+			// *** Traits for a crew ***
+			//Crew x = sttUser.Player.Character.Crew
+			//.Where(c => c.Name == "Dr. Leonard McCoy")
+			//.Select(c => c)
+			//.FirstOrDefault();
+			//foreach (string trait in x.Traits) {
+			//	Console.WriteLine(trait);
+			//}
+			// *** End Traits for a crew ***
 
-			string[] populatedSlotNames = new string[12];
-			SttUser.Crew[] populatedSlotCrews = new SttUser.Crew[12];
+			// *** Crew with a trait ***
+			//sttUser.Player.Character.Crew
+			//.Where(c => c.Traits.Contains("borg"))
+			//.ForEach(c => Console.WriteLine(c.Name));
+			//Console.WriteLine();
+			// *** End Crew with a trait ***
 
-			for (int i = 0; i < 12; i++)
-			{
-				GetUnusedCrew(crewScores, populatedSlotNames, populatedSlotCrews, i);
-				Console.WriteLine(populatedSlotNames[i]);
+			// *** Voyagers with a specific trait and > 0 in two skills and with a specific skill ***
+			//string primarySkill = "ScienceSkill";
+			//string secondarySkill = "MedicineSkill";
+			//string voyageSlotSkill = "MedicineSkill";
+			//string trait = "doctor";
+			//sttUser.Player.Character.Crew
+			//.Where(c => c.VoyageScoreForSkillPair(primarySkill, secondarySkill, false) > 0 && c.VoyageScores[voyageSlotSkill] > 0 && c.Traits.Contains(trait))
+			//.OrderByDescending(c => c.VoyageScoreForSkillPair(primarySkill, secondarySkill, false))
+			//.Take(10)
+			//.ForEach(c => Console.WriteLine(c.Name + " (" + c.Rarity + "/" + c.MaxRarity + ") - " + c.VoyageScoreForSkillPair(primarySkill, secondarySkill, false)));
+			// ***End Voyagers with a specific trait and 2000+ in two skills ***
 
-				commandTotal += (int)(populatedSlotCrews[i].BaseSkills.CommandSkill.Core + ((populatedSlotCrews[i].BaseSkills.CommandSkill.RangeMin + populatedSlotCrews[i].BaseSkills.CommandSkill.RangeMax) / 2));
-				diplomacyTotal += (int)(populatedSlotCrews[i].BaseSkills.DiplomacySkill.Core + ((populatedSlotCrews[i].BaseSkills.DiplomacySkill.RangeMin + populatedSlotCrews[i].BaseSkills.DiplomacySkill.RangeMax) / 2));
-				engineeringTotal += (int)(populatedSlotCrews[i].BaseSkills.EngineeringSkill.Core + ((populatedSlotCrews[i].BaseSkills.EngineeringSkill.RangeMin + populatedSlotCrews[i].BaseSkills.EngineeringSkill.RangeMax) / 2));
-				medicineTotal += (int)(populatedSlotCrews[i].BaseSkills.MedicineSkill.Core + ((populatedSlotCrews[i].BaseSkills.MedicineSkill.RangeMin + populatedSlotCrews[i].BaseSkills.MedicineSkill.RangeMax) / 2));
-				scienceTotal += (int)(populatedSlotCrews[i].BaseSkills.ScienceSkill.Core + ((populatedSlotCrews[i].BaseSkills.ScienceSkill.RangeMin + populatedSlotCrews[i].BaseSkills.ScienceSkill.RangeMax) / 2));
-				securityTotal += (int)(populatedSlotCrews[i].BaseSkills.SecuritySkill.Core + ((populatedSlotCrews[i].BaseSkills.SecuritySkill.RangeMin + populatedSlotCrews[i].BaseSkills.SecuritySkill.RangeMax) / 2));
-			}
+			// *** Top ten voyagers by skill pair ***
+			//string primarySkill = "EngineeringSkill";
+			//string secondarySkill = "DiplomacySkill";
+			//sttUser.Player.Character.Crew.OrderByDescending(c => c.VoyageScoreForSkillPair(primarySkill, secondarySkill)).Take(10).ForEach(c => Console.WriteLine(c.Name + " (" + c.Rarity + "/" + c.MaxRarity + ") - " + c.VoyageScoreForSkillPair(primarySkill, secondarySkill)));
+			//Console.WriteLine();
+			//sttUser.Player.Character.Crew.OrderByDescending(c => c.VoyageScoreForSkillPair(primarySkill, secondarySkill, true)).Take(10).ForEach(c => Console.WriteLine(c.Name + " (" + c.Rarity + "/" + c.MaxRarity + ") - " + c.VoyageScoreForSkillPair(primarySkill, secondarySkill, true)));
+			// *** End Top ten voyagers by skill pair ***
 
-			Console.WriteLine();
-			Console.WriteLine("command = " + commandTotal);
+			// *** Order golds by tier ***
+			dataCoreCrew.Where(c => c.MaxRarity == 5 && c.Have == true && c.Rarity != c.MaxRarity && c.Level != 100).OrderBy(c => c.Tier).ForEach(c => Console.WriteLine(c.Name + " - T" + c.Tier.ToString() + ", " + c.Rarity));
+			// *** End Order golds by tier ***
 
+			// *** Select crew with specific trait and voyage pair above specific value ***
+
+			//List<Archetype> archetypes = sttUser.ItemArchetypeCache.Archetypes; // archetypes for needed items???
+
+			//Player player = sttUser.Player;
+			//Character character = player.Character;
+			//Crew[] crew = character.Crew.ToArray(); // my crew
+
+			//List<Item> items = character.Items; // my inventory
+
+
+			// *** Find items that can't be obtained in space battles ***
+			//sttUser.ItemArchetypeCache.GetItemsNotInSpaceBattles().ForEach(i => Console.WriteLine(i.Name + " " + i.Rarity + "*"));
+			// *** End Find items that can't be obtained in space battles ***
+
+			//Console.WriteLine();
+			//Console.WriteLine();
+
+			// *** Find all SRs that are FF but not FE ***
+			//sttUser.Player.Character.GetSRThatAreFFButNotFE().ForEach(c => Console.WriteLine(c.Name + " - " + c.Level + "/" + c.Equipment.Count));
+			// *** End Find all SRs that are FF but not FE ***
+
+			//Console.WriteLine();
+			//Console.WriteLine();
+
+			// *** Find all SRs that are 3* ***
+			//sttUser.Player.Character.GetSRThatAreThreeStar().ForEach(c => Console.WriteLine(c.Name + " - " + c.Level + "/" + c.Equipment.Count));
+			// *** End Find all SRs that are 3* ***
+
+			//Console.WriteLine();
+			//Console.WriteLine();
+
+			// *** Calculate Honor Debt ***
+			//int honorDebt = sttUser.Player.Character.GetHonorDebt();
+			//Console.WriteLine("Honor Debt = " + honorDebt);
+			// *** End Calculate Honor Debt ***
+
+			// *** Calculate items left to FE ***
+			//var itemsLeftToFE = sttUser.Player.Character.GetItemsLeftToFE("seven_silver_crew");
+			// *** End Calculate items left to FE ***
+
+			// *** Export Archetypes spreadsheet ***
+			//sttUser.ItemArchetypeCache.WriteArchetypesSpreadsheet("archetypes.csv");
+
+			//Console.WriteLine("\r\nArchetypes CSV written.");
+			// *** End Export Archetypes spreadsheet ***
+
+			// *** Count Immortalized ***
+			//Console.WriteLine("\r\nImmortialized Count: " + character.StoredImmortals.Count);
+			//Console.WriteLine();
+			// *** End Count Immortalized ***
+
+			// *** Calculate voyage time ***
+			//DateTime start = DateTime.Now;
+			//int totalTime = Welcome.GetVoyageTimeEstimate(12735, 12351, 8556, 5844, 5195, 2152, 2825);
+			//Console.WriteLine("\r\nvoyage time = " + (totalTime / 1000).ToHoursMinutes()); // 1000 is the default for the number of iterations.
+			//DateTime end = DateTime.Now;
+			//TimeSpan elapsed = end - start;
+			//Console.WriteLine("elapsed time = " + elapsed.ToString());
+			//Console.WriteLine();
+			// *** End Calculate voyage time ***			
+
+			// *** Voyage Calculator ***
+			//start = DateTime.Now;
+			//var voyageCrew = sttUser.Player.Character.GetVoyageCrew();
+			//voyageCrew.Item1.ForEach(vc => Console.WriteLine(vc.Name));
+			//voyageCrew.Item2.ForEach(vc => Console.WriteLine(vc));
+			//end = DateTime.Now;
+			//elapsed = end - start;
+			//Console.WriteLine("\r\nelapsed time = " + elapsed.ToString());
+			//totalTime = Welcome.GetVoyageTimeEstimate(voyageCrew.Item2[4], voyageCrew.Item2[0], voyageCrew.Item2[1], voyageCrew.Item2[5], voyageCrew.Item2[3], voyageCrew.Item2[2], 2800);
+			//Console.WriteLine("\r\nvoyage time = " + (totalTime / 1000).ToHoursMinutes()); // 1000 is the default for the number of iterations.
+			// *** End Voyage Calculaor ***
+
+			// *** Find crew with two specific skills ***
+			//sttUser.Player.Character.GetCrewWithTwoSpecificSkills("EngineeringSkill", "DiplomacySkill").OrderByDescending(c => c.EngineeringVoyageScore + c.DiplomacyVoyageScore).ForEach(c => Console.WriteLine(c.Name + " - " + c.EngineeringVoyageScore + "/" + c.DiplomacyVoyageScore + " (" + c.Rarity + "/" + c.MaxRarity + ")"));
+			// *** End Find crew with two specific skills ***
+
+			// *** Various playing around to figure out the data ***
 			//var items = sttUser.ItemArchetypeCache.Archetypes;
 			//foreach (var iitem in items)
 			//{
@@ -123,108 +196,203 @@ namespace STTDataAnalyzer
 
 			//var item1 = welcome.ItemArchetypeCache.Archetypes.Find(a => a.Name == "Authorization Code");
 			//Console.WriteLine(item1.Id);
+			// *** End Various playing around to figure out the data ***
 
-			Console.WriteLine("Done");
-			Console.ReadLine();
+			Console.WriteLine("\r\nDone");
 		}
 
-		private static void GetUnusedCrew(CrewMember[] crewScores, string[] populatedSlotNames, Crew[] populatedSlotCrews, int v)
+		private static List<DataCoreEquipment> readDataCoreEquipment(string filePath)
 		{
-			var sortedSlots = crewScores.OrderByDescending(x => x.VoyageScores[v]).Select(x => new { x.Crew, Score = x.VoyageScores[v] }).Take(50);
+			List<DataCoreEquipment> result = new List<DataCoreEquipment>();
+			string[] firstLine = null;
+			bool isFirstLine = true;
 
-			foreach(var crewMember in sortedSlots) {
-				if (!populatedSlotNames.Contains(crewMember.Crew.Name)){
-					populatedSlotNames[v] = crewMember.Crew.Name;
-					populatedSlotCrews[v] = crewMember.Crew;
-					break;
-				}
-			}
-		}
-
-		private static int GetSkillVoyageScore(SttUser.Crew crewMember, string primarySkill, string secondarySkill, string currentSkill, string trait)
-		{
-			double skillScore = GetSkillVoyageValue(crewMember, currentSkill);
-			if (primarySkill == currentSkill) skillScore *= 0.500;
-			else if (secondarySkill == currentSkill) skillScore *= 0.358;
-			else skillScore *= 0.100;
-
-			if (crewMember.Traits.Contains(trait)) skillScore += 25;
-
-			return (int)skillScore;
-		}
-
-		private static double GetSkillVoyageValue(SttUser.Crew crewMember, string primarySkill)
-		{
-			double skillValue = 0;
-
-			switch(primarySkill) {
-				case "CommandSkill":
-					skillValue = crewMember.BaseSkills.CommandSkill.Core + ((crewMember.BaseSkills.CommandSkill.RangeMin + crewMember.BaseSkills.CommandSkill.RangeMax) / 2);
-					break;
-				case "DiplomacySkill":
-					skillValue = crewMember.BaseSkills.DiplomacySkill.Core + ((crewMember.BaseSkills.DiplomacySkill.RangeMin + crewMember.BaseSkills.DiplomacySkill.RangeMax) / 2);
-					break;
-				case "EngineeringSkill":
-					skillValue = crewMember.BaseSkills.EngineeringSkill.Core + ((crewMember.BaseSkills.EngineeringSkill.RangeMin + crewMember.BaseSkills.EngineeringSkill.RangeMax) / 2);
-					break;
-				case "MedicineSkill":
-					skillValue = crewMember.BaseSkills.MedicineSkill.Core + ((crewMember.BaseSkills.MedicineSkill.RangeMin + crewMember.BaseSkills.MedicineSkill.RangeMax) / 2);
-					break;
-				case "ScienceSkill":
-					skillValue = crewMember.BaseSkills.ScienceSkill.Core + ((crewMember.BaseSkills.ScienceSkill.RangeMin + crewMember.BaseSkills.ScienceSkill.RangeMax) / 2);
-					break;
-				case "SecuritySkill":
-					skillValue = crewMember.BaseSkills.SecuritySkill.Core + ((crewMember.BaseSkills.SecuritySkill.RangeMin + crewMember.BaseSkills.SecuritySkill.RangeMax) / 2);
-					break;
-			}
-
-			return skillValue;
-		}
-
-		private static void DisplayRecipe(SttUser.Archetype item, int level, int quantity)
-		{
-			Console.WriteLine(new string(' ', level * 2) + quantity + " - " + item.Name + " " + new string('*', (int)item.Rarity));
-			if (item.Recipe != null)
+			foreach (var line in File.ReadLines(filePath))
 			{
-				for (int i = 0; i < item.Recipe.Demands.Count; i++)
+				if (isFirstLine)
 				{
-					var subItem = sttUser.ItemArchetypeCache.Archetypes.Find(a => a.Id == item.Recipe.Demands[i].ArchetypeId);
-					if (subItem != null)
-					{
-						DisplayRecipe(subItem, level + 1, (int)item.Recipe.Demands[i].Count);
+					firstLine = line.Split('\t');
+					isFirstLine = false;
+				}
+				else
+				{
+					string[] tempLine = line.Split('\t');
+
+					DataCoreEquipment equipment = new DataCoreEquipment();
+					equipment.CraftCost = int.Parse(tempLine[2]);
+					equipment.Level = int.Parse(tempLine[1]);
+					equipment.Name = tempLine[0];
+
+					equipment.ItemsNeeded = new List<(string, int)>();
+					for (int i =3; i < 26 * 13 + 9 + 1; i++) {
+						if (tempLine[i] != "0") {
+							equipment.ItemsNeeded.Add((firstLine[i], int.Parse(tempLine[i])));
+						}
 					}
-					else
-					{
-						Console.WriteLine(new string(' ', (level + 1) * 2) + item.Recipe.Demands[i].Count + " - Unknown Item #" + item.Recipe.Demands[i].ArchetypeId);
-					}
-					//var item00 = sttUser.ItemArchetypeCache.Archetypes.Find(a => a.Id == item.Recipe.Demands[i].ArchetypeId);
-					//Console.WriteLine("Name = " + item0.Recipe.Demands[i].Count + " - " + item00.Name);
+
+					result.Add(equipment);
 				}
 			}
-		}
-	}
 
-	public class CrewMember : IComparable {
-		public SttUser.Crew Crew;
-		public int[] VoyageScores;
-
-		public CrewMember(SttUser.Crew c) {
-			this.Crew = c;
-			this.VoyageScores = new int[12];
+			return result;
 		}
 
-		public int CompareTo(object obj)
+		private static List<DataCoreShip> readDataCoreShips(string filePath)
 		{
-			if (obj == null) return 1;
+			List<DataCoreShip> result = new List<DataCoreShip>();
+			string[] firstLine = null;
+			bool isFirstLine = true;
+			List<string> multiwordTraits = new List<string>() { "Cloaking Device", "Transwarp Drive", "Electromagnetic Pulse", "War Veteran", "Spore Drive", "Orion Syndicate" };
 
-			CrewMember cm = obj as CrewMember;
-			if(cm != null) {
-				if (this.VoyageScores[0] < cm.VoyageScores[0]) return -1;
-				if (this.VoyageScores[0] > cm.VoyageScores[0]) return 1;
-				return 0;
+			foreach (var line in File.ReadLines(filePath))
+			{
+				if (isFirstLine)
+				{
+					firstLine = line.Split('\t');
+					isFirstLine = false;
+				}
+				else
+				{
+					string[] tempLine = line.Split('\t');
+
+					DataCoreShip ship = new DataCoreShip();
+					ship.Accuracy = int.Parse(tempLine[5]);
+					ship.Antimatter = int.Parse(tempLine[4]);
+					ship.Attack = int.Parse(tempLine[6]);
+					ship.AttacksPerSecond = decimal.Parse(tempLine[7]);
+					ship.CritBonus = int.Parse(tempLine[8]);
+					ship.CritChance = int.Parse(tempLine[9]);
+					ship.Evasion = int.Parse(tempLine[10]);
+					ship.Hull = int.Parse(tempLine[11]);
+					ship.Level = int.Parse(tempLine[3].Split('/')[0]);
+					ship.MaxLevel = int.Parse(tempLine[3].Split('/')[1]);
+					ship.Name = tempLine[0];
+					ship.Owned = tempLine[1] == "TRUE";
+					ship.Rarity = int.Parse(tempLine[2]);
+					ship.Shields = int.Parse(tempLine[12]);
+					ship.ShieldRegen = int.Parse(tempLine[13]);
+
+					ship.Traits = new List<string>();
+					string traits = tempLine[14];
+					foreach (string multiwordTrait in multiwordTraits)
+					{
+						if (traits.Contains(multiwordTrait))
+						{
+							ship.Traits.Add(multiwordTrait);
+							traits.Replace(multiwordTrait, "");
+						}
+					}
+					traits = traits.Replace("  ", " ");
+
+					ship.Traits.AddRange(traits.Split(' '));
+					
+					result.Add(ship);
+				}
 			}
 
-			return 0;
+			return result;
+		}
+
+		private static List<DataCoreItem> readDataCoreItems(string filePath)
+		{
+			List<DataCoreItem> result = new List<DataCoreItem>();
+			string[] firstLine = null;
+			bool isFirstLine = true;
+
+			foreach (var line in File.ReadLines(filePath))
+			{
+				if (isFirstLine)
+				{
+					firstLine = line.Split('\t');
+					isFirstLine = false;
+				}
+				else
+				{
+					string[] tempLine = line.Split('\t');
+
+					DataCoreItem item = new DataCoreItem();
+					item.Flavor = tempLine[4];
+					item.Image = tempLine[7];
+					item.Name = tempLine[0];
+					item.Quantity = int.Parse(tempLine[2]);
+					item.Rarity = int.Parse(tempLine[1]);
+					item.Symbol = tempLine[5];
+					item.Type = int.Parse(tempLine[3]);
+					item.Bonuses = JsonConvert.DeserializeObject<Dictionary<string, int>>(tempLine[6]);
+
+					result.Add(item);
+				}
+			}
+			return result;
+		}
+
+		private static List<DataCoreCrew> readDataCoreCrew(string filePath)
+		{
+			List<DataCoreCrew> result = new List<DataCoreCrew>();
+			string[] firstLine = null;
+			bool isFirstLine = true;
+
+			foreach (var line in File.ReadLines(filePath))
+			{
+				if (isFirstLine)
+				{
+					firstLine = line.Split('\t');
+					isFirstLine = false;
+				}
+				else
+				{
+					string[] tempLine = line.Split('\t');
+
+					DataCoreCrew crew = new DataCoreCrew();
+
+					crew.Accuracy = !string.IsNullOrEmpty(tempLine[43]) ? int.Parse(tempLine[43]) : 0;
+					crew.Action = new DataCoreCrewAction();
+					crew.Action.Amount = int.Parse(tempLine[34]);
+					crew.Action.Boosts = tempLine[33];
+					crew.Action.Cooldown = int.Parse(tempLine[37]);
+					crew.Action.Duration = int.Parse(tempLine[36]);
+					crew.Action.Initialize = int.Parse(tempLine[35]);
+					crew.Action.Name = tempLine[0];
+					crew.Bonus = new DataCoreCrewBonus();
+					crew.Bonus.Ability = tempLine[38];
+					crew.Bonus.HandicapAmount = !string.IsNullOrEmpty(tempLine[42]) ? int.Parse(tempLine[42]) : 0;
+					crew.Bonus.HandicapType = tempLine[41];
+					crew.Bonus.Trigger = tempLine[39];
+					crew.Bonus.UsesPerBattle = !string.IsNullOrEmpty(tempLine[40]) ? int.Parse(tempLine[40]) : 0;
+					crew.ChargePhases = tempLine[47];
+					crew.Collections = new List<string>();
+					if (!string.IsNullOrEmpty(tempLine[10])) {
+						crew.Collections = tempLine[10].Split('.').ToList();
+					}
+					crew.CritBonus = !string.IsNullOrEmpty(tempLine[44]) ? int.Parse(tempLine[44]) : 0;
+					crew.CritRating = !string.IsNullOrEmpty(tempLine[45]) ? int.Parse(tempLine[45]) : 0;
+					crew.Equipment = tempLine[7];
+					crew.Evasion = !string.IsNullOrEmpty(tempLine[46]) ? int.Parse(tempLine[46]) : 0;
+					crew.GauntletRank = int.Parse(tempLine[12]);
+					crew.Have = tempLine[1] == "TRUE";
+					crew.Immortal = int.Parse(tempLine[6]);
+					crew.InPortal = tempLine[9] == "TRUE";
+					crew.Level = int.Parse(tempLine[5]);
+					crew.MaxRarity = int.Parse(tempLine[3]);
+					crew.Name = tempLine[0];
+					crew.Rarity = int.Parse(tempLine[4]);
+					crew.ShortName = tempLine[2];
+					crew.Skills = new Dictionary<string, (int, int, int)>();
+					crew.Skills.Add("CommandSkill", (int.Parse(tempLine[13]), int.Parse(tempLine[14]), int.Parse(tempLine[15])));
+					crew.Skills.Add("DiplomacySkill", (int.Parse(tempLine[16]), int.Parse(tempLine[17]), int.Parse(tempLine[18])));
+					crew.Skills.Add("EngineeringSkill", (int.Parse(tempLine[19]), int.Parse(tempLine[20]), int.Parse(tempLine[21])));
+					crew.Skills.Add("MedicineSkill", (int.Parse(tempLine[22]), int.Parse(tempLine[23]), int.Parse(tempLine[24])));
+					crew.Skills.Add("ScienceSkill", (int.Parse(tempLine[25]), int.Parse(tempLine[26]), int.Parse(tempLine[27])));
+					crew.Skills.Add("SecuritySkill", (int.Parse(tempLine[28]), int.Parse(tempLine[29]), int.Parse(tempLine[30])));
+					crew.Tier = !string.IsNullOrEmpty(tempLine[8]) ? int.Parse(tempLine[8]) : 0;
+					crew.Traits = JsonConvert.DeserializeObject<List<string>>(tempLine[31]);
+					crew.VoyageRank = int.Parse(tempLine[11]);
+
+					result.Add(crew);
+				}
+			}
+
+			return result;
 		}
 	}
 }

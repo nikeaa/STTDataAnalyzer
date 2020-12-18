@@ -47,6 +47,8 @@
 						return PurpleName.Portal10x;
 					case "Replicator Fuel":
 						return PurpleName.ReplicatorFuel;
+					case "The Niners":
+						return PurpleName.TheNiners;
 				}
 				throw new Exception("Cannot unmarshal type PurpleName");
 			}

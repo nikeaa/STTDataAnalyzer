@@ -29,7 +29,14 @@
 			public long State { get; set; }
 
 			[JsonProperty("expires_in")]
-			public double ExpiresIn { get; set; }
+			public string ExpiresInString { get; set; }
+
+			public double ExpiresIn
+			{
+				get {
+					return (!string.IsNullOrEmpty(ExpiresInString)) ? double.Parse(ExpiresInString) : 0;
+				}
+			}
 
 			[JsonProperty("faction_id")]
 			public long FactionId { get; set; }

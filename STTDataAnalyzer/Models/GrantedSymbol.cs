@@ -11,6 +11,6 @@
 
 	namespace SttUser
 	{
-		public enum GrantedSymbol { GiftDirectGameItem, GuildCreate, GuildSquadCreate, MonthlyCardDailyCollect };
+		public enum GrantedSymbol { GiftDirectGameItem, GuildCreate, GuildSquadCreate, MonthlyCardDailyCollect, NinersAvatar };
 	}
 }

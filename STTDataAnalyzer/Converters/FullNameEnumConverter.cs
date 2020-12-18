@@ -49,6 +49,8 @@
 						return FullNameEnum.PremiumTimePortal10x;
 					case "Dynamic Replicator Ration":
 						return FullNameEnum.DynamicReplicatorRation;
+					case "The Niners":
+						return FullNameEnum.TheNiners;
 				}
 				throw new Exception("Cannot unmarshal type FullNameEnum");
 			}

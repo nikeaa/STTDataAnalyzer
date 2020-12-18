@@ -11,6 +11,6 @@
 
 	namespace SttUser
 	{
-		public enum PurpleName { Chronitons, Credits, Dilithium, Honor, Merits, Portal, Portal10x, ReplicatorFuel };
+		public enum PurpleName { Chronitons, Credits, Dilithium, Honor, Merits, Portal, Portal10x, ReplicatorFuel, TheNiners };
 	}
 }

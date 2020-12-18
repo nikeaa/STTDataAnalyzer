@@ -39,6 +39,8 @@
 						return GrantedSymbol.GuildSquadCreate;
 					case "monthly_card_daily_collect":
 						return GrantedSymbol.MonthlyCardDailyCollect;
+					case "niners_avatar":
+						return GrantedSymbol.NinersAvatar;
 				}
 				throw new Exception("Cannot unmarshal type GrantedSymbol");
 			}

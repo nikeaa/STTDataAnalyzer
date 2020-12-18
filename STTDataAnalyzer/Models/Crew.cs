@@ -126,33 +126,6 @@
 
 			[JsonProperty("cap_achiever")]
 			public CapAchiever CapAchiever { get; set; }
-
-			public bool HasSkillForVoyageSlot(SttUser.CrewSlot voyageCrewSlot) {
-				bool result = false;
-
-				switch (voyageCrewSlot.Skill) {
-					case SkillElement.CommandSkill:
-						result = Skills.CommandSkill != null && Skills.CommandSkill.Core > 0;
-						break;
-					case SkillElement.DiplomacySkill:
-						result = Skills.DiplomacySkill != null && Skills.DiplomacySkill.Core > 0;
-						break;
-					case SkillElement.EngineeringSkill:
-						result = Skills.EngineeringSkill != null && Skills.EngineeringSkill.Core > 0;
-						break;
-					case SkillElement.MedicineSkill:
-						result = Skills.MedicineSkill != null && Skills.MedicineSkill.Core > 0;
-						break;
-					case SkillElement.ScienceSkill:
-						result = Skills.ScienceSkill != null && Skills.ScienceSkill.Core > 0;
-						break;
-					case SkillElement.SecuritySkill:
-						result = Skills.SecuritySkill != null && Skills.SecuritySkill.Core > 0;
-						break;
-				}
-
-				return result;
-			}
 		}
 	}
 }
