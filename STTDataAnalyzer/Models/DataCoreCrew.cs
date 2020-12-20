@@ -26,5 +26,11 @@ namespace STTDataAnalyzer.Models
 		public int CritRating;
 		public int Evasion;
 		public string ChargePhases;
+
+		public int VoyageCommand {
+			get {
+				return 0;
+			}
+		}
 	}
 }
