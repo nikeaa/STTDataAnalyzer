@@ -219,6 +219,9 @@
 
 			[JsonProperty("starbase_buffs")]
 			public List<Buff> StarbaseBuffs { get; set; }
+
+			[JsonProperty("all_buffs")]
+			public List<Buff> AllBuffs { get; set; }
 		}
 	}
 }
