@@ -6,22 +6,23 @@ using System.Text;
 
 namespace STTDataAnalyzer.Models
 {
-	public class SkillSet
-	{
-		public Dictionary<string, int> Skills; // by skill
-	}
+//	public class SkillSet
+//	{
+//		public Dictionary<string, int> CoreSkills; // by skill
+//	}
 
-	public class Level
+	public class SkillsRow
 	{
 		public int LevelNumber;
-		public SkillSet[] Skills; // by star count
+		public Dictionary<string, int>[] CoreSkills; // by star count
 		public Dictionary<string, int> MinProficiency; // by skill
 		public Dictionary<string, int> MaxProficiency; // by skill
 	}
 
 	public class LevelTable
 	{
-		public Level[] Levels;
+		public string WikiName;
+		public SkillsRow[] Levels;
 	}
 
 	public class WikiData
@@ -35,10 +36,10 @@ namespace STTDataAnalyzer.Models
 		public WikiData(string wikiText)
 		{
 			_wikiText = wikiText;
-			skills = getSkillNames(_wikiText);
+			skills = GetSkillNames(_wikiText);
 		}
 
-		public Level parseWikiTextFromPageName(string pageName) {
+		public SkillsRow parseWikiTextFromPageName(string pageName) {
 			// get the text from the wiki based on the name.
 			string uri = string.Format("https://stt.wiki/w/api.php?action=query&format=json&prop=revisions&titles={0}&formatversion=2&rvprop=content&rvslots=*", pageName);
 
@@ -52,26 +53,26 @@ namespace STTDataAnalyzer.Models
 				_wikiText = reader.ReadToEnd().Replace("\\\\n", "\\n");
 			}
 
-			skills = getSkillNames(_wikiText);
+			skills = GetSkillNames(_wikiText);
 			return parseWikiText();
 		}
 
 		//1STAR_SKILL1_LVL_100
 		//string[,] skills = new string[5,3];
 		//string[,] mods = new string[2,3];
-		public Level parseWikiText(string wikiText)
+		public SkillsRow parseWikiText(string wikiText)
 		{
 			_wikiText = wikiText;
-			skills = getSkillNames(_wikiText);
+			skills = GetSkillNames(_wikiText);
 			return parseWikiText();
 		}
 
-		public Level parseWikiText()
+		public SkillsRow parseWikiText()
 		{
-			Level result = new Level
+			SkillsRow result = new SkillsRow
 			{
 				LevelNumber = 100,
-				Skills = new SkillSet[5],
+				CoreSkills = new Dictionary<string, int>[5],
 				MinProficiency = new Dictionary<string, int>(),
 				MaxProficiency = new Dictionary<string, int>()
 			};
@@ -79,13 +80,15 @@ namespace STTDataAnalyzer.Models
 			int skillCount = 2 + (skills[2] != null ? 1 : 0);
 			for (int star = 0; star < 5; star++)
 			{
-				SkillSet skillSet = new SkillSet();
-				skillSet.Skills = new Dictionary<string, int>();
+				result.CoreSkills[star] = new Dictionary<string, int>();
+				//SkillSet skillSet = new SkillSet();
+				//skillSet.Skills = new Dictionary<string, int>();
 				for (int skill = 0; skill < skillCount; skill++)
 				{
 					string key = (star + 1).ToString() + "STAR_SKILL" + (skill + 1).ToString() + "_LVL_100";
 					string value = GetValue(_wikiText, key);
-					skillSet.Skills.Add(skills[skill], int.Parse(value));
+					result.CoreSkills[star].Add(skills[skill], int.Parse(value));
+					//skillSet.Skills.Add(skills[skill], int.Parse(value));
 					//MIN_SKILL1_LVL_100= 335\n| 
 					if (star == 0)
 					{
@@ -95,7 +98,7 @@ namespace STTDataAnalyzer.Models
 						result.MaxProficiency.Add(skills[skill], int.Parse(GetValue(_wikiText, key)));
 					}
 				}
-				result.Skills[star] = skillSet;
+				//result.CoreSkills[star] = skillSet;
 			}
 
 			return result;
@@ -105,7 +108,6 @@ namespace STTDataAnalyzer.Models
 		{
 			string result = null;
 
-			//SKILL_1= eng\n| 
 			if (!string.IsNullOrEmpty(key))
 			{
 				key += "= ";
@@ -115,21 +117,43 @@ namespace STTDataAnalyzer.Models
 					int valueStart = keyPos + key.Length;
 					int valueEnd = text.IndexOf("\\n", valueStart);
 					result = text.Substring(valueStart, valueEnd - valueStart);
+					if (result.IndexOf(" ") > -1) {
+						valueEnd = result.IndexOf(" ");
+						result = result.Substring(0, valueEnd);
+					}
 				}
 			}
 
 			return result;
 		}
 
-		private string[] getSkillNames(string wikiText)
+		private string[] GetSkillNames(string wikiText)
 		{
 			string[] result = new string[3];
 
-			result[0] = GetValue(wikiText, "SKILL_1");
-			result[1] = GetValue(wikiText, "SKILL_2");
-			result[2] = GetValue(wikiText, "SKILL_3");
+			result[0] = GetSkillFullName(GetValue(wikiText, "SKILL_1"));
+			result[1] = GetSkillFullName(GetValue(wikiText, "SKILL_2"));
+			result[2] = GetSkillFullName(GetValue(wikiText, "SKILL_3"));
 
 			return result;
+		}
+
+		private string GetSkillFullName(string skillShortName)
+		{
+			if (skillShortName != null)
+			{
+				switch (skillShortName.ToLower())
+				{
+					case "cmd": return "commandSkill";
+					case "dip": return "diplomacySkill";
+					case "eng": return "engineeringSkill";
+					case "med": return "medicineSkill";
+					case "sci": return "scienceSkill";
+					case "sec": return "securitySkill";
+				}
+			}
+
+			return null;
 		}
 	}
 }

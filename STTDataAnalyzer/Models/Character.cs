@@ -13,6 +13,7 @@
 	{
 		using Newtonsoft.Json;
 		using System.Collections.Generic;
+		using System.Linq;
 
 		public partial class Character
 		{
@@ -222,6 +223,28 @@
 
 			[JsonProperty("all_buffs")]
 			public List<Buff> AllBuffs { get; set; }
+
+			public Dictionary<string, (double, double, double)> GetBuffs()
+			{
+				return new Dictionary<string, (double Core, double Min, double Max)>
+				{
+					{ "commandSkill", getBuffs("command") },
+					{ "diplomacySkill", getBuffs("diplomacy") },
+					{ "engineeringSkill", getBuffs("engineering") },
+					{ "medicineSkill", getBuffs("medicine") },
+					{ "scienceSkill", getBuffs("science") },
+					{ "securitySkill", getBuffs("security") }
+				};
+			}
+
+			private (double Core, double Min, double Max) getBuffs(string skillName)
+			{
+				double coreBuff = AllBuffs.Where(ab => ab.Stat == skillName + "_skill_core").Select(ab => ab.Value).FirstOrDefault();
+				double rangeMaxBuff = AllBuffs.Where(ab => ab.Stat == skillName + "_skill_range_max").Select(ab => ab.Value).FirstOrDefault();
+				double rangeMinBuff = AllBuffs.Where(ab => ab.Stat == skillName + "_skill_range_min").Select(ab => ab.Value).FirstOrDefault();
+
+				return (coreBuff, rangeMaxBuff, rangeMinBuff);
+			}
 		}
 	}
 }
