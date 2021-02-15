@@ -14,7 +14,7 @@
 		using Newtonsoft.Json;
 		using System;
 
-		internal class FromEnumConverter : JsonConverter
+		public class FromEnumConverter : JsonConverter
 		{
 			public override bool CanConvert(Type t)
 			{

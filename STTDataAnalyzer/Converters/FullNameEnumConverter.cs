@@ -14,7 +14,7 @@
 		using Newtonsoft.Json;
 		using System;
 
-		internal class FullNameEnumConverter : JsonConverter
+		public class FullNameEnumConverter : JsonConverter
 		{
 			public override bool CanConvert(Type t)
 			{
@@ -51,6 +51,8 @@
 						return FullNameEnum.DynamicReplicatorRation;
 					case "The Niners":
 						return FullNameEnum.TheNiners;
+					case "Interstellar Medium":
+						return FullNameEnum.InterstellarMedium;
 				}
 				throw new Exception("Cannot unmarshal type FullNameEnum");
 			}

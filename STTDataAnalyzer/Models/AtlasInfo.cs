@@ -11,6 +11,6 @@
 
 	namespace SttUser
 	{
-		public enum AtlasInfo { AtlasSttIcons2Info, AtlasSttIconsInfo };
+		public enum AtlasInfo { AtlasSttIcons2Info, AtlasSttIconsInfo, AtlasSttForteInfo };
 	}
 }

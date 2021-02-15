@@ -14,7 +14,7 @@
 		using Newtonsoft.Json;
 		using System;
 
-		internal class SpecializedConverter : JsonConverter
+		public class SpecializedConverter : JsonConverter
 		{
 			public override bool CanConvert(Type t)
 			{

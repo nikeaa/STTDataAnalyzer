@@ -11,6 +11,6 @@
 
 	namespace SttUser
 	{
-		public enum VideoAdChronitonBoostRewardSymbol { Energy, Honor, Nonpremium, Premium1XBundle, Premium10XBundle, PremiumEarnable, PremiumPurchasable, ReplicatorFuelSuperrare, ReplicatorFuelLegendary, NinersAvatar };
+		public enum VideoAdChronitonBoostRewardSymbol { Energy, Honor, Nonpremium, Premium1XBundle, Premium10XBundle, PremiumEarnable, PremiumPurchasable, ReplicatorFuelSuperrare, ReplicatorFuelLegendary, NinersAvatar, IsmSubCoin };
 	}
 }

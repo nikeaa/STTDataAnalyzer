@@ -6,6 +6,7 @@ using System.Linq;
 using STTDataAnalyzer.ExtensionMethods;
 using STTDataAnalyzer.Models;
 using STTDataAnalyzer.SttUser;
+using System.Net;
 
 namespace STTDataAnalyzer
 {
@@ -15,13 +16,37 @@ namespace STTDataAnalyzer
 
 		private static void Main(string[] args)
 		{
-			string data = File.ReadAllText(@"C:\Users\nikea\Desktop\STT\Crew.json");
+			string data = File.ReadAllText(@"C:\Users\nikea\Desktop\STT\PlayerData.json");
 			Welcome sttUser = Welcome.FromJson(data);
 			List<DataCoreCrew> dataCoreCrew = readDataCoreCrew(@"C:\Users\nikea\Desktop\STT\STT - Crew.tsv");
 			List<DataCoreItem> dataCoreItems = readDataCoreItems(@"C:\Users\nikea\Desktop\STT\STT - Items.tsv");
 			List<DataCoreShip> dataCoreShips = readDataCoreShips(@"C:\Users\nikea\Desktop\STT\STT - Ships.tsv");
 			List<DataCoreEquipment> dataCoreEquipment = readDataCoreEquipment(@"C:\Users\nikea\Desktop\STT\STT - Equipment.tsv");
 			List<LevelTable> levelTables = JsonConvert.DeserializeObject<List<LevelTable>>(File.ReadAllText(@"C:\Users\nikea\Desktop\STT\LevelTables.json"));
+
+			//using (WebClient client = new WebClient())
+			//{
+			//	string s = client.DownloadString("https://github.com/stt-datacore/website/tree/master/static/structured/");
+			//}
+
+			string staticBotCrew = GetStaticData<string>("botcrew.json"); 
+			string staticCollections = GetStaticData<string>("collections.json"); 
+			string staticCrew = GetStaticData<string>("crew.json");
+			string staticDilemmas = GetStaticData<string>("dilemmas.json");
+			string staticDisputes = GetStaticData<string>("disputes.json");
+			string staticEpisodes = GetStaticData<string>("episodes.json");
+			string staticEventFLeaderboards= GetStaticData<string>("event_fleaderboards.json");
+			string staticEventInstances = GetStaticData<string>("event_instances.json");
+			string staticEventLeaderboards = GetStaticData<string>("event_leaderboards.json");
+			string staticFactions = GetStaticData<string>("factions.json");
+			string staticItems = GetStaticData<string>("items.json");
+			string staticKeystones = GetStaticData<string>("keystones.json");
+			string staticMiscStats = GetStaticData<string>("misc_stats.json");
+			string staticMissions = GetStaticData<string>("missions.json");
+			string staticQuests = GetStaticData<string>("quests.json");
+			string staticShipSchematics = GetStaticData<string>("ship_schematics.json");
+			string staticSkillBuffs = GetStaticData<string>("skill_buffs.json");
+			string staticUpcomingEvents = GetStaticData<string>("upcomingevents.json");
 
 			Dictionary<string, (double, double, double)> buffs = sttUser.Player.Character.GetBuffs();
 
@@ -33,31 +58,31 @@ namespace STTDataAnalyzer
 			//levelTable.WikiName = "The_Caretaker";
 			//levelTable.Levels[0] = level;
 
-			string wikiName = "Disguised_Kira";
-			WikiData wikiData = new WikiData();
-			SkillsRow level2 = wikiData.parseWikiTextFromPageName(wikiName);
-			level2 = AddBuffs(level2, buffs);
-			LevelTable levelTable2 = new LevelTable();
-			levelTable2.Levels = new SkillsRow[1];
-			levelTable2.WikiName = wikiName;
-			levelTable2.Levels[0] = level2;
-			levelTables.Add(levelTable2);
+			//string wikiName = "Disguised_Kira";
+			//WikiData wikiData = new WikiData();
+			//SkillsRow level2 = wikiData.parseWikiTextFromPageName(wikiName);
+			//level2 = AddBuffs(level2, buffs);
+			//LevelTable levelTable2 = new LevelTable();
+			//levelTable2.Levels = new SkillsRow[1];
+			//levelTable2.WikiName = wikiName;
+			//levelTable2.Levels[0] = level2;
+			//levelTables.Add(levelTable2);
 
 			//List<LevelTable> levelTablesTemp = new List<LevelTable>();
 			//levelTablesTemp.Add(levelTable);
 			//levelTablesTemp.Add(levelTable2);
 
-			var oneStar = levelTable2.Levels[0].CoreSkills[0];
-			var twoStar = levelTable2.Levels[0].CoreSkills[1];
-			foreach(KeyValuePair<string, int> skill in oneStar) {
-				int oneStarValue = skill.Value;
-				int twoStarValue = twoStar.Where(ts => ts.Key == skill.Key).FirstOrDefault().Value;
-			}
+			//var oneStar = levelTable2.Levels[0].CoreSkills[0];
+			//var twoStar = levelTable2.Levels[0].CoreSkills[1];
+			//foreach(KeyValuePair<string, int> skill in oneStar) {
+			//	int oneStarValue = skill.Value;
+			//	int twoStarValue = twoStar.Where(ts => ts.Key == skill.Key).FirstOrDefault().Value;
+			//}
 
-			string levelTablesJson = JsonConvert.SerializeObject(levelTables);
-			File.WriteAllText(@"C:\Users\nikea\Desktop\STT\LevelTables.json", levelTablesJson);
+			//string levelTablesJson = JsonConvert.SerializeObject(levelTables);
+			//File.WriteAllText(@"C:\Users\nikea\Desktop\STT\LevelTables.json", levelTablesJson);
 
-			int x = 0;
+			//int x = 0;
 
 			/*
 			 */
@@ -82,15 +107,15 @@ namespace STTDataAnalyzer
 			// *** End Crew with a trait ***
 
 			// *** Voyagers with a specific trait and > 0 in two skills and with a specific skill ***
-			//string primarySkill = "ScienceSkill";
-			//string secondarySkill = "MedicineSkill";
-			//string voyageSlotSkill = "MedicineSkill";
-			//string trait = "doctor";
-			//sttUser.Player.Character.Crew
-			//.Where(c => c.VoyageScoreForSkillPair(primarySkill, secondarySkill, false) > 0 && c.VoyageScores[voyageSlotSkill] > 0 && c.Traits.Contains(trait))
-			//.OrderByDescending(c => c.VoyageScoreForSkillPair(primarySkill, secondarySkill, false))
-			//.Take(10)
-			//.ForEach(c => Console.WriteLine(c.Name + " (" + c.Rarity + "/" + c.MaxRarity + ") - " + c.VoyageScoreForSkillPair(primarySkill, secondarySkill, false)));
+			string primarySkill = "ScienceSkill";
+			string secondarySkill = "MedicineSkill";
+			string voyageSlotSkill = "MedicineSkill";
+			string trait = "doctor";
+			sttUser.Player.Character.Crew
+			.Where(c => c.VoyageScoreForSkillPair(primarySkill, secondarySkill, false) > 0 && c.VoyageScores[voyageSlotSkill] > 0 && c.Traits.Contains(trait))
+			.OrderByDescending(c => c.VoyageScoreForSkillPair(primarySkill, secondarySkill, false))
+			.Take(10)
+			.ForEach(c => Console.WriteLine(c.Name + " (" + c.Rarity + "/" + c.MaxRarity + ") - " + c.VoyageScoreForSkillPair(primarySkill, secondarySkill, false)));
 			// ***End Voyagers with a specific trait and 2000+ in two skills ***
 
 			// *** Top ten voyagers by skill pair ***
@@ -102,7 +127,7 @@ namespace STTDataAnalyzer
 			// *** End Top ten voyagers by skill pair ***
 
 			// *** Order golds by tier ***
-			dataCoreCrew.Where(c => c.MaxRarity == 5 && c.Have == true && c.Rarity != c.MaxRarity && c.Level != 100).OrderBy(c => c.Tier).ForEach(c => Console.WriteLine(c.Name + " - T" + c.Tier.ToString() + ", " + c.Rarity));
+			//dataCoreCrew.Where(c => c.MaxRarity == 5 && c.Have == true && c.Rarity != c.MaxRarity && c.Level != 100).OrderBy(c => c.Tier).ForEach(c => Console.WriteLine(c.Name + " - T" + c.Tier.ToString() + ", " + c.Rarity));
 			// *** End Order golds by tier ***
 
 			// *** Select crew with specific trait and voyage pair above specific value ***
@@ -238,6 +263,15 @@ namespace STTDataAnalyzer
 			// *** End Various playing around to figure out the data ***
 
 			Console.WriteLine("\r\nDone");
+		}
+
+		private static T GetStaticData<T>(string fileName)
+		{
+			using (WebClient client = new WebClient())
+			{
+				string s = client.DownloadString("https://raw.githubusercontent.com/stt-datacore/website/master/static/structured/" + fileName);
+				return JsonConvert.DeserializeObject<T>(s);
+			}
 		}
 
 		private static SkillsRow AddBuffs(SkillsRow level2, Dictionary<string, (double, double, double)> buffs)

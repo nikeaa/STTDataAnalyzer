@@ -11,6 +11,6 @@
 
 	namespace SttUser
 	{
-		public enum FullNameEnum { AdvancedReplicatorRation, DynamicReplicatorRation, Chronitons, Dilithium, FederationCredits, Honor, Merits, PremiumTimePortal, PremiumTimePortal10x, TheNiners };
+		public enum FullNameEnum { AdvancedReplicatorRation, DynamicReplicatorRation, Chronitons, Dilithium, FederationCredits, Honor, Merits, PremiumTimePortal, PremiumTimePortal10x, TheNiners, InterstellarMedium };
 	}
 }

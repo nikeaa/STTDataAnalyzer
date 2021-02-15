@@ -14,7 +14,7 @@
 		using Newtonsoft.Json;
 		using System;
 
-		internal class VideoAdChronitonBoostRewardSymbolConverter : JsonConverter
+		public class VideoAdChronitonBoostRewardSymbolConverter : JsonConverter
 		{
 			public override bool CanConvert(Type t)
 			{
@@ -51,6 +51,8 @@
 						return VideoAdChronitonBoostRewardSymbol.Premium10XBundle;
 					case "niners_avatar":
 						return VideoAdChronitonBoostRewardSymbol.NinersAvatar;
+					case "ism_subcoin":
+						return VideoAdChronitonBoostRewardSymbol.IsmSubCoin;
 				}
 				throw new Exception("Cannot unmarshal type VideoAdChronitonBoostRewardSymbol");
 			}

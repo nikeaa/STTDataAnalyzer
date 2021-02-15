@@ -14,7 +14,7 @@
 		using Newtonsoft.Json;
 		using System;
 
-		internal class AtlasInfoConverter : JsonConverter
+		public class AtlasInfoConverter : JsonConverter
 		{
 			public override bool CanConvert(Type t)
 			{
@@ -35,6 +35,8 @@
 						return AtlasInfo.AtlasSttIcons2Info;
 					case "atlas_stt_icons_info":
 						return AtlasInfo.AtlasSttIconsInfo;
+					case "atlas_stt_forte_info":
+						return AtlasInfo.AtlasSttForteInfo;
 				}
 				throw new Exception("Cannot unmarshal type AtlasInfo");
 			}

@@ -14,7 +14,7 @@
 		using Newtonsoft.Json;
 		using System;
 
-		internal class PurpleNameConverter : JsonConverter
+		public class PurpleNameConverter : JsonConverter
 		{
 			public override bool CanConvert(Type t)
 			{
@@ -49,6 +49,8 @@
 						return PurpleName.ReplicatorFuel;
 					case "The Niners":
 						return PurpleName.TheNiners;
+					case "ISM":
+						return PurpleName.ISM;
 				}
 				throw new Exception("Cannot unmarshal type PurpleName");
 			}
