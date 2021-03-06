@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Json.NET Property</Title>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[
+
+		[JsonProperty("$jsonField$")]
+		public $type$ $propertyName$ { get; set; }
+				]]>
+			</Code>
+			<Declarations>
+				<Literal>
+					<ID>jsonField</ID>
+					<ToolTip>Choose the name of the field from the JSON data.</ToolTip>
+					<Default>json_field</Default>
+				</Literal>
+				<Literal>
+					<ID>type</ID>
+					<ToolTip>Choose a type for the property.</ToolTip>
+					<Default>int</Default>
+				</Literal>
+				<Literal>
+					<ID>propertyName</ID>
+					<ToolTip>Choose a name for the property.</ToolTip>
+					<Default>PropertyName</Default>
+				</Literal>
+			</Declarations>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

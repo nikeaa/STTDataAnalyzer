@@ -1,4 +1,5 @@
-﻿using System;
+﻿using STTDataAnalyzer.Models.PlayerData;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,10 +7,10 @@ namespace STTDataAnalyzer
 {
 	public class CrewMember : IComparable
 	{
-		public SttUser.Crew Crew;
+		public PdCrew Crew;
 		public int[] VoyageScores;
 
-		public CrewMember(SttUser.Crew c)
+		public CrewMember(PdCrew c)
 		{
 			this.Crew = c;
 			this.VoyageScores = new int[12];
