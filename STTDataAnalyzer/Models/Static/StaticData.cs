@@ -6,7 +6,7 @@ using System.Text;
 
 namespace STTDataAnalyzer.Models.Static
 {
-	public class StaticData
+	public class StaticData : BaseData
 	{
 		public BotCrew[] BotCrews;
 		public Collection[] Collections;
@@ -26,8 +26,6 @@ namespace STTDataAnalyzer.Models.Static
 		public ShipSchematic[] ShipSchematics;
 		public SkillBuffs SkillBuffs;
 		public UpcomingEvent[] UpcomingEvents;
-
-		public const string Path = @"C:\Users\nikea\Desktop\STT\";
 
 		private const string BotCrewFileName = "botcrew.json";
 		private const string CollectionFileName = "collections.json";

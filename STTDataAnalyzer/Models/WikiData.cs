@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -25,7 +26,7 @@ namespace STTDataAnalyzer.Models
 		public SkillsRow[] Levels;
 	}
 
-	public class WikiData
+	public class WikiData : BaseData
 	{
 		private string[] skills = new string[3];
 		private string _wikiText = "";
@@ -144,12 +145,12 @@ namespace STTDataAnalyzer.Models
 			{
 				switch (skillShortName.ToLower())
 				{
-					case "cmd": return "commandSkill";
-					case "dip": return "diplomacySkill";
-					case "eng": return "engineeringSkill";
-					case "med": return "medicineSkill";
-					case "sci": return "scienceSkill";
-					case "sec": return "securitySkill";
+					case "cmd": return CommandSkillName;
+					case "dip": return DiplomacySkillName;
+					case "eng": return EngineeringSkillName;
+					case "med": return MedicineSkillName;
+					case "sci": return ScienceSkillName;
+					case "sec": return SecuritySkillName;
 				}
 			}
 

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
 namespace STTDataAnalyzer.Models.PlayerData
@@ -41,7 +42,7 @@ namespace STTDataAnalyzer.Models.PlayerData
 		[JsonProperty("hide_from_cryo")]
 		public bool HideFromCryo { get; set; }
 
-		[JsonProperty("skills")]
+		[JsonProperty("skills", ItemConverterType = typeof(StringEnumConverter))]
 		public List<PdSkillElement> Skills { get; set; }
 	}
 }

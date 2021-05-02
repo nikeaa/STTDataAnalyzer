@@ -1,14 +1,13 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using STTDataAnalyzer.Converters;
 using System.Configuration;
 using System.IO;
 
 namespace STTDataAnalyzer.Models.PlayerData
 {
-	public partial class PlayerData
+	public partial class PlayerData : BaseData
 	{
-		public string Path = ConfigurationManager.AppSettings["Path"];
-
 		[JsonProperty("action")]
 		public string Action { get; set; }
 
@@ -18,17 +17,27 @@ namespace STTDataAnalyzer.Models.PlayerData
 		[JsonProperty("item_archetype_cache")]
 		public PdItemArchetypeCache ItemArchetypeCache { get; set; }
 
-		private const string FileName = "PlayerData.json";
+		private readonly string FileName = ConfigurationManager.AppSettings["PlayerDataFileName"];
 
-		public PlayerData(string fileName = FileName)
+		public PlayerData() {
+			JObject playerData = JObject.Parse(File.ReadAllText(Path + FileName));
+			JToken action = playerData["action"];
+			Action = action.ToString();
+			JToken player = playerData["player"];
+			Player = player.ToObject<PdPlayer>();
+			JToken items = playerData["item_archetype_cache"];
+			ItemArchetypeCache = items.ToObject<PdItemArchetypeCache>();
+		}
+
+		public PlayerData(string fileName)
 		{
-			if (fileName != null)
-			{
-				PlayerData temp = JsonConvert.DeserializeObject<PlayerData>(File.ReadAllText(Path + fileName), Converter.Settings);
-				Action = temp.Action;
-				ItemArchetypeCache = temp.ItemArchetypeCache;
-				Player = temp.Player;
-			}
+			JObject playerData = JObject.Parse(File.ReadAllText(Path + fileName));
+			JToken action = playerData["action"];
+			Action = action.ToString();
+			JToken player = playerData["player"];
+			Player = player.ToObject<PdPlayer>();
+			JToken items = playerData["item_archetype_cache"];
+			ItemArchetypeCache = items.ToObject<PdItemArchetypeCache>();
 		}
 	}
 }

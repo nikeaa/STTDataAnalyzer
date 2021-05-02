@@ -6,21 +6,26 @@ using System.Linq;
 
 namespace STTDataAnalyzer.Models.DataCore
 {
-	public class DataCore
+	public partial class DataCore : BaseData
 	{
 		public List<DataCoreCrew> Crew = new List<DataCoreCrew>();
 		public List<DataCoreEquipment> Equipment = new List<DataCoreEquipment>();
 		public List<DataCoreItem> Items = new List<DataCoreItem>();
 		public List<DataCoreShip> Ships = new List<DataCoreShip>();
 
-		public string Path = ConfigurationManager.AppSettings["Path"];
+		private readonly string CrewFileName = ConfigurationManager.AppSettings["DataCoreCrewFileName"];
+		private readonly string EquipmentFileName = ConfigurationManager.AppSettings["DataCoreEquipmentFileName"];
+		private readonly string ItemsFileName = ConfigurationManager.AppSettings["DataCoreItemsFileName"];
+		private readonly string ShipsFileName = ConfigurationManager.AppSettings["DataCoreShipsFileName"];
 
-		private const string CrewFileName = "STT - Crew.tsv";
-		private const string EquipmentFileName = "STT - Equipment.tsv";
-		private const string ItemsFileName = "STT - Items.tsv";
-		private const string ShipsFileName = "STT - Ships.tsv";
+		public DataCore() {
+			ParseCrew(CrewFileName);
+			ParseEquipment(EquipmentFileName);
+			ParseItems(ItemsFileName);
+			ParseShips(ShipsFileName);
+		}
 
-		public DataCore(string crewFileName = CrewFileName, string equipmentFileName = EquipmentFileName, string itemsFileName = ItemsFileName, string shipsFileName = ShipsFileName)
+		public DataCore(string crewFileName, string equipmentFileName, string itemsFileName, string shipsFileName)
 		{
 			ParseCrew(crewFileName);
 			ParseEquipment(equipmentFileName);
@@ -28,12 +33,19 @@ namespace STTDataAnalyzer.Models.DataCore
 			ParseShips(shipsFileName);
 		}
 
-		public void ParseCrew(string fileName = CrewFileName)
+		public void ParseCrew() {
+			ParseCrew(null);
+		}
+
+		public void ParseCrew(string fileName)
 		{
 			string[] firstLine = null;
 			bool isFirstLine = true;
 
-			foreach (var line in File.ReadLines(Path + fileName))
+			if (fileName == null) fileName = CrewFileName;
+
+			IEnumerable<string> crewLines = File.ReadLines(Path + fileName);
+			foreach (var line in crewLines)
 			{
 				if (isFirstLine)
 				{
@@ -80,12 +92,12 @@ namespace STTDataAnalyzer.Models.DataCore
 					crew.Rarity = int.Parse(tempLine[4]);
 					crew.ShortName = tempLine[2];
 					crew.Skills = new Dictionary<string, (int, int, int)>();
-					crew.Skills.Add("CommandSkill", (int.Parse(tempLine[13]), int.Parse(tempLine[14]), int.Parse(tempLine[15])));
-					crew.Skills.Add("DiplomacySkill", (int.Parse(tempLine[16]), int.Parse(tempLine[17]), int.Parse(tempLine[18])));
-					crew.Skills.Add("EngineeringSkill", (int.Parse(tempLine[19]), int.Parse(tempLine[20]), int.Parse(tempLine[21])));
-					crew.Skills.Add("MedicineSkill", (int.Parse(tempLine[22]), int.Parse(tempLine[23]), int.Parse(tempLine[24])));
-					crew.Skills.Add("ScienceSkill", (int.Parse(tempLine[25]), int.Parse(tempLine[26]), int.Parse(tempLine[27])));
-					crew.Skills.Add("SecuritySkill", (int.Parse(tempLine[28]), int.Parse(tempLine[29]), int.Parse(tempLine[30])));
+					crew.Skills.Add(CommandSkillName, (int.Parse(tempLine[13]), int.Parse(tempLine[14]), int.Parse(tempLine[15])));
+					crew.Skills.Add(DiplomacySkillName, (int.Parse(tempLine[16]), int.Parse(tempLine[17]), int.Parse(tempLine[18])));
+					crew.Skills.Add(EngineeringSkillName, (int.Parse(tempLine[19]), int.Parse(tempLine[20]), int.Parse(tempLine[21])));
+					crew.Skills.Add(MedicineSkillName, (int.Parse(tempLine[22]), int.Parse(tempLine[23]), int.Parse(tempLine[24])));
+					crew.Skills.Add(ScienceSkillName, (int.Parse(tempLine[25]), int.Parse(tempLine[26]), int.Parse(tempLine[27])));
+					crew.Skills.Add(SecuritySkillName, (int.Parse(tempLine[28]), int.Parse(tempLine[29]), int.Parse(tempLine[30])));
 					crew.Tier = !string.IsNullOrEmpty(tempLine[8]) ? int.Parse(tempLine[8]) : 0;
 					crew.Traits = JsonConvert.DeserializeObject<List<string>>(tempLine[31]);
 					crew.VoyageRank = int.Parse(tempLine[11]);
@@ -95,12 +107,19 @@ namespace STTDataAnalyzer.Models.DataCore
 			}
 		}
 
-		public void ParseEquipment(string fileName = EquipmentFileName)
+		public void ParseEquipment() {
+			ParseEquipment(null);
+		}
+
+		public void ParseEquipment(string fileName)
 		{
 			string[] firstLine = null;
 			bool isFirstLine = true;
 
-			foreach (var line in File.ReadLines(Path + fileName))
+			if (fileName == null) fileName = EquipmentFileName;
+
+			IEnumerable<string> equipmentLines = File.ReadLines(Path + fileName);
+			foreach (var line in equipmentLines)
 			{
 				if (isFirstLine)
 				{
@@ -130,12 +149,19 @@ namespace STTDataAnalyzer.Models.DataCore
 			}
 		}
 
-		public void ParseItems(string fileName = ItemsFileName)
+		public void ParseItems() {
+			ParseItems(null);
+		}
+
+		public void ParseItems(string fileName)
 		{
 			string[] firstLine = null;
 			bool isFirstLine = true;
 
-			foreach (var line in File.ReadLines(Path + fileName))
+			if (fileName == null) fileName = ItemsFileName;
+
+			IEnumerable<string> itemLines = File.ReadLines(Path + fileName);
+			foreach (var line in itemLines)
 			{
 				if (isFirstLine)
 				{
@@ -161,13 +187,20 @@ namespace STTDataAnalyzer.Models.DataCore
 			}
 		}
 
-		public void ParseShips(string fileName = ShipsFileName)
+		public void ParseShips() {
+			ParseShips(null);
+		}
+
+		public void ParseShips(string fileName)
 		{
 			string[] firstLine = null;
 			bool isFirstLine = true;
-			List<string> multiwordTraits = new List<string>() { "Cloaking Device", "Transwarp Drive", "Electromagnetic Pulse", "War Veteran", "Spore Drive", "Orion Syndicate" };
+			List<string> multiwordTraits = ConfigurationManager.AppSettings["MultiWordTraits"].Split(",").ToList();
 
-			foreach (var line in File.ReadLines(Path + fileName))
+			if (fileName == null) fileName = ShipsFileName;
+
+			IEnumerable<string> shipLines = File.ReadLines(Path + fileName);
+			foreach (var line in shipLines)
 			{
 				if (isFirstLine)
 				{

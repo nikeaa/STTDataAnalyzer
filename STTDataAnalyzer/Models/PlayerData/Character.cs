@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace STTDataAnalyzer.Models.PlayerData
 {
-	public partial class PdCharacter
+	public partial class PdCharacter : BaseData
 	{
 		[JsonProperty("id")]
 		public long Id { get; set; }
@@ -213,26 +213,36 @@ namespace STTDataAnalyzer.Models.PlayerData
 		[JsonProperty("all_buffs")]
 		public List<PdBuff> AllBuffs { get; set; }
 
-		public Dictionary<string, (double, double, double)> GetBuffs()
-		{
-			return new Dictionary<string, (double Core, double Min, double Max)>
-				{
-					{ "commandSkill", getBuffs("command") },
-					{ "diplomacySkill", getBuffs("diplomacy") },
-					{ "engineeringSkill", getBuffs("engineering") },
-					{ "medicineSkill", getBuffs("medicine") },
-					{ "scienceSkill", getBuffs("science") },
-					{ "securitySkill", getBuffs("security") }
-				};
+		public BuffValues GetBuffValuesForSkill(string skillName) {
+			BuffValues result = new BuffValues();
+
+			result.Core = AllBuffs.Where(ab => ab.Stat == skillName + "_skill_core").Select(ab => ab.Value).FirstOrDefault();
+			result.RangeMax = AllBuffs.Where(ab => ab.Stat == skillName + "_skill_range_max").Select(ab => ab.Value).FirstOrDefault();
+			result.RangeMin = AllBuffs.Where(ab => ab.Stat == skillName + "_skill_range_min").Select(ab => ab.Value).FirstOrDefault();
+
+			return result;
 		}
 
-		private (double Core, double Min, double Max) getBuffs(string skillName)
-		{
-			double coreBuff = AllBuffs.Where(ab => ab.Stat == skillName + "_skill_core").Select(ab => ab.Value).FirstOrDefault();
-			double rangeMaxBuff = AllBuffs.Where(ab => ab.Stat == skillName + "_skill_range_max").Select(ab => ab.Value).FirstOrDefault();
-			double rangeMinBuff = AllBuffs.Where(ab => ab.Stat == skillName + "_skill_range_min").Select(ab => ab.Value).FirstOrDefault();
+		//public Dictionary<string, (double, double, double)> GetBuffs()
+		//{
+		//	return new Dictionary<string, (double Core, double Min, double Max)>
+		//		{
+		//			{ CommandSkillName, getBuffs("command") },
+		//			{ DiplomacySkillName, getBuffs("diplomacy") },
+		//			{ EngineeringSkillName, getBuffs("engineering") },
+		//			{ MedicineSkillName, getBuffs("medicine") },
+		//			{ ScienceSkillName, getBuffs("science") },
+		//			{ SecuritySkillName, getBuffs("security") }
+		//		};
+		//}
 
-			return (coreBuff, rangeMaxBuff, rangeMinBuff);
-		}
+		//private (double Core, double Min, double Max) getBuffs(string skillName)
+		//{
+		//	double coreBuff = AllBuffs.Where(ab => ab.Stat == skillName + "_skill_core").Select(ab => ab.Value).FirstOrDefault();
+		//	double rangeMaxBuff = AllBuffs.Where(ab => ab.Stat == skillName + "_skill_range_max").Select(ab => ab.Value).FirstOrDefault();
+		//	double rangeMinBuff = AllBuffs.Where(ab => ab.Stat == skillName + "_skill_range_min").Select(ab => ab.Value).FirstOrDefault();
+
+		//	return (coreBuff, rangeMaxBuff, rangeMinBuff);
+		//}
 	}
 }

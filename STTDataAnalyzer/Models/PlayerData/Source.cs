@@ -1,4 +1,12 @@
-﻿namespace STTDataAnalyzer.Models.PlayerData
+﻿using System.Runtime.Serialization;
+
+namespace STTDataAnalyzer.Models.PlayerData
+{
+	public enum PdSource
 	{
-		public enum PdSource { CrewCollection, Starbase };
-	}
+		[EnumMember(Value = "crew_collection")]
+		CrewCollection,
+		[EnumMember(Value = "starbase")]
+		Starbase
+	};
+}

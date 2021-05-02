@@ -47,6 +47,25 @@ namespace STTDataAnalyzer.Models.PlayerData
 			return Crew.Where(c => c.VoyageScores[primarySkill] > 0 && c.VoyageScores[secondarySkill] > 0).Select(c => c);
 		}
 
+		public IEnumerable<ShipElement> GetLegendaryShipsThatArentFullyLevelled() {
+			return Ships.Where(s => s.Rarity == 5 && s.Level < 10);
+		}
+
+		public IEnumerable<PdCrew> GetCrewWithATrait(string trait)
+		{
+			return Crew.Where(c => c.Traits.Contains(trait));
+		}
+
+		public IOrderedEnumerable<PdCrew> GetBestVoyagersForSlotAndTrait(string primarySkill, string secondarySkill, string voyageSlotSkill, string trait) {
+			return Crew
+				.Where(c => c.WeightedVoyageScoreForSkillPair(primarySkill, secondarySkill, false) > 0 && c.VoyageScores[voyageSlotSkill] > 0 && c.Traits.Contains(trait))
+				.OrderByDescending(c => c.WeightedVoyageScoreForSkillPair(primarySkill, secondarySkill, false));
+		}
+
+		public IEnumerable<PdCrew> GetTopVoyagersBySkillPair(string primarySkill, string secondarySkill, int count = 10) {
+			return Crew.OrderByDescending(c => c.WeightedVoyageScoreForSkillPair(primarySkill, secondarySkill)).Take(count);
+		}
+
 		public (PdCrew[], int[]) GetVoyageCrew()
 		{
 			const int voyageCrewSlotCount = 12;

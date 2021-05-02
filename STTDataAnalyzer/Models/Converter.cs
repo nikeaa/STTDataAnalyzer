@@ -29,17 +29,17 @@
 			Converters =
 			{
 				PdSkillElementConverter.Singleton,
-				PdFullNameEnumConverter.Singleton,
-				PdAtlasInfoConverter.Singleton,
-				PdVideoAdChronitonBoostRewardSymbolConverter.Singleton,
-				PdOperatorConverter.Singleton,
-				PdSourceConverter.Singleton,
-				PdPurpleNameConverter.Singleton,
+				//PdFullNameEnumConverter.Singleton,
+				//PdAtlasInfoConverter.Singleton,
+				//PdVideoAdChronitonBoostRewardSymbolConverter.Singleton,
+				//PdOperatorConverter.Singleton,
+				//PdSourceConverter.Singleton,
+				//PdPurpleNameConverter.Singleton,
 				PdTutorialStateConverter.Singleton,
-				PdFromEnumConverter.Singleton,
+				//PdFromEnumConverter.Singleton,
 				PdReasonConverter.Singleton,
-				PdSpecializedConverter.Singleton,
-				PdGrantedSymbolConverter.Singleton,
+				//PdSpecializedConverter.Singleton,
+				//PdGrantedSymbolConverter.Singleton,
 				new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
 			},
 		};
