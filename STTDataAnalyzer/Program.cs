@@ -5,6 +5,7 @@ using STTDataAnalyzer.Models.DataCore;
 using STTDataAnalyzer.Models.PlayerData;
 using STTDataAnalyzer.Models.Static;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,6 +15,54 @@ namespace STTDataAnalyzer
 {
 	public class Program
 	{
+		public static Dictionary<string, int> voyageTraitsSkills = new Dictionary<string, int>()
+		{
+			{ "astrophysicist",			0b110110 },
+			{ "bajoran",				0b111000 },
+			{ "borg",					0b001110 },
+			{ "brutal",					0b111110 },
+			{ "cardassian",				0b111000 },
+			{ "civilian",				0b111111 },
+			{ "communicator",			0b111000 },
+			{ "costumed",				0b111110 },
+			{ "crafty",					0b111010 },
+			{ "cultural_figure",		0b111000 },
+			{ "cyberneticist",			0b000110 },
+			{ "desperate",				0b111110 },
+			{ "diplomat",				0b111000 },
+			{ "duelist",				0b111000 },
+			{ "exobiology",				0b000010 },
+			{ "explorer",				0b100000 },
+			{ "federation",				0b111111 },
+			{ "ferengi",				0b010000 },
+			{ "gambler",				0b111000 },
+			{ "hero",					0b111000 },
+			{ "hologram",				0b110011 },
+			{ "human",					0b111111 },
+			{ "hunter",					0b101000 },
+			{ "innovator",				0b100110 },
+			{ "inspiring",				0b111000 },
+			{ "jury_rigger",			0b101100 },
+			{ "klingon",				0b111000 },
+			{ "marksman",				0b001000 },
+			{ "maverick",				0b111000 },
+			{ "physician",				0b010011 },
+			{ "pilot",					0b101100 },
+			{ "prodigy",				0b000110 },
+			{ "resourceful",			0b111110 },
+			{ "romantic",				0b111110 },
+			{ "romulan",				0b011000 },
+			{ "saboteur",				0b101000 },
+			{ "starfleet",				0b111111 },
+			{ "survivalist",			0b111000 },
+			{ "tactician",				0b111110 },
+			{ "telepath",				0b111010 },
+			{ "undercover_operative",	0b111010 },
+			{ "veteran",				0b111000 },
+			{ "villain",				0b111000 },
+			{ "vulcan",					0b111010 }
+		};
+
 		private static void Main(string[] args)
 		{
 			PlayerData playerData = new PlayerData();
@@ -21,50 +70,58 @@ namespace STTDataAnalyzer
 			StaticData staticData = new StaticData();
 			List<LevelTable> levelTables = new List<LevelTable>();
 
-			VoyageDescription vd = playerData.Player.Character.VoyageDescriptions.First();
-			vd.CrewSlots
-			.ForEach(cs => {
-				Console.WriteLine("=============================================================================");
-				Console.WriteLine(string.Format("Name: {0} - Skill: {1}, Trait: {2}", cs.Name, cs.Skill, cs.Trait));
+			// Select all crew with a specific trait and skill
+			List<PdCrew> x = playerData.Player.Character.Crew.Where(c => c.Traits.Contains("gambler") && c.Skills.CommandSkill!= null).OrderByDescending(c => c.DiplomacyVoyageScore + c.EngineeringVoyageScore).ToList();
+			x.ForEach(c => Console.WriteLine(c.Name + " - "+ c.DiplomacyVoyageScore + " " + c.EngineeringVoyageScore + " " + (c.CommandVoyageScore + c.MedicineVoyageScore + c.ScienceVoyageScore + c.SecurityVoyageScore)));
 
-				// Has trait and skill for the slot and both primary and secondary skill
-				playerData.Player.Character.Crew
-					.Where(c => c.Traits.Contains(cs.Trait) && c.HasSkillForVoyageSlot(cs) && (c.HasPrimarySkillForVoyage(vd) && c.HasSecondarySkillForVoyage(vd)))
-					.OrderByDescending(c => c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd))
-					.ForEach(c => Console.WriteLine(string.Format("   {0} - {1}/{2}/{3}", c.Name, c.PrimarySkillForVoyageValue(vd), c.SecondarySkillForVoyageValue(vd), c.TertiarySkillForVoyageValue(vd))));
+			// Select crew by trait by voyage score
+			//List<PdCrew> y = playerData.Player.Character.Crew.Where(c => c.Traits.Contains("vulcan") && c.Skills.ScienceSkill != null && c.Skills.CommandSkill == null && c.Skills.DiplomacySkill == null).OrderByDescending(c => c.VoyageScores.Sum(v => v.Value)).ToList();
+			//y.ForEach(c => Console.WriteLine(c.Name + " - " + c.VoyageScores.Sum(v => v.Value)));
 
-				Console.WriteLine("-----------------------------------------------------------------------------");
+			//VoyageDescription vd = playerData.Player.Character.VoyageDescriptions.First();
+			//vd.CrewSlots
+			//.ForEach(cs => {
+			//	Console.WriteLine("=============================================================================");
+			//	Console.WriteLine(string.Format("Name: {0} - Skill: {1}, Trait: {2}", cs.Name, cs.Skill, cs.Trait));
 
-				// Has trait and voyage value 4000+
-				playerData.Player.Character.Crew
-					.Where(c => c.Traits.Contains(cs.Trait) && c.HasSkillForVoyageSlot(cs) && (c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd) >= 4000))
-					.OrderByDescending(c => c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd))
-					.ForEach(c => Console.WriteLine(string.Format("   {0} - {1}/{2}/{3}", c.Name, c.PrimarySkillForVoyageValue(vd), c.SecondarySkillForVoyageValue(vd),c.TertiarySkillForVoyageValue(vd))));
+			//	// Has trait and skill for the slot and both primary and secondary skill
+			//	playerData.Player.Character.Crew
+			//		.Where(c => c.Traits.Contains(cs.Trait) && c.HasSkillForVoyageSlot(cs) && (c.HasPrimarySkillForVoyage(vd) && c.HasSecondarySkillForVoyage(vd)))
+			//		.OrderByDescending(c => c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd))
+			//		.ForEach(c => Console.WriteLine(string.Format("   {0} - {1}/{2}/{3}", c.Name, c.PrimarySkillForVoyageValue(vd), c.SecondarySkillForVoyageValue(vd), c.TertiarySkillForVoyageValue(vd))));
 
-				Console.WriteLine("****************************************************************************");
+			//	Console.WriteLine("-----------------------------------------------------------------------------");
 
-				// Has trait and 3500 <= voyage value < 4000
-				playerData.Player.Character.Crew
-					.Where(c => c.Traits.Contains(cs.Trait) && c.HasSkillForVoyageSlot(cs) && (3500 <= c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd) && c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd) < 4000))
-					.OrderByDescending(c => c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd))
-					.ForEach(c => Console.WriteLine(string.Format("   {0} - {1}/{2}/{3}", c.Name, c.PrimarySkillForVoyageValue(vd), c.SecondarySkillForVoyageValue(vd), c.TertiarySkillForVoyageValue(vd))));
+			//	// Has trait and voyage value 4000+
+			//	playerData.Player.Character.Crew
+			//		.Where(c => c.Traits.Contains(cs.Trait) && c.HasSkillForVoyageSlot(cs) && (c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd) >= 4000))
+			//		.OrderByDescending(c => c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd))
+			//		.ForEach(c => Console.WriteLine(string.Format("   {0} - {1}/{2}/{3}", c.Name, c.PrimarySkillForVoyageValue(vd), c.SecondarySkillForVoyageValue(vd),c.TertiarySkillForVoyageValue(vd))));
 
-				Console.WriteLine("-----------------------------------------------------------------------------");
+			//	Console.WriteLine("****************************************************************************");
 
-				// Does not have trait but voyage value 4000+
-				playerData.Player.Character.Crew
-					.Where(c => !c.Traits.Contains(cs.Trait) && c.HasSkillForVoyageSlot(cs) && (c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd) >= 4000))
-					.OrderByDescending(c => c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd))
-					.ForEach(c => Console.WriteLine(string.Format("   {0} - {1}/{2}/{3}", c.Name, c.PrimarySkillForVoyageValue(vd), c.SecondarySkillForVoyageValue(vd), c.TertiarySkillForVoyageValue(vd))));
+			//	// Has trait and 3500 <= voyage value < 4000
+			//	playerData.Player.Character.Crew
+			//		.Where(c => c.Traits.Contains(cs.Trait) && c.HasSkillForVoyageSlot(cs) && (3500 <= c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd) && c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd) < 4000))
+			//		.OrderByDescending(c => c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd))
+			//		.ForEach(c => Console.WriteLine(string.Format("   {0} - {1}/{2}/{3}", c.Name, c.PrimarySkillForVoyageValue(vd), c.SecondarySkillForVoyageValue(vd), c.TertiarySkillForVoyageValue(vd))));
 
-				Console.WriteLine("****************************************************************************");
+			//	Console.WriteLine("-----------------------------------------------------------------------------");
 
-				// Does not have trait but voyage value 4000+
-				playerData.Player.Character.Crew
-					.Where(c => !c.Traits.Contains(cs.Trait) && c.HasSkillForVoyageSlot(cs) && (3500 <= c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd) && c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd) < 4000))
-					.OrderByDescending(c => c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd))
-					.ForEach(c => Console.WriteLine(string.Format("   {0} - {1}/{2}/{3}", c.Name, c.PrimarySkillForVoyageValue(vd), c.SecondarySkillForVoyageValue(vd), c.TertiarySkillForVoyageValue(vd))));
-			});
+			//	// Does not have trait but voyage value 4000+
+			//	playerData.Player.Character.Crew
+			//		.Where(c => !c.Traits.Contains(cs.Trait) && c.HasSkillForVoyageSlot(cs) && (c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd) >= 4000))
+			//		.OrderByDescending(c => c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd))
+			//		.ForEach(c => Console.WriteLine(string.Format("   {0} - {1}/{2}/{3}", c.Name, c.PrimarySkillForVoyageValue(vd), c.SecondarySkillForVoyageValue(vd), c.TertiarySkillForVoyageValue(vd))));
+
+			//	Console.WriteLine("****************************************************************************");
+
+			//	// Does not have trait but voyage value 4000+
+			//	playerData.Player.Character.Crew
+			//		.Where(c => !c.Traits.Contains(cs.Trait) && c.HasSkillForVoyageSlot(cs) && (3500 <= c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd) && c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd) < 4000))
+			//		.OrderByDescending(c => c.PrimarySkillForVoyageValue(vd) + c.SecondarySkillForVoyageValue(vd) + c.TertiarySkillForVoyageValue(vd))
+			//		.ForEach(c => Console.WriteLine(string.Format("   {0} - {1}/{2}/{3}", c.Name, c.PrimarySkillForVoyageValue(vd), c.SecondarySkillForVoyageValue(vd), c.TertiarySkillForVoyageValue(vd))));
+			//});
 
 			//playerData.Player.Character.Crew
 

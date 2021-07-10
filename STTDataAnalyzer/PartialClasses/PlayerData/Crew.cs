@@ -6,6 +6,65 @@ namespace STTDataAnalyzer.Models.PlayerData
 {
 	public partial class PdCrew
 	{
+		public enum SkillsBitmapEnum {
+			MedicineSkill = 1,
+			ScienceSkill = 2,
+			EngineeringSkill = 4,
+			SceuritySkill = 8,
+			DiplomacySkill = 16,
+			CommandSkill = 32
+		}
+		public int HasCommandSkill {
+			get {
+				if (Skills.CommandSkill != null && Skills.CommandSkill.Core > 0) return 1;
+				return 0;
+			}
+		}
+		public int HasDiplomacySkill
+		{
+			get
+			{
+				if (Skills.DiplomacySkill != null && Skills.DiplomacySkill.Core > 0) return 1;
+				return 0;
+			}
+		}
+		public int HasEngineeringSkill
+		{
+			get
+			{
+				if (Skills.EngineeringSkill != null && Skills.EngineeringSkill.Core > 0) return 1;
+				return 0;
+			}
+		}
+		public int HasMedicineSkill
+		{
+			get
+			{
+				if (Skills.MedicineSkill != null && Skills.MedicineSkill.Core > 0) return 1;
+				return 0;
+			}
+		}
+		public int HasScienceSkill
+		{
+			get
+			{
+				if (Skills.ScienceSkill != null && Skills.ScienceSkill.Core > 0) return 1;
+				return 0;
+			}
+		}
+		public int HasSecuritySkill
+		{
+			get
+			{
+				if (Skills.SecuritySkill != null && Skills.SecuritySkill.Core > 0) return 1;
+				return 0;
+			}
+		}
+		public int VoyageSkillBitmap {
+			get {
+				return HasCommandSkill * 32 + HasDiplomacySkill * 16 + HasSecuritySkill * 8 + HasEngineeringSkill * 4 + HasScienceSkill * 2 + HasMedicineSkill;
+			}
+		}
 		public int CommandVoyageScore
 		{
 			get
