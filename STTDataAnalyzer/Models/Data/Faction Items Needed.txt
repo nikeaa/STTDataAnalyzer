@@ -1,0 +1,102 @@
+(Part 1 of 5)
+Items for all relevant crew:
+
+| Qty   | Have  | Item                               | Location                               |
+-----------------------------------------------------------------------------------------------
+| 8     | 193   | 0* Agonizer                        | *Faction-Terran Empire                 |
+| 3     | 236   | 1* Agonizer                        | *Faction-Terran Empire                 |
+| 8     | 128   | 2* Agonizer                        | *Faction-Terran Empire                 |
+| 130   | 52    | 0* Ancient Film                    | *Faction-Federation,Borg               |
+| 146   | 134   | 1* Ancient Film                    | *Faction-Federation,Borg               |
+| 59    | 70    | 2* Ancient Film                    | *Faction-Federation                    |
+| 18    | 727   | 1* Andorian Ale                    | *Faction-Federation                    |
+| 2     | 425   | 2* Augment Icon                    | *Faction-Augment                       |
+| 1     | 212   | 1* Bajoran Combadge                | *Faction-Bajoran,Borg                  |
+| 11    | 365   | 0* Bajoran Earring                 | *Faction-Bajoran,Borg                  |
+| 8     | 94    | 2* Bajoran Earring                 | *Faction-Bajoran,Borg                  |
+| 11    | 107   | 2* Bajoran PADD                    | *Faction-Bajoran,Borg                  |
+| 12    | 926   | 0* Bajoran Phaser                  | *Faction-Bajoran,Borg                  |
+| 39    | 140   | 1* Bat'leth                        | *Faction-Klingon Empire,Borg           |
+| 6     | 58    | 1* Bloodwine                       | *Faction-Klingon-Cardassian Alliance   |
+| 34    | 0     | 2* Bloodwine                       | *Faction-Klingon-Cardassian Alliance   |
+[10:58 AM]
+(Part 2 of 5)
+| 5     | 133   | 0* Cardassian Communicator         | *Faction-Cardassian Union,Borg         |
+| 4     | 54    | 2* Cardassian Communicator         | *Faction-Cardassian Union,Borg         |
+| 1     | 122   | 1* Cardassian Encryption Algorithm | *Faction-Cardassian Union,Borg         |
+| 6     | 68    | 1* Cardassian PADD                 | *Faction-Cardassian Union              |
+| 56    | 2     | 0* Case Files                      | *Faction-Section 31                    |
+| 122   | 583   | 1* Case Files                      | *Faction-Section 31,Borg               |
+| 6     | 107   | 1* Central Command Insignia        | *Faction-Cardassian Union              |
+| 2     | 50    | 2* Central Command Insignia        | *Faction-Cardassian Union,Borg         |
+| 2     | 263   | 0* Ceti Eel                        | *Faction-Augment                       |
+| 7     | 317   | 1* Covert Contacts                 | *Faction-Section 31                    |
+| 111   | 3     | 2* Covert Contacts                 | *Faction-Section 31                    |
+| 4     | 521   | 1* Earl Grey Tea                   | *Faction-Federation,Borg               |
+| 14    | 224   | 2* Earl Grey Tea                   | *Faction-Federation                    |
+| 214   | 315   | 2* Encoded Communique              | *Faction-Maquis                        |
+| 2     | 137   | 0* Ferengi PADD                    | *Faction-Ferengi Alliance,Borg         |
+| 2     | 186   | 1* Ferengi PADD                    | *Faction-Ferengi Alliance,Borg         |
+| 2     | 182   | 2* Ferengi PADD                    | *Faction-Ferengi Traditionalists,Fere..|
+| 8     | 0     | 2* Gagh                            | *Faction-Klingon-Cardassian Alliance   |
+| 1     | 172   | 1* Great Material Continuum Texts  | *Faction-Ferengi Alliance,Borg         |
+| 1     | 107   | 2* Great Material Continuum Texts  | *Faction-Ferengi Alliance,Borg         |
+[10:58 AM]
+(Part 3 of 5)
+| 545   | 2     | 0* Holoprogram                     | *Faction-Section 31,Borg               |
+| 116   | 72    | 1* Holoprogram                     | *Faction-Section 31                    |
+| 58    | 52    | 2* Holoprogram                     | *Faction-Section 31                    |
+| 61    | 66    | 2* IDIC                            | *Faction-Federation,Borg               |
+| 1     | 32    | 2* Kanar                           | *Faction-Cardassian Union              |
+| 18    | 117   | 2* Klingon Armor                   | *Faction-Klingon Empire                |
+| 30    | 0     | 1* Klingon Disruptor Pistol        | *Faction-Klingon-Cardassian Alliance   |
+| 2     | 68    | 2* Latinum Tooth Sharpener         | *Faction-Ferengi Alliance              |
+| 7     | 60    | 0* Maquis Command Outfit           | *Faction-Maquis                        |
+| 9     | 131   | 0* Maquis Emblem                   | *Faction-Maquis                        |
+| 9     | 99    | 1* Maquis Emblem                   | *Faction-Maquis                        |
+| 10    | 182   | 1* Maquis Pistol                   | *Faction-Maquis                        |
+| 3     | 171   | 2* Maquis Pistol                   | *Faction-Maquis                        |
+| 192   | 6     | 0* Medical Experiment              | *Faction-Augment                       |
+| 77    | 311   | 1* Medical Experiment              | *Faction-Augment                       |
+| 39    | 131   | 2* Medical Experiment              | *Faction-Augment                       |
+| 8     | 190   | 0* Mek'leth                        | *Faction-Klingon Empire                |
+| 122   | 60    | 2* Novel                           | *Faction-Maquis                        |
+| 11    | 189   | 1* Orb Experience                  | *Faction-Bajoran                       |
+| 4     | 81    | 2* Orb Experience                  | *Faction-Bajoran                       |
+[10:58 AM]
+(Part 4 of 5)
+| 159   | 115   | 0* Orchids                         | *Faction-Federation                    |
+| 6     | 618   | 0* Poker Cards                     | *Faction-Federation                    |
+| 19    | 380   | 1* Poker Cards                     | *Faction-Federation                    |
+| 5     | 116   | 2* Raktajino                       | *Faction-Klingon Empire                |
+| 3     | 213   | 1* Resistance Cipher               | *Faction-Bajoran,Borg                  |
+| 7     | 56    | 0* Romulan Ale                     | *Faction-Romulan,Borg                  |
+| 5     | 626   | 1* Romulan Ale                     | *Faction-Romulan                       |
+| 14    | 32    | 2* Romulan Ale                     | *Faction-Romulan                       |
+| 7     | 1     | 2* Romulan Encryption Algorithm    | *Faction-Romulan,Borg                  |
+| 1     | 136   | 1* Rules of Acquisition            | *Faction-Ferengi Traditionalists,Borg  |
+| 5     | 169   | 2* Rules of Acquisition            | *Faction-Ferengi Traditionalists,Borg  |
+| 23    | 230   | 0* Scalpel                         | *Faction-Augment                       |
+| 13    | 422   | 1* Scalpel                         | *Faction-Augment                       |
+| 33    | 272   | 2* Scalpel                         | *Faction-Augment                       |
+| 120   | 0     | 2* Science Experiment              | *Faction-Augment                       |
+| 80    | 0     | 1* Security Codes                  | *Faction-Section 31,Borg               |
+| 290   | 20    | 2* Security Codes                  | *Faction-Section 31,Borg               |
+| 5     | 62    | 2* Slug-o-Cola                     | *Faction-Ferengi Alliance              |
+| 20    | 55    | 2* Spring Wine                     | *Faction-Bajoran                       |
+| 15    | 3     | 2* Star Empire Icon                | *Faction-Romulan,Borg                  |
+[10:58 AM]
+(Part 5 of 5)
+| 3     | 173   | 1* Tactical Alert                  | *Faction-Section 31                    |
+| 97    | 1     | 2* Tactical Alert                  | *Faction-Section 31                    |
+| 3     | 49    | 1* Terran Emblem                   | *Faction-Terran Empire                 |
+| 1     | 105   | 2* Terran Knife                    | *Faction-Terran Empire                 |
+| 1     | 69    | 2* Tube Grubs                      | *Faction-Ferengi Traditionalists       |
+| 8     | 160   | 1* Vedek Robes                     | *Faction-Bajoran                       |
+| 1     | 105   | 2* Vedek Robes                     | *Faction-Bajoran                       |
+| 3     | 459   | 1* Vulcan Meditation Lamp          | *Faction-Federation                    |
+| 5     | 217   | 2* Vulcan Meditation Lamp          | *Faction-Federation                    |
+| 48    | 673   | 0* Vulcan Robes                    | *Faction-Federation,Borg               |
+-----------------------------------------------------------------------------------------------
+(Experimental) Expected chron cost is 0
+Total faction items is 1793
