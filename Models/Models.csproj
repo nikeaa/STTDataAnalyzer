@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Serialize.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<Content Include="Data\**">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Converters\**" />
+    <Compile Remove="PlayerData\**" />
+    <EmbeddedResource Remove="Converters\**" />
+    <EmbeddedResource Remove="PlayerData\**" />
+    <None Remove="Converters\**" />
+    <None Remove="PlayerData\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Converters\BaseSkillsConverter.cs" />
+    <Compile Include="Converters\RanksConverter .cs" />
+    <Compile Include="Converters\SingleValueArrayConverter.cs" />
+    <Compile Include="Converters\SkillDataConverter.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{69243F93-A2AF-438A-908D-2E909E16048A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NewModels</RootNamespace>
+    <AssemblyName>NewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseData.cs" />
+    <Compile Include="Converter.cs" />
+    <Compile Include="Converters\BaseSkillsConverter.cs" />
+    <Compile Include="Converters\RanksConverter .cs" />
+    <Compile Include="Converters\SingleValueArrayConverter.cs" />
+    <Compile Include="Converters\SkillDataConverter.cs" />
+    <Compile Include="CrewMemberComparable.cs" />
+    <Compile Include="DataCore\DataCore.cs" />
+    <Compile Include="DataCore\DataCoreCrew.cs" />
+    <Compile Include="DataCore\DataCoreCrewAction.cs" />
+    <Compile Include="DataCore\DataCoreCrewBonus.cs" />
+    <Compile Include="DataCore\DataCoreEquipment.cs" />
+    <Compile Include="DataCore\DataCoreItem.cs" />
+    <Compile Include="DataCore\DataCoreShip.cs" />
+    <Compile Include="ExtensionMethods\IEnumerableExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\IntExtensionMethods.cs" />
+    <Compile Include="PartialClasses\DataCore\DataCore.cs" />
+    <Compile Include="PartialClasses\PlayerData\Character.cs" />
+    <Compile Include="PartialClasses\PlayerData\Crew.cs" />
+    <Compile Include="PartialClasses\PlayerData\ItemArchetypeCache.cs" />
+    <Compile Include="PartialClasses\PlayerData\PlayerData.cs" />
+    <Compile Include="PlayerData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Static\Ability.cs" />
+    <Compile Include="Static\Action.cs" />
+    <Compile Include="Static\Average.cs" />
+    <Compile Include="Static\BaseSkill.cs" />
+    <Compile Include="Static\BotCrew.cs" />
+    <Compile Include="Static\Challenge.cs" />
+    <Compile Include="Static\Collection.cs" />
+    <Compile Include="Static\Crew.cs" />
+    <Compile Include="Static\CrossFuseTarget.cs" />
+    <Compile Include="Static\Demand.cs" />
+    <Compile Include="Static\Dilemma.cs" />
+    <Compile Include="Static\DilemmaChoice.cs" />
+    <Compile Include="Static\Dispute.cs" />
+    <Compile Include="Static\Episode.cs" />
+    <Compile Include="Static\EpisodePortrait.cs" />
+    <Compile Include="Static\EquipmentSlot.cs" />
+    <Compile Include="Static\EventFLeaderboards.cs" />
+    <Compile Include="Static\EventInstance.cs" />
+    <Compile Include="Static\EventLeaderboard.cs" />
+    <Compile Include="Static\EventLeaderboardEntry.cs" />
+    <Compile Include="Static\Faction.cs" />
+    <Compile Include="Static\Filter.cs" />
+    <Compile Include="Static\FleetRank.cs" />
+    <Compile Include="Static\Icon.cs" />
+    <Compile Include="Static\IntermediateSkillData.cs" />
+    <Compile Include="Static\Intro.cs" />
+    <Compile Include="Static\Item.cs" />
+    <Compile Include="Static\ItemSource.cs" />
+    <Compile Include="Static\Jackpot.cs" />
+    <Compile Include="Static\JackpotReward.cs" />
+    <Compile Include="Static\Keystone.cs" />
+    <Compile Include="Static\Lock.cs" />
+    <Compile Include="Static\MasteryLevel.cs" />
+    <Compile Include="Static\MiscStats.cs" />
+    <Compile Include="Static\Mission.cs" />
+    <Compile Include="Static\Opponent.cs" />
+    <Compile Include="Static\PairRank.cs" />
+    <Compile Include="Static\PerFaction.cs" />
+    <Compile Include="Static\PerTrait.cs" />
+    <Compile Include="Static\PotentialReward.cs" />
+    <Compile Include="Static\Progress.cs" />
+    <Compile Include="Static\Quest.cs" />
+    <Compile Include="Static\Ranks.cs" />
+    <Compile Include="Static\Reward.cs" />
+    <Compile Include="Static\Ship.cs" />
+    <Compile Include="Static\ShipBattle.cs" />
+    <Compile Include="Static\ShipSchematic.cs" />
+    <Compile Include="Static\Skill.cs" />
+    <Compile Include="Static\SkillBuff.cs" />
+    <Compile Include="Static\SkillBuffs.cs" />
+    <Compile Include="Static\SkillForRarity.cs" />
+    <Compile Include="Static\SkillRank.cs" />
+    <Compile Include="Static\SmallBonus.cs" />
+    <Compile Include="Static\Stage.cs" />
+    <Compile Include="Static\StaticData.cs" />
+    <Compile Include="Static\TraitBonus.cs" />
+    <Compile Include="Static\UpcomingEvent.cs" />
+    <Compile Include="Static\WarpLog.cs" />
+    <Compile Include="Wiki\WikiData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataCore\EF.Reverse.POCO.v3.ttinclude" />
+    <None Include="Data\botcrew.json" />
+    <None Include="Data\collections.json" />
+    <None Include="Data\crew.json" />
+    <None Include="Data\dilemmas.json" />
+    <None Include="Data\disputes.json" />
+    <None Include="Data\episodes.json" />
+    <None Include="Data\event_fleaderboards.json" />
+    <None Include="Data\event_instances.json" />
+    <None Include="Data\event_leaderboards.json" />
+    <None Include="Data\factions.json" />
+    <None Include="Data\items.json" />
+    <None Include="Data\keystones.json" />
+    <None Include="Data\LevelTables.json" />
+    <None Include="Data\misc_stats.json" />
+    <None Include="Data\missions.json" />
+    <None Include="Data\missionsfull.json" />
+    <None Include="Data\PlayerData.json" />
+    <None Include="Data\quests.json" />
+    <None Include="Data\Sales Tax and Surcharge Quarterly Return - Confirmation.pdf" />
+    <None Include="Data\ship_schematics.json" />
+    <None Include="Data\skill_bufs.json" />
+    <None Include="Data\STT - Crew.tsv" />
+    <None Include="Data\STT - Equipment.tsv" />
+    <None Include="Data\STT - Items.tsv" />
+    <None Include="Data\STT - Ships.tsv" />
+    <None Include="Data\upcomingevents.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\LevelTables.json.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
