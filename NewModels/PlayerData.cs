@@ -3386,23 +3386,23 @@ namespace STTDataAnalyzer.Models.PlayerData
 
     public enum Source { CrewCollection, Starbase };
 
-    public enum FullNameEnum { Chronitons, Dilithium, DynamicReplicatorRation, FederationCredits, Honor, InterstellarMedium, LegendaryHonorableCitation, Merits, PremiumTimePortal, RequisitionShuttleTokens, RewardMultiplier, The10XPremiumShuttleBoost, The10XPremiumTimePortal, TwilightTPol, The10XStandardShuttleBoost, LeahBrahms };
+    public enum FullNameEnum { Chronitons, Dilithium, DynamicReplicatorRation, FederationCredits, Honor, InterstellarMedium, LegendaryHonorableCitation, Merits, PremiumTimePortal, RequisitionShuttleTokens, RewardMultiplier, The10XPremiumShuttleBoost, The10XPremiumTimePortal, TwilightTPol, The10XStandardShuttleBoost, LeahBrahms, CaptainProtonRocketShipSchematic, NyotaUhura };
 
     public enum AtlasInfo { AtlasSttForteInfo, AtlasSttIcons2Info, AtlasSttIconsInfo };
 
-    public enum VideoAdChronitonBoostRewardSymbol { Energy, Honor, HonorableCitationQuality5, IsmSubcoin, Nonpremium, Premium10XBundle, Premium1XBundle, PremiumConsumables10XBundle, PremiumEarnable, PremiumPurchasable, ReplicatorFuelLegendary, RewardMultiplier5_ShuttleConsumable, ShuttleRentalTokens, TpolTwilightCrew, StandardConsumables10Bundle, BrahmsLeahCrew };
+    public enum VideoAdChronitonBoostRewardSymbol { Energy, Honor, HonorableCitationQuality5, IsmSubcoin, Nonpremium, Premium10XBundle, Premium1XBundle, PremiumConsumables10XBundle, PremiumEarnable, PremiumPurchasable, ReplicatorFuelLegendary, RewardMultiplier5_ShuttleConsumable, ShuttleRentalTokens, TpolTwilightCrew, StandardConsumables10Bundle, BrahmsLeahCrew, CaptainProtonShipSchematic, UhuraStivCrew };
 
-    public enum PurpleName { Augments, Chronitons, Credits, Dilithium, HonCitation, Honor, Ism, Merits, Portal, ReplicatorFuel, RewardMultiplier, TPol, The10XPShuttle, The10XPortal, Tokens, The10XSShuttle, Brahms };
+    public enum PurpleName { Augments, Chronitons, Credits, Dilithium, HonCitation, Honor, Ism, Merits, Portal, ReplicatorFuel, RewardMultiplier, TPol, The10XPShuttle, The10XPortal, Tokens, The10XSShuttle, Brahms, CaptainProtonRocketShipShcematics, CaptainProtonRocketShipSchematics, Uhura };
 
-    public enum FullName { AdvancedTacticalTraining, CaptainSaru, CommanderTPol, Dilithium, DynamicOfficerTraining, Honor, InterstellarMedium, Merits, RarityConstellation, SkillConstellation, The10XPremiumTimePortal, TribbleUhura, CaptainLucero, TribbleMcCoy, CaptainSulu, TribbleChekov, TraderOdo, LittleJohnRiker, TouristQuark };
+    public enum FullName { AdvancedTacticalTraining, CaptainSaru, CommanderTPol, Dilithium, DynamicOfficerTraining, Honor, InterstellarMedium, Merits, RarityConstellation, SkillConstellation, The10XPremiumTimePortal, TribbleUhura, CaptainLucero, TribbleMcCoy, CaptainSulu, TribbleChekov, TraderOdo, LittleJohnRiker, TouristQuark, ProphetKira, NinersKiraNerys, RacketballOBrien, TimeLoopMudd };
 
-    public enum FluffyName { Dilithium, Honor, Ism, Merits, Rarity, Saru, Skill, TPol, The10XPortal, Training, Uhura, Lucero, McCoy, Sulu, Chekov, Odo, Riker, Quark };
+    public enum FluffyName { Dilithium, Honor, Ism, Merits, Rarity, Saru, Skill, TPol, The10XPortal, Training, Uhura, Lucero, McCoy, Sulu, Chekov, Odo, Riker, Quark, Kira, OBrien, Mudd };
 
-    public enum PurpleSymbol { DscSaruCaptainCrew, Honor, HugeProductionTraining, IsmSubcoin, MegaProductionTraining, Premium10XBundle, PremiumEarnable, PremiumPurchasable, RarityKeystoneCrate, SkillKeystoneCrate, TpolCommanderCrew, UhuraTribbleCrew, ChekovTribbleCrew, DscLuceroCaptainCrew, MccoyTribbleCrew, SuluCaptainCrew, OdoTosCrew, RikerLittlejohnCrew, QuarkRisaCrew };
+    public enum PurpleSymbol { DscSaruCaptainCrew, Honor, HugeProductionTraining, IsmSubcoin, MegaProductionTraining, Premium10XBundle, PremiumEarnable, PremiumPurchasable, RarityKeystoneCrate, SkillKeystoneCrate, TpolCommanderCrew, UhuraTribbleCrew, ChekovTribbleCrew, DscLuceroCaptainCrew, MccoyTribbleCrew, SuluCaptainCrew, OdoTosCrew, RikerLittlejohnCrew, QuarkRisaCrew, KiraProphetCrew, KiraNinersCrew, OBrienRacketballCrew, DscMuddTakeoverCrew, CaptainProtonRocketShipSchematic };
 
-    public enum RewardTrait { Astrophysicist, Exobiology, Federation, Inspiring, Kelpien, Starfleet, Telepath, Vulcan, Human, Communicator, Resourceful, Tribbled, Survivalist, Explorer, Doctor, Veteran, Tactician, Pilot, Changeling, Costumed, Merchant, Shapeshifter, Thief, Ferengi, Scoundrel, Desperate, Romantic, Gambler, Civilian };
+    public enum RewardTrait { Astrophysicist, Exobiology, Federation, Inspiring, Kelpien, Starfleet, Telepath, Vulcan, Human, Communicator, Resourceful, Tribbled, Survivalist, Explorer, Doctor, Veteran, Tactician, Pilot, Changeling, Costumed, Merchant, Shapeshifter, Thief, Ferengi, Scoundrel, Desperate, Romantic, Gambler, Civilian, Bajoran, Spiritual, Maverick, Athlete, Duelist, Crafty, Smuggler };
 
-    public enum PremiumRewardTrait { Astrophysicist, Caregiver, Civilian, Telepath, Vulcan, Federation, Starfleet, WarpTheorist, Human, Cyberneticist };
+    public enum PremiumRewardTrait { Astrophysicist, Caregiver, Civilian, Telepath, Vulcan, Federation, Starfleet, WarpTheorist, Human, Cyberneticist, Communicator, Resourceful, Musician };
 
     public enum TutorialState { Completed };
 
@@ -3410,7 +3410,7 @@ namespace STTDataAnalyzer.Models.PlayerData
 
     public enum Reason { Reward };
 
-    public enum Specialized { Standard10XBundle, StandardConsumables10XBundle, StimpackBundle };
+    public enum Specialized { Standard10XBundle, StandardConsumables10XBundle, StimpackBundle, Standard1xBundle };
 
     public enum GrantedSymbol { GiftDirectGameItem, GuildCreate, GuildSquadCreate, NinersAvatar };
 
@@ -3654,6 +3654,10 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return FullNameEnum.TwilightTPol;
                 case "Leah Brahms":
                     return FullNameEnum.LeahBrahms;
+                case "Captain Proton Rocket Ship Schematic":
+                    return FullNameEnum.CaptainProtonRocketShipSchematic;
+                case "Nyota Uhura":
+                    return FullNameEnum.NyotaUhura;
             }
             throw new Exception("Cannot unmarshal type FullNameEnum");
         }
@@ -3805,6 +3809,10 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return VideoAdChronitonBoostRewardSymbol.StandardConsumables10Bundle;
                 case "brahms_leah_crew":
                     return VideoAdChronitonBoostRewardSymbol.BrahmsLeahCrew;
+                case "captain_proton_ship_schematic":
+                    return VideoAdChronitonBoostRewardSymbol.CaptainProtonShipSchematic;
+                case "uhura_stiv_crew":
+                    return VideoAdChronitonBoostRewardSymbol.UhuraStivCrew;
             }
             throw new Exception("Cannot unmarshal type VideoAdChronitonBoostRewardSymbol");
         }
@@ -3912,6 +3920,10 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return PurpleName.Tokens;
                 case "Brahms":
                     return PurpleName.Brahms;
+                case "Captain Proton Rocket Ship Schematic":
+                    return PurpleName.CaptainProtonRocketShipSchematics;
+                case "Uhura":
+                    return PurpleName.Uhura;
             }
             throw new Exception("Cannot unmarshal type PurpleName");
         }
@@ -3970,6 +3982,12 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return;
                 case PurpleName.Tokens:
                     serializer.Serialize(writer, "Tokens");
+                    return;
+                case PurpleName.Brahms:
+                    serializer.Serialize(writer, "Brahms");
+                    return;
+                case PurpleName.CaptainProtonRocketShipShcematics:
+                    serializer.Serialize(writer, "Captain Proton Rocket Ship Schematics");
                     return;
             }
             throw new Exception("Cannot marshal type PurpleName");
@@ -4064,6 +4082,14 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return FullName.LittleJohnRiker;
                 case "Tourist Quark":
                     return FullName.TouristQuark;
+                case "Prophet Kira":
+                    return FullName.ProphetKira;
+                case "Niners Kira Nerys":
+                    return FullName.NinersKiraNerys;
+                case "Racquetball O'Brien":
+                    return FullName.RacketballOBrien;
+                case "Time Loop Mudd":
+                    return FullName.TimeLoopMudd;
             }
             throw new Exception("Cannot unmarshal type FullName");
         }
@@ -4164,6 +4190,12 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return FluffyName.Riker;
                 case "Quark":
                     return FluffyName.Quark;
+                case "Kira":
+                    return FluffyName.Kira;
+                case "O'Brien":
+                    return FluffyName.OBrien;
+                case "Mudd":
+                    return FluffyName.Mudd;
             }
             throw new Exception("Cannot unmarshal type FluffyName");
         }
@@ -4263,6 +4295,14 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return PurpleSymbol.RikerLittlejohnCrew;
                 case "quark_risa_crew":
                     return PurpleSymbol.QuarkRisaCrew;
+                case "kira_prophet_crew":
+                    return PurpleSymbol.KiraProphetCrew;
+                case "kira_niners_crew":
+                    return PurpleSymbol.KiraNinersCrew;
+                case "obrien_racquetball_crew":
+                    return PurpleSymbol.OBrienRacketballCrew;
+                case "dsc_mudd_takeover_crew":
+                    return PurpleSymbol.DscMuddTakeoverCrew;
             }
             throw new Exception("Cannot unmarshal type PurpleSymbol");
         }
@@ -4385,6 +4425,20 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return RewardTrait.Gambler;
                 case "civilian":
                     return RewardTrait.Civilian;
+                case "bajoran":
+                    return RewardTrait.Bajoran;
+                case "spiritual":
+                    return RewardTrait.Spiritual;
+                case "maverick":
+                    return RewardTrait.Maverick;
+                case "athlete":
+                    return RewardTrait.Athlete;
+                case "duelist":
+                    return RewardTrait.Duelist;
+                case "crafty":
+                    return RewardTrait.Crafty;
+                case "smuggler":
+                    return RewardTrait.Smuggler;
             }
             throw new Exception("Cannot unmarshal type RewardTrait");
         }
@@ -4460,6 +4514,12 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return PremiumRewardTrait.Human;
                 case "cyberneticist":
                     return PremiumRewardTrait.Cyberneticist;
+                case "communicator":
+                    return PremiumRewardTrait.Communicator;
+                case "resourceful":
+                    return PremiumRewardTrait.Resourceful;
+                case "musician":
+                    return PremiumRewardTrait.Musician;
             }
             throw new Exception("Cannot unmarshal type PremiumRewardTrait");
         }
@@ -4667,6 +4727,8 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return Specialized.StandardConsumables10XBundle;
                 case "stimpack_bundle":
                     return Specialized.StimpackBundle;
+                case "standard_1x_bundle":
+                    return Specialized.Standard1xBundle;
             }
             throw new Exception("Cannot unmarshal type Specialized");
         }

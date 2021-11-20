@@ -148,7 +148,9 @@
     <None Include="Data\misc_stats.json" />
     <None Include="Data\missions.json" />
     <None Include="Data\missionsfull.json" />
-    <None Include="Data\PlayerData.json" />
+    <None Include="Data\PlayerData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Data\quests.json" />
     <None Include="Data\Sales Tax and Surcharge Quarterly Return - Confirmation.pdf" />
     <None Include="Data\ship_schematics.json" />

@@ -6,6 +6,7 @@ using System.Data;
 using System.Configuration;
 using System.Linq;
 using System.Windows.Forms;
+using STTDataAnalyzer.Models.PlayerData;
 
 namespace Windows_UI
 {
@@ -18,6 +19,7 @@ namespace Windows_UI
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Get player data from JSON.
             JsonSerializerSettings settings = new JsonSerializerSettings();
             settings.MissingMemberHandling = MissingMemberHandling.Error;
 
@@ -25,8 +27,9 @@ namespace Windows_UI
             string FileNameAndPath = Directory.GetCurrentDirectory() + "\\Data\\" + FileName;
             string jsonString = File.ReadAllText(FileNameAndPath);
 
-            //var playerData = PlayerData.FromJson(jsonString);
+            var playerData = PlayerData.FromJson(jsonString);
 
+            // Populate dropdowns with values from enums.
             var skillList = Enum.GetValues(typeof(SkillsEnum)).Cast<SkillsEnum>().ToList();
             var traitList = voyageTraitsSkills.Keys.ToList();
             traitList.Insert(0, "None");
