@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -163,6 +164,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\LevelTables.json.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NewUtilities\NewUtilities.csproj">
+      <Project>{0CB4E55D-7056-4D70-98E9-042B9A982DED}</Project>
+      <Name>NewUtilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

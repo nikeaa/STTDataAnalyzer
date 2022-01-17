@@ -7,6 +7,7 @@ using System.IO;
 using System.Configuration;
 using STTDataAnalyzer.Models.PlayerData;
 using System.Linq;
+using NewUtilities;
 
 namespace STTDataAnalyzer
 {
@@ -73,14 +74,18 @@ namespace STTDataAnalyzer
             Command = 32
         }
 
+        [STAThread]
         private static void Main(string[] args)
         {
+            //string data = GetPlayerData.Retrieve();
+
             JsonSerializerSettings settings = new JsonSerializerSettings();
             settings.MissingMemberHandling = MissingMemberHandling.Error;
 
-            string FileName = ConfigurationManager.AppSettings["PlayerDataFileName"];
-            string FileNameAndPath = Directory.GetCurrentDirectory() + "\\Data\\" + FileName;
-            string jsonString = File.ReadAllText(FileNameAndPath);
+            //string jsonString = PlayerData.RetrieveFromDB();
+            //File.WriteAllText(FileNameAndPath, jsonString);
+
+            string jsonString = PlayerData.ReadFromFile();
 
             var playerData = PlayerData.FromJson(jsonString);
 

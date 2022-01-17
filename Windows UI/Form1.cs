@@ -12,6 +12,8 @@ namespace Windows_UI
 {
     public partial class Form1 : Form
     {
+        PlayerData playerData = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -27,16 +29,18 @@ namespace Windows_UI
             string FileNameAndPath = Directory.GetCurrentDirectory() + "\\Data\\" + FileName;
             string jsonString = File.ReadAllText(FileNameAndPath);
 
-            var playerData = PlayerData.FromJson(jsonString);
+            playerData = PlayerData.FromJson(jsonString);
 
             // Populate dropdowns with values from enums.
             var skillList = Enum.GetValues(typeof(SkillsEnum)).Cast<SkillsEnum>().ToList();
+            var skillList2 = Enum.GetValues(typeof(SkillsEnum)).Cast<SkillsEnum>().ToList();
+            var skillList3 = Enum.GetValues(typeof(SkillsEnum)).Cast<SkillsEnum>().ToList();
             var traitList = voyageTraitsSkills.Keys.ToList();
             traitList.Insert(0, "None");
 
             ddlPrimarySkill.DataSource = skillList;
-            ddlSecondarySkill.DataSource = skillList;
-            ddlSlotSkill.DataSource = skillList;
+            ddlSecondarySkill.DataSource = skillList2;
+            ddlSlotSkill.DataSource = skillList3;
             ddlSlotTrait.DataSource = traitList;
         }
 
@@ -90,6 +94,8 @@ namespace Windows_UI
 
         private void btnFindCrew_Click(object sender, EventArgs e)
         {
+            lbResults.Items.Clear();
+
             if (ddlPrimarySkill.SelectedIndex > 0 && ddlSecondarySkill.SelectedIndex > 0 && ddlSlotSkill.SelectedIndex > 0 && ddlSlotTrait.SelectedIndex > 0)
             {
                 string primarySkillName = ddlPrimarySkill.SelectedValue.ToString();
@@ -97,7 +103,12 @@ namespace Windows_UI
                 string slotSkillName = ddlSlotSkill.SelectedValue.ToString();
                 string slotTraitName = ddlSlotSkill.SelectedValue.ToString();
 
-                //foreach(var crewMember in )
+                IOrderedEnumerable<Crew> list = playerData.Player.Character.Crew.Where(c => c.HasSkill(slotSkillName)).OrderByDescending(c => c.WeightedVoyageScore(primarySkillName, secondarySkillName, slotTraitName));
+
+                foreach (Crew item in list)
+                {
+                    lbResults.Items.Add(item.WeightedVoyageScore(primarySkillName, secondarySkillName, slotTraitName) + " - " + item.Name + "\r\n");
+                }
             }
         }   
     }

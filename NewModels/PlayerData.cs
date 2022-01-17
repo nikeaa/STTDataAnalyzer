@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 
 using System.Globalization;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -3394,13 +3395,13 @@ namespace STTDataAnalyzer.Models.PlayerData
 
     public enum PurpleName { Augments, Chronitons, Credits, Dilithium, HonCitation, Honor, Ism, Merits, Portal, ReplicatorFuel, RewardMultiplier, TPol, The10XPShuttle, The10XPortal, Tokens, The10XSShuttle, Brahms, CaptainProtonRocketShipShcematics, CaptainProtonRocketShipSchematics, Uhura };
 
-    public enum FullName { AdvancedTacticalTraining, CaptainSaru, CommanderTPol, Dilithium, DynamicOfficerTraining, Honor, InterstellarMedium, Merits, RarityConstellation, SkillConstellation, The10XPremiumTimePortal, TribbleUhura, CaptainLucero, TribbleMcCoy, CaptainSulu, TribbleChekov, TraderOdo, LittleJohnRiker, TouristQuark, ProphetKira, NinersKiraNerys, RacketballOBrien, TimeLoopMudd };
+    public enum FullName { AdvancedTacticalTraining, CaptainSaru, CommanderTPol, Dilithium, DynamicOfficerTraining, Honor, InterstellarMedium, Merits, RarityConstellation, SkillConstellation, The10XPremiumTimePortal, TribbleUhura, CaptainLucero, TribbleMcCoy, CaptainSulu, TribbleChekov, TraderOdo, LittleJohnRiker, TouristQuark, ProphetKira, NinersKiraNerys, RacketballOBrien, TimeLoopMudd, UnionQ };
 
-    public enum FluffyName { Dilithium, Honor, Ism, Merits, Rarity, Saru, Skill, TPol, The10XPortal, Training, Uhura, Lucero, McCoy, Sulu, Chekov, Odo, Riker, Quark, Kira, OBrien, Mudd };
+    public enum FluffyName { Dilithium, Honor, Ism, Merits, Rarity, Saru, Skill, TPol, The10XPortal, Training, Uhura, Lucero, McCoy, Sulu, Chekov, Odo, Riker, Quark, Kira, OBrien, Mudd, Q };
 
-    public enum PurpleSymbol { DscSaruCaptainCrew, Honor, HugeProductionTraining, IsmSubcoin, MegaProductionTraining, Premium10XBundle, PremiumEarnable, PremiumPurchasable, RarityKeystoneCrate, SkillKeystoneCrate, TpolCommanderCrew, UhuraTribbleCrew, ChekovTribbleCrew, DscLuceroCaptainCrew, MccoyTribbleCrew, SuluCaptainCrew, OdoTosCrew, RikerLittlejohnCrew, QuarkRisaCrew, KiraProphetCrew, KiraNinersCrew, OBrienRacketballCrew, DscMuddTakeoverCrew, CaptainProtonRocketShipSchematic };
+    public enum PurpleSymbol { DscSaruCaptainCrew, Honor, HugeProductionTraining, IsmSubcoin, MegaProductionTraining, Premium10XBundle, PremiumEarnable, PremiumPurchasable, RarityKeystoneCrate, SkillKeystoneCrate, TpolCommanderCrew, UhuraTribbleCrew, ChekovTribbleCrew, DscLuceroCaptainCrew, MccoyTribbleCrew, SuluCaptainCrew, OdoTosCrew, RikerLittlejohnCrew, QuarkRisaCrew, KiraProphetCrew, KiraNinersCrew, OBrienRacketballCrew, DscMuddTakeoverCrew, CaptainProtonRocketShipSchematic, QUnionCrew, UnuraWrathOfKhanCrew };
 
-    public enum RewardTrait { Astrophysicist, Exobiology, Federation, Inspiring, Kelpien, Starfleet, Telepath, Vulcan, Human, Communicator, Resourceful, Tribbled, Survivalist, Explorer, Doctor, Veteran, Tactician, Pilot, Changeling, Costumed, Merchant, Shapeshifter, Thief, Ferengi, Scoundrel, Desperate, Romantic, Gambler, Civilian, Bajoran, Spiritual, Maverick, Athlete, Duelist, Crafty, Smuggler };
+    public enum RewardTrait { Astrophysicist, Exobiology, Federation, Inspiring, Kelpien, Starfleet, Telepath, Vulcan, Human, Communicator, Resourceful, Tribbled, Survivalist, Explorer, Doctor, Veteran, Tactician, Pilot, Changeling, Costumed, Merchant, Shapeshifter, Thief, Ferengi, Scoundrel, Desperate, Romantic, Gambler, Civilian, Bajoran, Spiritual, Maverick, Athlete, Duelist, Crafty, Smuggler, Q };
 
     public enum PremiumRewardTrait { Astrophysicist, Caregiver, Civilian, Telepath, Vulcan, Federation, Starfleet, WarpTheorist, Human, Cyberneticist, Communicator, Resourceful, Musician };
 
@@ -4090,8 +4091,13 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return FullName.RacketballOBrien;
                 case "Time Loop Mudd":
                     return FullName.TimeLoopMudd;
+                case "Union Q":
+                    return FullName.UnionQ;
             }
-            throw new Exception("Cannot unmarshal type FullName");
+
+            Clipboard.SetText(value);
+
+            throw new Exception($"Cannot unmarshal type FullName ({value})");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -4196,8 +4202,13 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return FluffyName.OBrien;
                 case "Mudd":
                     return FluffyName.Mudd;
+                case "Q":
+                    return FluffyName.Q;
             }
-            throw new Exception("Cannot unmarshal type FluffyName");
+
+            Clipboard.SetText(value);
+
+            throw new Exception($"Cannot unmarshal type FluffyName ({value})");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -4303,8 +4314,15 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return PurpleSymbol.OBrienRacketballCrew;
                 case "dsc_mudd_takeover_crew":
                     return PurpleSymbol.DscMuddTakeoverCrew;
+                case "q_union_crew":
+                    return PurpleSymbol.QUnionCrew;
+                case "uhura_wrathofkhan_crew":
+                    return PurpleSymbol.UnuraWrathOfKhanCrew;
             }
-            throw new Exception("Cannot unmarshal type PurpleSymbol");
+
+            Clipboard.SetText(value);
+
+            throw new Exception($"Cannot unmarshal type PurpleSymbol ({value})");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -4439,8 +4457,13 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return RewardTrait.Crafty;
                 case "smuggler":
                     return RewardTrait.Smuggler;
+                case "q":
+                    return RewardTrait.Q;
             }
-            throw new Exception("Cannot unmarshal type RewardTrait");
+
+            Clipboard.SetText(value);
+
+            throw new Exception($"Cannot unmarshal type RewardTrait ({value})");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)

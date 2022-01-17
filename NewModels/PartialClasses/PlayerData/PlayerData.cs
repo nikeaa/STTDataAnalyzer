@@ -1,9 +1,54 @@
-﻿using System;
+﻿using NewUtilities;
+using System;
+using System.Configuration;
+using System.IO;
+using System.Net.Http;
+using System.Text;
 
 namespace STTDataAnalyzer.Models.PlayerData
 {
 	public partial class PlayerData
 	{
+        private static string FileName = ConfigurationManager.AppSettings["PlayerDataFileName"];
+        private static string FileNameAndPath = Directory.GetCurrentDirectory() + "\\Data\\" + FileName;
+
+        public static string RetrieveFromDB()
+        {
+            string result = "";
+
+            OAuth oAuth = new OAuth();
+            string token = oAuth.GetToken("nikeaa@gmail.com", "Winter64!", "4fc852d7-d602-476a-a292-d243022a475d", "password");
+
+            string data = $"{{\"client_api\": \"12\", \"access_token\": \"{token}\"}}";
+            string url = $"https://stt.disruptorbeam.com/player?{data}";
+
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("https://stt.disruptorbeam.com");
+
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "/player");
+                    request.Content = new StringContent(data, Encoding.UTF8, "application/json");
+
+                    using (HttpResponseMessage response = client.SendAsync(request).Result)
+                    {
+                        using (HttpContent content = response.Content)
+                        {
+                            result = content.ReadAsStringAsync().Result;
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                result = "";
+            }
+
+
+            return result;
+        }
+
 		public static int GetVoyageTimeEstimate(int goldSkill, int silverSkill, int bronzeSkill1, int bronzeSkill2, int bronzeSkill3, int bronzeSkill4, int startingAm, int estimateIterations = 1000)
 		{
 			int am;
@@ -100,6 +145,22 @@ namespace STTDataAnalyzer.Models.PlayerData
             }
 
             return (int)(totalTime / estimateIterations);
+        }
+
+        public static string ReadFromFile()
+        {
+            string result = null;
+
+            try
+            {
+                result = File.ReadAllText(FileNameAndPath);
+            }
+            catch
+            {
+                result = null;
+            }
+
+            return result;
         }
     }
 }
