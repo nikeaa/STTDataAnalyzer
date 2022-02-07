@@ -8,9 +8,7 @@
 
 using System;
 using System.Collections.Generic;
-
 using System.Globalization;
-using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -3387,23 +3385,23 @@ namespace STTDataAnalyzer.Models.PlayerData
 
     public enum Source { CrewCollection, Starbase };
 
-    public enum FullNameEnum { Chronitons, Dilithium, DynamicReplicatorRation, FederationCredits, Honor, InterstellarMedium, LegendaryHonorableCitation, Merits, PremiumTimePortal, RequisitionShuttleTokens, RewardMultiplier, The10XPremiumShuttleBoost, The10XPremiumTimePortal, TwilightTPol, The10XStandardShuttleBoost, LeahBrahms, CaptainProtonRocketShipSchematic, NyotaUhura };
+    public enum FullNameEnum { Chronitons, Dilithium, DynamicReplicatorRation, FederationCredits, Honor, InterstellarMedium, LegendaryHonorableCitation, Merits, PremiumTimePortal, RequisitionShuttleTokens, RewardMultiplier, The10XPremiumShuttleBoost, The10XPremiumTimePortal, TwilightTPol, The10XStandardShuttleBoost, LeahBrahms, CaptainProtonRocketShipSchematic, NyotaUhura, PartyTilly, None };
 
     public enum AtlasInfo { AtlasSttForteInfo, AtlasSttIcons2Info, AtlasSttIconsInfo };
 
-    public enum VideoAdChronitonBoostRewardSymbol { Energy, Honor, HonorableCitationQuality5, IsmSubcoin, Nonpremium, Premium10XBundle, Premium1XBundle, PremiumConsumables10XBundle, PremiumEarnable, PremiumPurchasable, ReplicatorFuelLegendary, RewardMultiplier5_ShuttleConsumable, ShuttleRentalTokens, TpolTwilightCrew, StandardConsumables10Bundle, BrahmsLeahCrew, CaptainProtonShipSchematic, UhuraStivCrew };
+    public enum VideoAdChronitonBoostRewardSymbol { Energy, Honor, HonorableCitationQuality5, IsmSubcoin, Nonpremium, Premium10XBundle, Premium1XBundle, PremiumConsumables10XBundle, PremiumEarnable, PremiumPurchasable, ReplicatorFuelLegendary, RewardMultiplier5_ShuttleConsumable, ShuttleRentalTokens, TpolTwilightCrew, StandardConsumables10Bundle, BrahmsLeahCrew, CaptainProtonShipSchematic, UhuraStivCrew, DscTillyPartyCrew, None };
 
-    public enum PurpleName { Augments, Chronitons, Credits, Dilithium, HonCitation, Honor, Ism, Merits, Portal, ReplicatorFuel, RewardMultiplier, TPol, The10XPShuttle, The10XPortal, Tokens, The10XSShuttle, Brahms, CaptainProtonRocketShipShcematics, CaptainProtonRocketShipSchematics, Uhura };
+    public enum PurpleName { Augments, Chronitons, Credits, Dilithium, HonCitation, Honor, Ism, Merits, Portal, ReplicatorFuel, RewardMultiplier, TPol, The10XPShuttle, The10XPortal, Tokens, The10XSShuttle, Brahms, CaptainProtonRocketShipShcematics, CaptainProtonRocketShipSchematics, Uhura, Tilly, None };
 
-    public enum FullName { AdvancedTacticalTraining, CaptainSaru, CommanderTPol, Dilithium, DynamicOfficerTraining, Honor, InterstellarMedium, Merits, RarityConstellation, SkillConstellation, The10XPremiumTimePortal, TribbleUhura, CaptainLucero, TribbleMcCoy, CaptainSulu, TribbleChekov, TraderOdo, LittleJohnRiker, TouristQuark, ProphetKira, NinersKiraNerys, RacketballOBrien, TimeLoopMudd, UnionQ };
+    public enum FullName { AdvancedTacticalTraining, CaptainSaru, CommanderTPol, Dilithium, DynamicOfficerTraining, Honor, InterstellarMedium, Merits, RarityConstellation, SkillConstellation, The10XPremiumTimePortal, TribbleUhura, CaptainLucero, TribbleMcCoy, CaptainSulu, TribbleChekov, TraderOdo, LittleJohnRiker, TouristQuark, ProphetKira, NinersKiraNerys, RacketballOBrien, TimeLoopMudd, UnionQ, DahjOnTheRun, AugmentRiker, CommanderUhura, None };
 
-    public enum FluffyName { Dilithium, Honor, Ism, Merits, Rarity, Saru, Skill, TPol, The10XPortal, Training, Uhura, Lucero, McCoy, Sulu, Chekov, Odo, Riker, Quark, Kira, OBrien, Mudd, Q };
+    public enum FluffyName { Dilithium, Honor, Ism, Merits, Rarity, Saru, Skill, TPol, The10XPortal, Training, Uhura, Lucero, McCoy, Sulu, Chekov, Odo, Riker, Quark, Kira, OBrien, Mudd, Q, Dahj, None };
 
-    public enum PurpleSymbol { DscSaruCaptainCrew, Honor, HugeProductionTraining, IsmSubcoin, MegaProductionTraining, Premium10XBundle, PremiumEarnable, PremiumPurchasable, RarityKeystoneCrate, SkillKeystoneCrate, TpolCommanderCrew, UhuraTribbleCrew, ChekovTribbleCrew, DscLuceroCaptainCrew, MccoyTribbleCrew, SuluCaptainCrew, OdoTosCrew, RikerLittlejohnCrew, QuarkRisaCrew, KiraProphetCrew, KiraNinersCrew, OBrienRacketballCrew, DscMuddTakeoverCrew, CaptainProtonRocketShipSchematic, QUnionCrew, UnuraWrathOfKhanCrew };
+    public enum PurpleSymbol { DscSaruCaptainCrew, Honor, HugeProductionTraining, IsmSubcoin, MegaProductionTraining, Premium10XBundle, PremiumEarnable, PremiumPurchasable, RarityKeystoneCrate, SkillKeystoneCrate, TpolCommanderCrew, UhuraTribbleCrew, ChekovTribbleCrew, DscLuceroCaptainCrew, MccoyTribbleCrew, SuluCaptainCrew, OdoTosCrew, RikerLittlejohnCrew, QuarkRisaCrew, KiraProphetCrew, KiraNinersCrew, OBrienRacketballCrew, DscMuddTakeoverCrew, CaptainProtonRocketShipSchematic, QUnionCrew, UnuraWrathOfKhanCrew, DahjOnTheRunCrew, RikerAugmentCrew, None };
 
-    public enum RewardTrait { Astrophysicist, Exobiology, Federation, Inspiring, Kelpien, Starfleet, Telepath, Vulcan, Human, Communicator, Resourceful, Tribbled, Survivalist, Explorer, Doctor, Veteran, Tactician, Pilot, Changeling, Costumed, Merchant, Shapeshifter, Thief, Ferengi, Scoundrel, Desperate, Romantic, Gambler, Civilian, Bajoran, Spiritual, Maverick, Athlete, Duelist, Crafty, Smuggler, Q };
+    public enum RewardTrait { Astrophysicist, Exobiology, Federation, Inspiring, Kelpien, Starfleet, Telepath, Vulcan, Human, Communicator, Resourceful, Tribbled, Survivalist, Explorer, Doctor, Veteran, Tactician, Pilot, Changeling, Costumed, Merchant, Shapeshifter, Thief, Ferengi, Scoundrel, Desperate, Romantic, Gambler, Civilian, Bajoran, Spiritual, Maverick, Athlete, Duelist, Crafty, Smuggler, Q, Android, Brutal, Botanist, Augment, Engineered, JuryRigger, Musician, Romulan, Caregiver, TalShiar, Xenoanthropology, Section31, UndercoverOperative, None };
 
-    public enum PremiumRewardTrait { Astrophysicist, Caregiver, Civilian, Telepath, Vulcan, Federation, Starfleet, WarpTheorist, Human, Cyberneticist, Communicator, Resourceful, Musician };
+    public enum PremiumRewardTrait { Astrophysicist, Caregiver, Civilian, Telepath, Vulcan, Federation, Starfleet, WarpTheorist, Human, Cyberneticist, Communicator, Resourceful, Musician, TheoreticalEngineer, Casual, Romantic, None };
 
     public enum TutorialState { Completed };
 
@@ -3411,7 +3409,7 @@ namespace STTDataAnalyzer.Models.PlayerData
 
     public enum Reason { Reward };
 
-    public enum Specialized { Standard10XBundle, StandardConsumables10XBundle, StimpackBundle, Standard1xBundle };
+    public enum Specialized { Standard10XBundle, StandardConsumables10XBundle, StimpackBundle, Standard1xBundle, Premium10xBundle, None };
 
     public enum GrantedSymbol { GiftDirectGameItem, GuildCreate, GuildSquadCreate, NinersAvatar };
 
@@ -3659,8 +3657,13 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return FullNameEnum.CaptainProtonRocketShipSchematic;
                 case "Nyota Uhura":
                     return FullNameEnum.NyotaUhura;
+                case "Party Tilly":
+                    return FullNameEnum.PartyTilly;
+                // FullNameEnum.Insert
+                default:
+                    PlayerData.AddEnumValueToCode(value, "FullNameEnum");
+                    return FullNameEnum.None;
             }
-            throw new Exception("Cannot unmarshal type FullNameEnum");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -3814,8 +3817,13 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return VideoAdChronitonBoostRewardSymbol.CaptainProtonShipSchematic;
                 case "uhura_stiv_crew":
                     return VideoAdChronitonBoostRewardSymbol.UhuraStivCrew;
+                case "dsc_tilly_party_crew":
+                    return VideoAdChronitonBoostRewardSymbol.DscTillyPartyCrew;
+                // VideoAdChronitonBoostRewardSymbol.Insert
+                default:
+                    PlayerData.AddEnumValueToCode(value, "VideoAdChronitonBoostRewardSymbol");
+                    return VideoAdChronitonBoostRewardSymbol.None;
             }
-            throw new Exception("Cannot unmarshal type VideoAdChronitonBoostRewardSymbol");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -3925,8 +3933,13 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return PurpleName.CaptainProtonRocketShipSchematics;
                 case "Uhura":
                     return PurpleName.Uhura;
+                case "Tilly":
+                    return PurpleName.Tilly;
+                // PurpleName.Insert
+                default:
+                    PlayerData.AddEnumValueToCode(value, "PurpleName");
+                    return PurpleName.None;
             }
-            throw new Exception("Cannot unmarshal type PurpleName");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -4093,11 +4106,17 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return FullName.TimeLoopMudd;
                 case "Union Q":
                     return FullName.UnionQ;
+                case "Dahj On The Run":
+                    return FullName.DahjOnTheRun;
+                case "Augment Riker":
+                    return FullName.AugmentRiker;
+                case "Commander Uhura":
+                    return FullName.CommanderUhura;
+                // FullName.Insert
+                default:
+                    PlayerData.AddEnumValueToCode(value, "FullName");
+                    return FullName.None;
             }
-
-            Clipboard.SetText(value);
-
-            throw new Exception($"Cannot unmarshal type FullName ({value})");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -4204,11 +4223,13 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return FluffyName.Mudd;
                 case "Q":
                     return FluffyName.Q;
+                case "Dahj":
+                    return FluffyName.Dahj;
+                // FluffyName.Insert
+                default:
+                    PlayerData.AddEnumValueToCode(value, "FluffyName");
+                    return FluffyName.None;
             }
-
-            Clipboard.SetText(value);
-
-            throw new Exception($"Cannot unmarshal type FluffyName ({value})");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -4318,11 +4339,15 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return PurpleSymbol.QUnionCrew;
                 case "uhura_wrathofkhan_crew":
                     return PurpleSymbol.UnuraWrathOfKhanCrew;
+                case "dahj_on_the_run_crew":
+                    return PurpleSymbol.DahjOnTheRunCrew;
+                case "riker_augment_crew":
+                    return PurpleSymbol.RikerAugmentCrew;
+                // PurpleSymbol.Insert
+                default:
+                    PlayerData.AddEnumValueToCode(value, "PurpleSymbol");
+                    return PurpleSymbol.None;
             }
-
-            Clipboard.SetText(value);
-
-            throw new Exception($"Cannot unmarshal type PurpleSymbol ({value})");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -4459,11 +4484,25 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return RewardTrait.Smuggler;
                 case "q":
                     return RewardTrait.Q;
+                case "android":
+                    return RewardTrait.Android;
+                case "brutal":
+                    return RewardTrait.Brutal;
+                case "botanist":
+                    return RewardTrait.Botanist;
+                case "augment":
+                    return RewardTrait.Augment;
+                case "engineered":
+                    return RewardTrait.Engineered;
+                case "jury_rigger":
+                    return RewardTrait.JuryRigger;
+                case "musician":
+                    return RewardTrait.Musician;
+                // RewardTrait.Insert
+                default:
+                    PlayerData.AddEnumValueToCode(value, "RewardTrait");
+                    return RewardTrait.None;
             }
-
-            Clipboard.SetText(value);
-
-            throw new Exception($"Cannot unmarshal type RewardTrait ({value})");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -4543,8 +4582,17 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return PremiumRewardTrait.Resourceful;
                 case "musician":
                     return PremiumRewardTrait.Musician;
+                case "theoretical_engineer":
+                    return PremiumRewardTrait.TheoreticalEngineer;
+                case "casual":
+                    return PremiumRewardTrait.Casual;
+                case "romantic":
+                    return PremiumRewardTrait.Romantic;
+                // PremiumRewardTrait.Insert
+                default:
+                    PlayerData.AddEnumValueToCode(value, "PremiumRewardTrait");
+                    return PremiumRewardTrait.None;
             }
-            throw new Exception("Cannot unmarshal type PremiumRewardTrait");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -4752,8 +4800,15 @@ namespace STTDataAnalyzer.Models.PlayerData
                     return Specialized.StimpackBundle;
                 case "standard_1x_bundle":
                     return Specialized.Standard1xBundle;
+                case "premium_10x_bundle":
+                    return Specialized.Premium10xBundle;
+                case "premium_1x_bundle":
+                    return Specialized.Premium10xBundle;
+                // Specialized.Insert
+                default:
+                    PlayerData.AddEnumValueToCode(value, "Specialized");
+                    return Specialized.None;
             }
-            throw new Exception("Cannot unmarshal type Specialized");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)

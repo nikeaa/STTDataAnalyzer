@@ -4,13 +4,49 @@ using System.Configuration;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace STTDataAnalyzer.Models.PlayerData
 {
 	public partial class PlayerData
 	{
         private static string FileName = ConfigurationManager.AppSettings["PlayerDataFileName"];
-        private static string FileNameAndPath = Directory.GetCurrentDirectory() + "\\Data\\" + FileName;
+        private static string FilePath = Directory.GetCurrentDirectory() + "\\Data\\";
+        private static string FileNameAndPath = FilePath + FileName;
+
+        public static string Get(bool forceFromWeb = false)
+        {
+            string result = null;
+
+            bool retrievedInLast24Hours = true;
+
+            if (!File.Exists(FilePath + "nextRetrievalFromDB.txt"))
+            {
+                retrievedInLast24Hours = false;
+            }
+            else
+            {
+                string nextRetrievalDateString = File.ReadAllText(FilePath + "nextRetrievalFromDB.txt");
+                DateTime nextRetrievalDate = DateTime.Parse(nextRetrievalDateString);
+                if (DateTime.Now > nextRetrievalDate)
+                {
+                    retrievedInLast24Hours = false;
+                }
+            }
+
+            if (forceFromWeb || !retrievedInLast24Hours)
+            {
+                result = RetrieveFromDB();
+                File.WriteAllText(FileNameAndPath, result);
+                File.WriteAllText(FilePath + "nextRetrievalFromDB.txt", DateTime.Now.AddDays(1).ToShortDateString());
+            }
+            else
+            {
+                result = ReadFromFile();
+            }
+
+            return result;
+        }
 
         public static string RetrieveFromDB()
         {
@@ -24,7 +60,8 @@ namespace STTDataAnalyzer.Models.PlayerData
 
             try
             {
-                using (HttpClient client = new HttpClient())
+                var handler = new WinHttpHandler();
+                using (HttpClient client = new HttpClient(handler))
                 {
                     client.BaseAddress = new Uri("https://stt.disruptorbeam.com");
 
@@ -49,7 +86,33 @@ namespace STTDataAnalyzer.Models.PlayerData
             return result;
         }
 
-		public static int GetVoyageTimeEstimate(int goldSkill, int silverSkill, int bronzeSkill1, int bronzeSkill2, int bronzeSkill3, int bronzeSkill4, int startingAm, int estimateIterations = 1000)
+        public static void AddEnumValueToCode(string value, string enumName)
+        {
+            string enumValueName = Regex.Replace(value, @"_[a-zA-Z]", m => m.ToString().ToUpper().Replace("_", ""));
+            enumValueName = Regex.Replace(enumValueName, @"^[a-z]", m => m.ToString().ToUpper());
+
+            string fileName = @"C:\Users\nikea\source\repos\STTDataAnalyzer\NewModels\PlayerData.cs";
+            string playerDataCode = File.ReadAllText(fileName);
+
+            if (playerDataCode.IndexOf($"case \"{value}\"") < 0)
+            {
+                string newEnumValue = $@"
+                case ""{value}"":
+                    return {enumName}.{enumValueName};";
+
+                string insertString = $"// {enumName}.Insert";
+                int insertPos = playerDataCode.IndexOf(insertString) + insertString.Length;
+                playerDataCode = playerDataCode.Insert(insertPos, newEnumValue);
+
+                int enumPos = playerDataCode.IndexOf($"public enum {enumName}");
+                int enumInsertPos = playerDataCode.IndexOf(";", enumPos) - 8;
+                playerDataCode = playerDataCode.Insert(enumInsertPos, $", {enumValueName}");
+
+                File.WriteAllText(fileName, playerDataCode);
+            }
+        }
+
+        public static int GetVoyageTimeEstimate(int goldSkill, int silverSkill, int bronzeSkill1, int bronzeSkill2, int bronzeSkill3, int bronzeSkill4, int startingAm, int estimateIterations = 1000)
 		{
 			int am;
 			int totalTime = 0;
@@ -155,7 +218,7 @@ namespace STTDataAnalyzer.Models.PlayerData
             {
                 result = File.ReadAllText(FileNameAndPath);
             }
-            catch
+            catch (Exception ex)
             {
                 result = null;
             }

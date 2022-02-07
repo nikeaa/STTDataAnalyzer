@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewModels", "NewModels\NewM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewUtilities", "NewUtilities\NewUtilities.csproj", "{0CB4E55D-7056-4D70-98E9-042B9A982DED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewSTTDataAnalyzer", "NewSTTDataAnalyzer\NewSTTDataAnalyzer.csproj", "{603AE790-2146-483B-BDCF-A12EF4E17F8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{0CB4E55D-7056-4D70-98E9-042B9A982DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CB4E55D-7056-4D70-98E9-042B9A982DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CB4E55D-7056-4D70-98E9-042B9A982DED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{603AE790-2146-483B-BDCF-A12EF4E17F8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{603AE790-2146-483B-BDCF-A12EF4E17F8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{603AE790-2146-483B-BDCF-A12EF4E17F8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{603AE790-2146-483B-BDCF-A12EF4E17F8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
