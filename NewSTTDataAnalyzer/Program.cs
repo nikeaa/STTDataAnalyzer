@@ -84,6 +84,12 @@ namespace STTDataAnalyzer
 
             var playerData = PlayerData.FromJson(jsonString);
 
+            if (PlayerData.PlayerDataCodeChanged)
+            {
+                PlayerData.UpdatePlayerDataCode();
+				System.Environment.Exit(0);
+            }
+
             //List<Voyage> voyages = playerData.Player.Character.Voyage;
             //Voyage voyage = voyages.First();
             //string shipTrait = voyage.ShipTrait;

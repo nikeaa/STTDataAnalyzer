@@ -3385,21 +3385,21 @@ namespace STTDataAnalyzer.Models.PlayerData
 
     public enum Source { CrewCollection, Starbase };
 
-    public enum FullNameEnum { Chronitons, Dilithium, DynamicReplicatorRation, FederationCredits, Honor, InterstellarMedium, LegendaryHonorableCitation, Merits, PremiumTimePortal, RequisitionShuttleTokens, RewardMultiplier, The10XPremiumShuttleBoost, The10XPremiumTimePortal, TwilightTPol, The10XStandardShuttleBoost, LeahBrahms, CaptainProtonRocketShipSchematic, NyotaUhura, PartyTilly, None };
+    public enum FullNameEnum { Chronitons, Dilithium, DynamicReplicatorRation, FederationCredits, Honor, InterstellarMedium, LegendaryHonorableCitation, Merits, PremiumTimePortal, RequisitionShuttleTokens, RewardMultiplier, The10XPremiumShuttleBoost, The10XPremiumTimePortal, TwilightTPol, The10XStandardShuttleBoost, LeahBrahms, CaptainProtonRocketShipSchematic, NyotaUhura, PartyTilly, SecurityLaris, MikeBurnhamSr, TenXStandardTimePortal, SanctuaryBooker, COPFounderArcher, None };
 
     public enum AtlasInfo { AtlasSttForteInfo, AtlasSttIcons2Info, AtlasSttIconsInfo };
 
     public enum VideoAdChronitonBoostRewardSymbol { Energy, Honor, HonorableCitationQuality5, IsmSubcoin, Nonpremium, Premium10XBundle, Premium1XBundle, PremiumConsumables10XBundle, PremiumEarnable, PremiumPurchasable, ReplicatorFuelLegendary, RewardMultiplier5_ShuttleConsumable, ShuttleRentalTokens, TpolTwilightCrew, StandardConsumables10Bundle, BrahmsLeahCrew, CaptainProtonShipSchematic, UhuraStivCrew, DscTillyPartyCrew, None };
 
-    public enum PurpleName { Augments, Chronitons, Credits, Dilithium, HonCitation, Honor, Ism, Merits, Portal, ReplicatorFuel, RewardMultiplier, TPol, The10XPShuttle, The10XPortal, Tokens, The10XSShuttle, Brahms, CaptainProtonRocketShipShcematics, CaptainProtonRocketShipSchematics, Uhura, Tilly, None };
+    public enum PurpleName { Augments, Chronitons, Credits, Dilithium, HonCitation, Honor, Ism, Merits, Portal, ReplicatorFuel, RewardMultiplier, TPol, The10XPShuttle, The10XPortal, Tokens, The10XSShuttle, Brahms, CaptainProtonRocketShipShcematics, CaptainProtonRocketShipSchematics, Uhura, Tilly, Federation, None };
 
     public enum FullName { AdvancedTacticalTraining, CaptainSaru, CommanderTPol, Dilithium, DynamicOfficerTraining, Honor, InterstellarMedium, Merits, RarityConstellation, SkillConstellation, The10XPremiumTimePortal, TribbleUhura, CaptainLucero, TribbleMcCoy, CaptainSulu, TribbleChekov, TraderOdo, LittleJohnRiker, TouristQuark, ProphetKira, NinersKiraNerys, RacketballOBrien, TimeLoopMudd, UnionQ, DahjOnTheRun, AugmentRiker, CommanderUhura, None };
 
-    public enum FluffyName { Dilithium, Honor, Ism, Merits, Rarity, Saru, Skill, TPol, The10XPortal, Training, Uhura, Lucero, McCoy, Sulu, Chekov, Odo, Riker, Quark, Kira, OBrien, Mudd, Q, Dahj, None };
+    public enum FluffyName { Dilithium, Honor, Ism, Merits, Rarity, Saru, Skill, TPol, The10XPortal, Training, Uhura, Lucero, McCoy, Sulu, Chekov, Odo, Riker, Quark, Kira, OBrien, Mudd, Q, Dahj, Laris, Burnham, Booker, Archer, None };
 
-    public enum PurpleSymbol { DscSaruCaptainCrew, Honor, HugeProductionTraining, IsmSubcoin, MegaProductionTraining, Premium10XBundle, PremiumEarnable, PremiumPurchasable, RarityKeystoneCrate, SkillKeystoneCrate, TpolCommanderCrew, UhuraTribbleCrew, ChekovTribbleCrew, DscLuceroCaptainCrew, MccoyTribbleCrew, SuluCaptainCrew, OdoTosCrew, RikerLittlejohnCrew, QuarkRisaCrew, KiraProphetCrew, KiraNinersCrew, OBrienRacketballCrew, DscMuddTakeoverCrew, CaptainProtonRocketShipSchematic, QUnionCrew, UnuraWrathOfKhanCrew, DahjOnTheRunCrew, RikerAugmentCrew, None };
+    public enum PurpleSymbol { DscSaruCaptainCrew, Honor, HugeProductionTraining, IsmSubcoin, MegaProductionTraining, Premium10XBundle, PremiumEarnable, PremiumPurchasable, RarityKeystoneCrate, SkillKeystoneCrate, TpolCommanderCrew, UhuraTribbleCrew, ChekovTribbleCrew, DscLuceroCaptainCrew, MccoyTribbleCrew, SuluCaptainCrew, OdoTosCrew, RikerLittlejohnCrew, QuarkRisaCrew, KiraProphetCrew, KiraNinersCrew, OBrienRacketballCrew, DscMuddTakeoverCrew, CaptainProtonRocketShipSchematic, QUnionCrew, UnuraWrathOfKhanCrew, DahjOnTheRunCrew, RikerAugmentCrew, LarisSecurityCrew, DscMburnhamSrCrew, DscBookerSanctuaryCrew, ArcherFounderCrew, None };
 
-    public enum RewardTrait { Astrophysicist, Exobiology, Federation, Inspiring, Kelpien, Starfleet, Telepath, Vulcan, Human, Communicator, Resourceful, Tribbled, Survivalist, Explorer, Doctor, Veteran, Tactician, Pilot, Changeling, Costumed, Merchant, Shapeshifter, Thief, Ferengi, Scoundrel, Desperate, Romantic, Gambler, Civilian, Bajoran, Spiritual, Maverick, Athlete, Duelist, Crafty, Smuggler, Q, Android, Brutal, Botanist, Augment, Engineered, JuryRigger, Musician, Romulan, Caregiver, TalShiar, Xenoanthropology, Section31, UndercoverOperative, None };
+    public enum RewardTrait { Astrophysicist, Exobiology, Federation, Inspiring, Kelpien, Starfleet, Telepath, Vulcan, Human, Communicator, Resourceful, Tribbled, Survivalist, Explorer, Doctor, Veteran, Tactician, Pilot, Changeling, Costumed, Merchant, Shapeshifter, Thief, Ferengi, Scoundrel, Desperate, Romantic, Gambler, Civilian, Bajoran, Spiritual, Maverick, Athlete, Duelist, Crafty, Smuggler, Q, Android, Brutal, Botanist, Augment, Engineered, JuryRigger, Musician, Caregiver, Romulan, TalShiar, Xenoanthropology, Section31, UndercoverOperative, Courier, Kwejian, Empath, CulturalFigure, None };
 
     public enum PremiumRewardTrait { Astrophysicist, Caregiver, Civilian, Telepath, Vulcan, Federation, Starfleet, WarpTheorist, Human, Cyberneticist, Communicator, Resourceful, Musician, TheoreticalEngineer, Casual, Romantic, None };
 
@@ -3409,7 +3409,7 @@ namespace STTDataAnalyzer.Models.PlayerData
 
     public enum Reason { Reward };
 
-    public enum Specialized { Standard10XBundle, StandardConsumables10XBundle, StimpackBundle, Standard1xBundle, Premium10xBundle, None };
+    public enum Specialized { Standard10XBundle, StandardConsumables10XBundle, StimpackBundle, Standard1xBundle, Premium10xBundle, MinorConsumables_TenXBundle, None };
 
     public enum GrantedSymbol { GiftDirectGameItem, GuildCreate, GuildSquadCreate, NinersAvatar };
 
@@ -3660,6 +3660,8 @@ namespace STTDataAnalyzer.Models.PlayerData
                 case "Party Tilly":
                     return FullNameEnum.PartyTilly;
                 // FullNameEnum.Insert
+                case "10x Standard Time Portal":
+                    return FullNameEnum.TenXStandardTimePortal;
                 default:
                     PlayerData.AddEnumValueToCode(value, "FullNameEnum");
                     return FullNameEnum.None;
@@ -3936,6 +3938,8 @@ namespace STTDataAnalyzer.Models.PlayerData
                 case "Tilly":
                     return PurpleName.Tilly;
                 // PurpleName.Insert
+                case "Federation":
+                    return PurpleName.Federation;
                 default:
                     PlayerData.AddEnumValueToCode(value, "PurpleName");
                     return PurpleName.None;
@@ -4226,6 +4230,14 @@ namespace STTDataAnalyzer.Models.PlayerData
                 case "Dahj":
                     return FluffyName.Dahj;
                 // FluffyName.Insert
+                case "Archer":
+                    return FluffyName.Archer;
+                case "Booker":
+                    return FluffyName.Booker;
+                case "Burnham":
+                    return FluffyName.Burnham;
+                case "Laris":
+                    return FluffyName.Laris;
                 default:
                     PlayerData.AddEnumValueToCode(value, "FluffyName");
                     return FluffyName.None;
@@ -4344,6 +4356,14 @@ namespace STTDataAnalyzer.Models.PlayerData
                 case "riker_augment_crew":
                     return PurpleSymbol.RikerAugmentCrew;
                 // PurpleSymbol.Insert
+                case "archer_founder_crew":
+                    return PurpleSymbol.ArcherFounderCrew;
+                case "dsc_booker_sanctuary_crew":
+                    return PurpleSymbol.DscBookerSanctuaryCrew;
+                case "dsc_mburnham_sr_crew":
+                    return PurpleSymbol.DscMburnhamSrCrew;
+                case "laris_security_crew":
+                    return PurpleSymbol.LarisSecurityCrew;
                 default:
                     PlayerData.AddEnumValueToCode(value, "PurpleSymbol");
                     return PurpleSymbol.None;
@@ -4499,6 +4519,26 @@ namespace STTDataAnalyzer.Models.PlayerData
                 case "musician":
                     return RewardTrait.Musician;
                 // RewardTrait.Insert
+                case "cultural_figure":
+                    return RewardTrait.CulturalFigure;
+                case "empath":
+                    return RewardTrait.Empath;
+                case "kwejian":
+                    return RewardTrait.Kwejian;
+                case "courier":
+                    return RewardTrait.Courier;
+                case "caregiver":
+                    return RewardTrait.Caregiver;
+                case "undercover_operative":
+                    return RewardTrait.UndercoverOperative;
+                case "section31":
+                    return RewardTrait.Section31;
+                case "xenoanthropology":
+                    return RewardTrait.Xenoanthropology;
+                case "tal_shiar":
+                    return RewardTrait.TalShiar;
+                case "romulan":
+                    return RewardTrait.Romulan;
                 default:
                     PlayerData.AddEnumValueToCode(value, "RewardTrait");
                     return RewardTrait.None;
@@ -4805,6 +4845,8 @@ namespace STTDataAnalyzer.Models.PlayerData
                 case "premium_1x_bundle":
                     return Specialized.Premium10xBundle;
                 // Specialized.Insert
+                case "minor_consumables_10x_bundle":
+                    return Specialized.MinorConsumables_TenXBundle;
                 default:
                     PlayerData.AddEnumValueToCode(value, "Specialized");
                     return Specialized.None;

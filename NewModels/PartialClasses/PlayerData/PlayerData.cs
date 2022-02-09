@@ -14,6 +14,11 @@ namespace STTDataAnalyzer.Models.PlayerData
         private static string FilePath = Directory.GetCurrentDirectory() + "\\Data\\";
         private static string FileNameAndPath = FilePath + FileName;
 
+        private static string ProgramDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName).FullName;
+        private static string PlayerDataFileName = $@"{ProgramDirectory}\NewModels\PlayerData.cs";
+        private static string PlayerDataCode = File.ReadAllText(PlayerDataFileName);
+        public static bool PlayerDataCodeChanged = false;
+
         public static string Get(bool forceFromWeb = false)
         {
             string result = null;
@@ -86,33 +91,54 @@ namespace STTDataAnalyzer.Models.PlayerData
             return result;
         }
 
+        public static void UpdatePlayerDataCode() {
+            if (PlayerDataCodeChanged) {
+                File.WriteAllText(PlayerDataFileName, PlayerDataCode);
+            }
+        }
+
         public static void AddEnumValueToCode(string value, string enumName)
         {
             string enumValueName = Regex.Replace(value, @"_[a-zA-Z]", m => m.ToString().ToUpper().Replace("_", ""));
-            enumValueName = Regex.Replace(enumValueName, @"^[a-z]", m => m.ToString().ToUpper());
+            enumValueName = Regex.Replace(enumValueName, @"^[a-z]", m => m.ToString().ToUpper()).Replace(" ", "").Replace(".","").Replace("1x", "OneX").Replace("10x", "TenX");
 
-            string fileName = @"C:\Users\nikea\source\repos\STTDataAnalyzer\NewModels\PlayerData.cs";
-            string playerDataCode = File.ReadAllText(fileName);
-
-            if (playerDataCode.IndexOf($"case \"{value}\"") < 0)
+            if (PlayerDataCode.IndexOf($"return {enumName}.{enumValueName}") < 0)
             {
                 string newEnumValue = $@"
                 case ""{value}"":
                     return {enumName}.{enumValueName};";
 
                 string insertString = $"// {enumName}.Insert";
-                int insertPos = playerDataCode.IndexOf(insertString) + insertString.Length;
-                playerDataCode = playerDataCode.Insert(insertPos, newEnumValue);
+                int insertPos = PlayerDataCode.IndexOf(insertString) + insertString.Length;
+                PlayerDataCode = PlayerDataCode.Insert(insertPos, newEnumValue);
 
-                int enumPos = playerDataCode.IndexOf($"public enum {enumName}");
-                int enumInsertPos = playerDataCode.IndexOf(";", enumPos) - 8;
-                playerDataCode = playerDataCode.Insert(enumInsertPos, $", {enumValueName}");
+                PlayerDataCodeChanged = true;
+            }
 
-                File.WriteAllText(fileName, playerDataCode);
+            int enumPos = PlayerDataCode.IndexOf($"public enum {enumName}");
+            int enumInsertPos = PlayerDataCode.IndexOf(";", enumPos) - 8;
+            if (!TextInLine(enumInsertPos, enumValueName))
+            {
+                PlayerDataCode = PlayerDataCode.Insert(enumInsertPos, $", {enumValueName}");
+
+                PlayerDataCodeChanged = true;
             }
         }
 
-        public static int GetVoyageTimeEstimate(int goldSkill, int silverSkill, int bronzeSkill1, int bronzeSkill2, int bronzeSkill3, int bronzeSkill4, int startingAm, int estimateIterations = 1000)
+		private static bool TextInLine(int enumInsertPos, string enumValueName)
+		{
+            int endPos = enumInsertPos + 8;
+            int startPos = endPos - 1;
+            while (PlayerDataCode[startPos]  != '{') {
+                startPos--;
+			}
+
+            string line = PlayerDataCode.Substring(startPos, endPos - startPos + 1);
+
+            return line.IndexOf(enumValueName) > -1;
+		}
+
+		public static int GetVoyageTimeEstimate(int goldSkill, int silverSkill, int bronzeSkill1, int bronzeSkill2, int bronzeSkill3, int bronzeSkill4, int startingAm, int estimateIterations = 1000)
 		{
 			int am;
 			int totalTime = 0;
