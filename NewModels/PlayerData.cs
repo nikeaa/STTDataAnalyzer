@@ -4117,6 +4117,14 @@ namespace STTDataAnalyzer.Models.PlayerData
                 case "Commander Uhura":
                     return FullName.CommanderUhura;
                 // FullName.Insert
+                case "C.O.P. Founder Archer":
+                    return FullName.COPFounderArcher;
+                case "Sanctuary Booker":
+                    return FullName.SanctuaryBooker;
+                case "Mike Burnham Sr.":
+                    return FullName.MikeBurnhamSr;
+                case "Security Laris":
+                    return FullName.SecurityLaris;
                 default:
                     PlayerData.AddEnumValueToCode(value, "FullName");
                     return FullName.None;
