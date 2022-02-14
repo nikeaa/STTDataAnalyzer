@@ -73,6 +73,7 @@
     <Compile Include="PartialClasses\DataCore\DataCore.cs" />
     <Compile Include="PartialClasses\PlayerData\Character.cs" />
     <Compile Include="PartialClasses\PlayerData\Crew.cs" />
+    <Compile Include="PartialClasses\PlayerData\CrewSlot.cs" />
     <Compile Include="PartialClasses\PlayerData\ItemArchetypeCache.cs" />
     <Compile Include="PartialClasses\PlayerData\PlayerData.cs" />
     <Compile Include="PartialClasses\PlayerData\VoyageDescription.cs" />

@@ -115,7 +115,7 @@ namespace STTDataAnalyzer.Models.PlayerData
                 PlayerDataCodeChanged = true;
             }
 
-            int enumPos = PlayerDataCode.IndexOf($"public enum {enumName}");
+            int enumPos = PlayerDataCode.IndexOf($"public enum {enumName} ");
             int enumInsertPos = PlayerDataCode.IndexOf(";", enumPos) - 8;
             if (!TextInLine(enumInsertPos, enumValueName))
             {

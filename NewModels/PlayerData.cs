@@ -3385,7 +3385,7 @@ namespace STTDataAnalyzer.Models.PlayerData
 
     public enum Source { CrewCollection, Starbase };
 
-    public enum FullNameEnum { Chronitons, Dilithium, DynamicReplicatorRation, FederationCredits, Honor, InterstellarMedium, LegendaryHonorableCitation, Merits, PremiumTimePortal, RequisitionShuttleTokens, RewardMultiplier, The10XPremiumShuttleBoost, The10XPremiumTimePortal, TwilightTPol, The10XStandardShuttleBoost, LeahBrahms, CaptainProtonRocketShipSchematic, NyotaUhura, PartyTilly, SecurityLaris, MikeBurnhamSr, TenXStandardTimePortal, SanctuaryBooker, COPFounderArcher, None };
+    public enum FullNameEnum { Chronitons, Dilithium, DynamicReplicatorRation, FederationCredits, Honor, InterstellarMedium, LegendaryHonorableCitation, Merits, PremiumTimePortal, RequisitionShuttleTokens, RewardMultiplier, The10XPremiumShuttleBoost, The10XPremiumTimePortal, TwilightTPol, The10XStandardShuttleBoost, LeahBrahms, CaptainProtonRocketShipSchematic, NyotaUhura, PartyTilly, TenXStandardTimePortal, None };
 
     public enum AtlasInfo { AtlasSttForteInfo, AtlasSttIcons2Info, AtlasSttIconsInfo };
 
@@ -3393,7 +3393,7 @@ namespace STTDataAnalyzer.Models.PlayerData
 
     public enum PurpleName { Augments, Chronitons, Credits, Dilithium, HonCitation, Honor, Ism, Merits, Portal, ReplicatorFuel, RewardMultiplier, TPol, The10XPShuttle, The10XPortal, Tokens, The10XSShuttle, Brahms, CaptainProtonRocketShipShcematics, CaptainProtonRocketShipSchematics, Uhura, Tilly, Federation, None };
 
-    public enum FullName { AdvancedTacticalTraining, CaptainSaru, CommanderTPol, Dilithium, DynamicOfficerTraining, Honor, InterstellarMedium, Merits, RarityConstellation, SkillConstellation, The10XPremiumTimePortal, TribbleUhura, CaptainLucero, TribbleMcCoy, CaptainSulu, TribbleChekov, TraderOdo, LittleJohnRiker, TouristQuark, ProphetKira, NinersKiraNerys, RacketballOBrien, TimeLoopMudd, UnionQ, DahjOnTheRun, AugmentRiker, CommanderUhura, None };
+    public enum FullName { AdvancedTacticalTraining, CaptainSaru, CommanderTPol, Dilithium, DynamicOfficerTraining, Honor, InterstellarMedium, Merits, RarityConstellation, SkillConstellation, The10XPremiumTimePortal, TribbleUhura, CaptainLucero, TribbleMcCoy, CaptainSulu, TribbleChekov, TraderOdo, LittleJohnRiker, TouristQuark, ProphetKira, NinersKiraNerys, RacketballOBrien, TimeLoopMudd, UnionQ, DahjOnTheRun, AugmentRiker, CommanderUhura, SecurityLaris, MikeBurnhamSr, SanctuaryBooker, COPFounderArcher, None };
 
     public enum FluffyName { Dilithium, Honor, Ism, Merits, Rarity, Saru, Skill, TPol, The10XPortal, Training, Uhura, Lucero, McCoy, Sulu, Chekov, Odo, Riker, Quark, Kira, OBrien, Mudd, Q, Dahj, Laris, Burnham, Booker, Archer, None };
 

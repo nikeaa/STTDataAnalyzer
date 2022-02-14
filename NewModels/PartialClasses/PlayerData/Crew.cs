@@ -28,6 +28,40 @@
 
         public int SecurityVoyageScore => Skills.SecuritySkill != null ? (int)(Skills.SecuritySkill.Core + ((Skills.SecuritySkill.RangeMin + Skills.SecuritySkill.RangeMax) / 2)) : 0;
 
+        public int VoyageScore => CommandVoyageScore + DiplomacyVoyageScore + EngineeringVoyageScore + MedicineVoyageScore + ScienceVoyageScore + SecurityVoyageScore;
+
+        public bool HasCommandSkill => (Skills.CommandSkill != null && Skills.CommandSkill.Core > 0);
+
+        public bool HasDiplomacySkill => (Skills.DiplomacySkill != null && Skills.DiplomacySkill.Core > 0);
+
+        public bool HasEngineeringSkill => (Skills.EngineeringSkill != null && Skills.EngineeringSkill.Core > 0);
+
+        public bool HasMedicineSkill => (Skills.MedicineSkill != null && Skills.MedicineSkill.Core > 0);
+
+        public bool HasScienceSkill => (Skills.ScienceSkill != null && Skills.ScienceSkill.Core > 0);
+
+        public bool HasSecuritySkill => (Skills.SecuritySkill != null && Skills.SecuritySkill.Core > 0);
+
+        public bool HasSkill(ChallengeSkillEnum skill)
+        {
+            switch (skill)
+            {
+                case ChallengeSkillEnum.CommandSkill: return BaseSkills.CommandSkill != null && BaseSkills.CommandSkill.Core > 0;
+                case ChallengeSkillEnum.DiplomacySkill: return BaseSkills.DiplomacySkill != null && BaseSkills.DiplomacySkill.Core > 0;
+                case ChallengeSkillEnum.EngineeringSkill: return BaseSkills.EngineeringSkill != null && BaseSkills.EngineeringSkill.Core > 0;
+                case ChallengeSkillEnum.MedicineSkill: return BaseSkills.MedicineSkill != null && BaseSkills.MedicineSkill.Core > 0;
+                case ChallengeSkillEnum.ScienceSkill: return BaseSkills.ScienceSkill != null && BaseSkills.ScienceSkill.Core > 0;
+                case ChallengeSkillEnum.SecuritySkill: return BaseSkills.SecuritySkill != null && BaseSkills.SecuritySkill.Core > 0;
+            }
+
+            return false;
+        }
+
+        public int DoubleWeightedVoyageScore(string primarySkillName, string secondarySkillName, string slotTraitName)
+        {
+            return WeightedVoyageScore(primarySkillName, secondarySkillName, slotTraitName) + WeightedVoyageScore(secondarySkillName, primarySkillName, slotTraitName);
+        }
+
         public int WeightedVoyageScore(string primarySkillName, string secondarySkillName, string slotTraitName)
         {
             int score = 0;

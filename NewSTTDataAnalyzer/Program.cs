@@ -105,6 +105,34 @@ namespace STTDataAnalyzer
 
             Console.WriteLine(voyageDescription.ToString());
 
+            playerData.Player.Character.SetVoyageCharacters();
+
+            Console.WriteLine();
+            Console.WriteLine("SHIPS");
+            foreach(ShipElement ship in voyageDescription.PossibleShips)
+            {
+                Console.WriteLine("    " + ship.Name);
+            }
+
+            Console.WriteLine();
+            voyageDescription.getVoyagePossibleCards();
+            foreach (CrewSlot cs in crewSlots)
+            {
+                string trait = cs.Trait;
+                ChallengeSkillEnum skill = cs.Skill;
+                Console.WriteLine(trait.ToUpper());
+                foreach (Crew c in cs.PossibleCards)
+                {
+                    Console.Write("    " + c.Name + " (" + c.DoubleWeightedVoyageScore(voyageDescription.Skills.PrimarySkill.ToString().Replace("Skill", ""), voyageDescription.Skills.SecondarySkill.ToString().Replace("Skill", ""), trait) + ") = " + c.VoyageScore + " [");
+                    Console.Write(c.CommandVoyageScore + " / ");
+                    Console.Write(c.DiplomacyVoyageScore + " / ");
+                    Console.Write(c.EngineeringVoyageScore + " / ");
+                    Console.Write(c.MedicineVoyageScore + " / ");
+                    Console.Write(c.ScienceVoyageScore + " / ");
+                    Console.WriteLine(c.SecurityVoyageScore + "] {" + c.Rarity + "/" + c.MaxRarity + "}");
+                }
+            }
+
             Console.WriteLine("\r\nDone");
             Console.ReadLine();
 

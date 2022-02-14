@@ -6,6 +6,13 @@ namespace STTDataAnalyzer.Models.PlayerData
 {
 	public partial class Character
 	{
+        public void SetVoyageCharacters()
+        {
+            foreach(VoyageDescription vd in VoyageDescriptions)
+            {
+                vd.Character = this;
+            }
+        }
 		//public IOrderedEnumerable<Crew> GetSRThatAreFFButNotFE()
 		//{
 		//	return crew.Where(c => c.max_rarity == 4 && c.rarity == 4 && (c.Level < 100 || (c.Level == 100 && c.Equipment.Count < 4))).OrderByDescending(c => c.Level).ThenByDescending(c => c.Equipment.Count);
