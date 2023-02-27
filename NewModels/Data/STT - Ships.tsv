@@ -1,0 +1,66 @@
+Name	Owned	Rarity	Level	Antimatter	Accuracy	Attack	Attacks per second	Crit bonus	Crit chance	Evasion	Hull	Shields	Shield regen	Traits
+Maquis Raider	TRUE	1	5 / 5	1300	2700	2475	0.93	5000	700	3075	61907	27637	730	Maquis Fighter
+Klingon K'Vort Bird-of-Prey	TRUE	2	6 / 6	1550	3500	3375	1	5000	675	3760	54963	27482	700	Klingon Cloaking Device
+Nova Class	TRUE	2	6 / 6	1550	2550	2275	0.65	5000	520	2600	82445	69954	1049	Federation Scout
+Jem'Hadar Fighter	TRUE	2	6 / 6	1550	2850	2525	0.83	5000	675	3125	104931	41223	824	Dominion Fighter
+Val Jean	TRUE	2	6 / 6	1550	3100	2450	0.85	9000	675	3125	82445	52466	1049	Maquis Fighter
+Hirogen Hunter Ship	TRUE	2	3 / 6	1400	1700	2425	0.84	5000	525	1800	76185	21644	433	Hirogen Warship
+Borg Sphere	TRUE	2	6 / 6	1550	2850	2450	1.05	7850	750	3760	93688	34978	1249	Borg Transwarp Drive
+Suurok Class Combat Cruiser	TRUE	2	6 / 6	1550	2750	2750	0.8	5000	520	3760	104931	62459	824	Vulcan Battlecruiser
+Miranda Class Ship	TRUE	2	6 / 6	1550	2950	2375	0.83	5000	520	3435	82445	52466	1249	Federation Explorer
+Jem'Hadar Battleship	TRUE	2	5 / 6	1500	2900	2250	1.05	5000	625	2625	92859	41455	730	Dominion Warship
+Romulan Valdore-type Warbird	TRUE	2	6 / 6	1550	3150	2450	0.85	5000	675	2800	93688	52466	824	Romulan Cloaking Device
+Galaxy Class Ship	TRUE	3	7 / 7	1900	4850	5400	0.82	5000	500	4300	185000	81000	1700	Federation Explorer
+Defiant-Class Ship	TRUE	3	7 / 7	1900	4300	5800	0.9	8000	700	5400	170000	77000	1500	Federation Fighter
+Intrepid-Class Ship	TRUE	3	7 / 7	1900	5850	4875	0.88	8000	750	5300	175500	81000	1825	Federation Explorer
+Constitution Class Ship	TRUE	3	7 / 7	1900	5230	5800	0.7	8100	850	5230	170000	78500	1750	Federation Explorer
+Cardassian Galor Cruiser	TRUE	3	7 / 7	1900	5550	5600	0.85	8000	850	5000	150000	78500	1550	Cardassian Battlecruiser
+Ferengi D'Kora Marauder	TRUE	3	7 / 7	1900	5700	5400	0.75	5000	1000	5100	172500	80000	1625	Ferengi Warship
+NX-Class Ship	TRUE	3	7 / 7	1900	5550	5400	0.98	5000	500	5000	175500	77000	1500	Federation Explorer
+Klingon K't'inga Battlecruiser	TRUE	3	7 / 7	1900	5850	5800	0.75	5000	790	5300	176446	77636	1976	Klingon Battlecruiser Cloaking Device
+Terran Empire Constellation Class	TRUE	3	7 / 7	1900	5850	5400	0.85	5000	790	5100	207031	103516	1317	Terran Battlecruiser
+Breen Warship	TRUE	3	6 / 7	1850	4950	4850	0.7	7500	720	4200	174886	68704	1166	Breen Cloaking Device Warship
+U.S.S. Enterprise NCC-1701-D	TRUE	4	8 / 8	2250	9300	8150	0.88	5000	500	7580	328750	160000	2650	Federation Explorer War Veteran
+U.S.S. Enterprise NCC-1701	TRUE	4	8 / 8	2250	8700	9300	0.84	8100	850	7750	300000	145000	2900	Federation Explorer Historic
+U.S.S. Defiant	TRUE	4	7 / 8	2200	7860	8350	0.9	8000	625	7860	250000	100000	1900	Federation Fighter Cloaking Device
+U.S.S. Voyager	TRUE	4	7 / 8	2200	7600	6750	0.8	7500	720	7600	260000	130000	2800	Federation Explorer Transwarp Drive
+Romulan D'deridex Warbird	TRUE	4	8 / 8	2250	8350	8100	0.7	5000	500	7525	370000	200000	2750	Romulan Battlecruiser Cloaking Device
+Hirogen Warship	TRUE	4	8 / 8	2250	8700	8150	0.88	5000	500	7750	370000	118000	2750	Hirogen Warship Ruthless
+Borg Sphere 878	TRUE	4	8 / 8	2250	9825	7800	1.1	5000	960	9150	374309	119099	4254	Borg Transwarp Drive Scout
+I.S.S. Avenger	TRUE	4	7 / 8	2200	10275	8110	0.86	5000	1250	5800	316190	124218	3312	Terran Battlecruiser Ruthless
+La Sirena	TRUE	4	1 / 8	1900	4500	3850	0.89	2500	875	4775	151872	67800	1356	Explorer Pioneer Federation Freighter
+Tholian Ship	TRUE	4	0 / 8	1850	4100	4000	0.93	5000	850	4100	105600	67200	896	Tholian Ruthless Fighter
+Generational NX-01 Enterprise	TRUE	4	0 / 8	1850	4300	3700	0.78	2500	800	3900	134400	67200	1408	Federation Explorer Pioneer
+U.S.S. T'Kumbra	TRUE	4	0 / 8	1850	5700	3700	0.82	2500	800	3900	140800	70400	1200	Federation Explorer Vulcan
+Borg Cube	TRUE	5	9 / 9	2500	19200	17750	0.67	15000	525	4650	750000	360000	5225	Borg Battlecruiser Transwarp Drive
+H.M.S. Bounty	TRUE	5	9 / 9	2500	12750	13500	1.04	20000	400	12750	705000	360000	4500	Federation Warship Cloaking Device
+I.S.S. Enterprise NCC-1701	TRUE	5	9 / 9	2500	14250	15925	0.88	17500	1150	11000	675000	300000	3925	Terran Battlecruiser Ruthless
+D'Kora Krayton	TRUE	5	9 / 9	2500	17250	14750	0.72	5000	1400	10500	690000	320000	3875	Ferengi Warship Electromagnetic Pulse
+Prakesh	TRUE	5	9 / 9	2500	17000	14000	0.83	8000	1150	10000	675000	300000	3825	Cardassian Battlecruiser War Veteran
+NX-01 Enterprise	TRUE	5	6 / 9	2350	11800	12750	1.02	8000	1100	9800	385000	150000	2700	Federation Explorer Pioneer
+IKS T'Ong	TRUE	5	8 / 9	2450	13000	15225	0.91	8100	1200	8800	757656	233942	3456	Klingon Battlecruiser Cloaking Device
+U.S.S. Shenzhou	TRUE	5	9 / 9	2500	17225	16900	0.75	17500	1150	10500	673000	380000	6008	Federation Explorer Historic
+U.S.S. Discovery	TRUE	5	8 / 9	2450	15225	14750	0.9	17500	1100	9200	470000	235000	3871	Federation Spore Drive Ruthless
+Klingon Sarcophagus	TRUE	5	9 / 9	2500	17225	16900	0.88	7500	1300	9500	600807	300404	3905	Klingon Cloaking Device Historic
+I.S.S. Defiant	TRUE	5	6 / 9	2350	12175	13250	0.9	7500	1080	10100	238175	296678	3031	Terran Warship Ruthless
+Andorian Battlecruiser Kumari	TRUE	5	8 / 9	2450	14925	12050	0.72	20000	1275	8500	467884	265844	5955	Federation Andorian Battlecruiser Pioneer
+Orion Syndicate Interceptor	TRUE	5	9 / 9	2500	16925	14500	0.55	5000	1225	13050	343662	264355	8562	Orion Syndicate Fighter Ruthless
+Ni'Var	TRUE	5	9 / 9	2500	13500	16425	0.8	5000	1140	13050	672905	428076	5287	Vulcan Battlecruiser Fighter
+U.S.S Reliant	TRUE	5	6 / 9	2350	11000	10750	0.9	7500	1080	9800	303133	233179	5934	Federation Explorer Ruthless
+Breen Command Warship	TRUE	5	6 / 9	2350	11000	13725	0.9	7500	1150	9000	303133	183211	4164	Breen Warship Cloaking Device
+Jem'Hadar Flagship	TRUE	5	2 / 9	2150	8800	9000	1.02	7500	1050	6150	286026	127690	2247	Dominion Warship Ruthless
+The Valdore	TRUE	5	8 / 9	2450	15225	13500	0.85	7500	1200	8200	531688	297746	4679	Romulan Warship Cloaking Device
+Captain Proton Rocket Ship	TRUE	5	9 / 9	2500	13700	13500	0.82	5000	1140	9200	958890	336453	5287	Explorer Pioneer Hologram
+U.S.S. Enterprise NCC-1701-A	TRUE	5	4 / 9	2250	10175	8300	0.9	5000	1040	6750	286962	143481	4089	Federation Historic Explorer
+Xindi-Insectoid Patrol Ship	TRUE	5	9 / 9	2500	13700	13500	1.02	5000	1225	12750	390526	264355	6008	Ruthless Xindi Fighter
+The Scimitar	TRUE	5	9 / 9	2500	13700	15925	0.84	5000	1300	9500	753414	300404	4374	Battlecruiser Reman Warship
+Pike's U.S.S. Enterprise	TRUE	5	9 / 9	2500	17475	14500	0.98	5000	1225	11000	437389	264355	5287	Explorer Federation Pioneer
+U.S.S. Enterprise NCC-1701-E	TRUE	5	3 / 9	2200	9925	6900	1.1	2500	1275	8400	187577	205613	1651	Fighter Federation War Veteran
+Cardassian Keldon Class	TRUE	5	7 / 9	2400	14075	11750	0.89	7500	1100	7500	670492	263492	3425	Cloaking Device Cardassian Battlecruiser
+Assimilated Voyager	TRUE	5	4 / 9	2250	10725	9300	0.86	7500	1100	6150	326094	118699	4089	Borg Fighter Transwarp Drive
+Federation Fighter	TRUE	5	3 / 9	2200	9375	8700	0.96	2500	1020	7800	253949	144290	2101	Federation Scout Fighter
+The Artifact	TRUE	5	0 / 9	2050	8850	7825	0.76	7500	960	5000	319200	65000	1760	Borg Historic Transwarp Drive
+Krenim Weapon Ship	TRUE	5	0 / 9	2050	7525	7825	0.78	2500	960	6300	319200	159600	1456	Warship Historic Ruthless War Veteran
+IKS Negh'Var	FALSE	5	0 / 9	2050	8300	8800	0.82	5000	960	5700	250800	125400	1760	Klingon Cloaking Device Warship
+Borg Queen’s Vessel	TRUE	5	0 / 9	2050	8850	7700	0.76	2500	960	6300	224000	112000	2508	Borg Transwarp Drive Ruthless
+Warship Voyager	TRUE	5	0 / 9	2050	7900	7825	0.82	5000	1000	6300	250800	125400	1760	Federation Warship Ruthless Hologram
